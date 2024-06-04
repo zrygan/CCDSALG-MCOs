@@ -8,7 +8,15 @@
 ### Role Assignemnt
 
 - Ganituen: Task 1, Design and implement stack and queue structures
+    See files:
+        - queue.c
+        - queue.h
+        - stack.c
+        - stack.h
 - Balcita:  Task 2, Implement for infix to postfix, and evaluate postfix
+    See files:
+        - inToPost.c
+        - evalPost.c
 - Jimenez:  Task 3, Integrate the modules
 - ___:      Task 4, Solution testing
 - ___:      Task 5, Solution documentation

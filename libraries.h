@@ -5,9 +5,7 @@
  * 
  * CCDSALG, Project 1
  * 
- * Libraries user-defined header file.
- * 
- * CONTAINS: General pre-defined libraries, constants, etc.
+ * User-defined header file of general utility functions and macros.
 */
 
 #ifndef LIBRARIES

@@ -5,9 +5,7 @@
  * 
  * CCDSALG, Project 1
  * 
- * Main C file.
- * 
- * CONTAINS: main function
+ * Main C file of Part 1 of the project.
 */
 
 #include <stdio.h>

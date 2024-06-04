@@ -2,4 +2,4 @@
 
 ## Part 1
 
-- The source code must be in C
+- The source code must be in C.
