@@ -4,26 +4,26 @@
 
 For each contribution, function, or any part of the code that needs documentation in the project. Follow the example format:
 
-/* _NAME-OF-CODE-BLOCK_
-_DESCRIPTION_
+    /* _NAME-OF-CODE-BLOCK_
+    _DESCRIPTION_
 
-@params:
-    - add, if any (for functions)
+    @params:
+        - add, if any (for functions)
 
-@fields:
-    - add, if any (for structs)
+    @fields:
+        - add, if any (for structs)
 
-@return:
-    - add, if any (for functions)
+    @return:
+        - add, if any (for functions)
 
-@fixme:
-    - add, if any (for bugs or issues)
+    @fixme:
+        - add, if any (for bugs or issues)
 
-@see: add, if any (for references)
+    @see: add, if any (for references)
 
-@author: _SURNAME_
-@contributor: _SURNAME_
-*/
+    @author: _SURNAME_
+    @contributor: _SURNAME_
+    */
 
 ## Part 1
 
