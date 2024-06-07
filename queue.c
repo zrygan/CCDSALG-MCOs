@@ -39,7 +39,7 @@ void enqueue(int elem, queue *Queue){
 
     // update tail position
     // move the position by 1 and make it loop around if it exeeds size
-    Queue->tail = (Queue->tail + 1) % Queue->size;
+    Queue->tail = (Queue->tail + 1) % (Queue->size + 1);
     // dont update head
 }
 
@@ -58,7 +58,7 @@ int dequeue(queue *Queue){
 
     // update head position
     // same formula as with enqueue (moving tail)
-    Queue->head = (Queue->head + 1) % Queue->size;
+    Queue->head = (Queue->head + 1) % (Queue->size + 1);
     // dont update tail
 
     return removed;
