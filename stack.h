@@ -11,9 +11,7 @@
 #ifndef STACK
 #define STACK
 
-#include <stdbool.h> // include stdbool for the isEmpty and isFull functions
-
-#define MAX_SIZE 256 // define the maximum size of a stack as 256
+#include "libraries.h"
 
 /** stack
  * struct data type for a stack

@@ -8,7 +8,9 @@
  * Main C file of Part 1 of the project.
 */
 
-#include <stdio.h>
+#include "libraries.h"
+#include "stack.h"
+#include "queue.h"
 
 int main(){
 

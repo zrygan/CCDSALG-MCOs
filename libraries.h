@@ -12,6 +12,9 @@
 #define LIBRARIES
 
 #include <stdio.h>
-#include <stdlib.h> // remove, if needed
+#include <stdlib.h> 
+#include <stdlib.h>
+
+#define MAX_SIZE 256 // define the maximum size of a stack as 256
 
 #endif 
