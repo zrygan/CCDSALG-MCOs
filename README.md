@@ -12,7 +12,7 @@ Balcita, V., [Ganituen, Z.](github.com/zrygan), and Jimenez, J.
    1. Using `bat` file:
       1. Run the command `zry`.
    2. Using `gcc -Wall` and I/O redirection separately:
-      1. Run `gcc -Wall main.c`
+      1. Run `gcc -Wall main.c <...>` (remember to include all `.c` files here)
       2. Run `TESTCASE.txt < a > RESULT.TXT`
 
 ## Files and Directories

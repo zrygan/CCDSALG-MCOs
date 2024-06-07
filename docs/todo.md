@@ -30,7 +30,11 @@
 
 ### To do list
 
-- [ ] ...
+- [X] TASK 1 : Make queue functions
+- [X] TASK 1 : Debug queue functions
+- [X] TASK 1 : Make stack functions
+- [X] TASK 1 : Debug stack functions
+- [X] TASK 1 : Finalize stack and queue implementation
 
 ## Part 2
 

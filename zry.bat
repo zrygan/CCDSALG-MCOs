@@ -7,7 +7,7 @@ cls
 
 REM Compile `main.c` using `gcc -Wall`
 
-gcc -Wall main.c stack.c queue.c -o main.exe
+gcc -Wall main.c stack.c queue.c evalPost.c inToPost.c -o main.exe
 
 REM Without I/O file redirection
 
