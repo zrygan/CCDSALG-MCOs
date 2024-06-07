@@ -96,8 +96,8 @@ int pop(stack *Stack){
  * 
  * @author: Zhean Ganituen
  */
-bool isEmpty(stack *Stack){
-    if (Stack->elems == 0) return true;
+bool isEmpty(stack Stack){
+    if (Stack.elems == 0) return true;
     else return false;
 }
 
@@ -106,7 +106,7 @@ bool isEmpty(stack *Stack){
  * 
  * @author: Zhean Ganituen
  */
-bool isFull(stack *Stack){
-    if (Stack->size == Stack->elems) return true;
+bool isFull(stack Stack){
+    if (Stack.size == Stack.elems) return true;
     else return false;
 }
