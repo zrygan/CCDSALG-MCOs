@@ -20,33 +20,38 @@
  * 
  * @fields:
  *  - items[MAX_SIZE] : int : array of integers, with maximum size of MAX_SIZE = 256
- *  - top : int : the most recent addition in the items array 
+ *  - top             : int : the most recent addition in the items array 
+ *  - size            : int : the actual maximum size of the stack
+ *  - elems           : int : current number of elements in the stack, 
+ *                    constraint: elems < size
+ *                    constraint: elems > 0
  */
-typedef struct stack
+typedef struct
 {
     int items[MAX_SIZE];
     int top;
-};
-
+    int size;
+    int elems;
+} stack;
 
 /** createStack
- * creates an empty stack with size `S`
+ * creates an empty stack with size `S` and top 0
  * 
  * @params:
  *  - S : int : the size/capacity of the stack
  * 
  * @returns:
- *  - none
+ *  - *Stack : the stack created
  * 
  * @author: Zhean Ganituen
  */
-void create(int S);
+stack create(int S);
 
 /**push
  * inserts an element `elem` in the stack `Stack`.
  * 
  * @params:
- *  - elem : int : the element to insert in the stack
+ *  - elem  : int   : the element to insert in the stack
  *  - Stack : stack : the stack
  * 
  * @returns:
@@ -64,7 +69,7 @@ int push(int elem, stack Stack);
  *  - Stack : stack : the stack
  * 
  * @returns:
- *  - top : the top element; the deleted element
+ *  - removed : the deleted element
  *  - -999999 : for unseccessful pop (caused by underflow)
  * 
  * @author: Zhean Ganituen
