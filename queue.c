@@ -27,6 +27,11 @@ queue createQueue(int S){
     return *Queue;
 }
 
+/**enqueue
+ * Implementation of enqueue function, see documentation in `queue.h`
+ * 
+ * @author: Zhean Ganituen
+ */
 void enqueue(int elem, queue *Queue){
     // put the element in the tail position
     Queue->items[Queue->tail] = elem;
@@ -38,6 +43,11 @@ void enqueue(int elem, queue *Queue){
     // dont update head
 }
 
+/**denqueue
+ * Implementation of denqueue function, see documentation in `queue.h`
+ * 
+ * @author: Zhean Ganituen
+ */
 int dequeue(queue *Queue){
     // store removed value
     int removed = Queue->items[Queue->head];
@@ -54,20 +64,40 @@ int dequeue(queue *Queue){
     return removed;
 }
 
+/**queueEmpty
+ * Checks if queue is empty, see documentation in `queue.h`
+ * 
+ * @author: Zhean Ganituen
+ */
 bool queueEmpty(queue Queue){
     if (Queue.elems == 0) return true;
     else return false;
 }
 
+/**queueFull
+ * Checks if queue is full, see documentation in `queue.h`
+ * 
+ * @author: Zhean Ganituen
+ */
 bool queueFull(queue Queue){
     if (Queue.elems == Queue.size) return true;
     else return false;
 }
 
+/**queueHead
+ * Gets current value in head, see documentation in `queue.h`
+ * 
+ * @author: Zhean Ganituen
+ */
 int queueHead(queue Queue){
     return Queue.items[Queue.head];
 }
 
+/**queueTail
+ * Gets current value in tail, see documentation in `queue.h`
+ * 
+ * @author: Zhean Ganituen
+ */
 int queueTail(queue Queue){
     return Queue.items[Queue.tail];
 }
