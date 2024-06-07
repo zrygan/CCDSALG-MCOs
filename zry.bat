@@ -7,10 +7,14 @@ cls
 
 REM Compile `main.c` using `gcc -Wall`
 
-gcc -Wall main.c -o main.exe
+gcc -Wall main.c stack.c -o main.exe
 
-REM Use I/O file redirection
+REM Without I/O file redirection
 
-TESTCASE.txt < main > RESULT.txt
+main
+
+REM With I/O file redirection
+
+REM TESTCASE.txt < main > RESULT.txt
 
 REM END OF FILE

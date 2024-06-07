@@ -74,12 +74,12 @@ int pop(stack *Stack){
 
     if (Stack->elems > 0){
         // if an element can still be removed
-        
+        Stack->elems--;
+
         // store element to be removed
         int removed = Stack->items[Stack->elems];
         
         Stack->items[Stack->elems] = 0;
-        Stack->elems--;
 
         // update top if stack is not empty
         if (Stack->elems >= 0) {
