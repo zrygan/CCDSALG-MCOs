@@ -58,7 +58,7 @@ stack create(int S);
  * 
  * @author: Zhean Ganituen
  */
-int push(int elem, stack Stack);
+int push(int elem, stack *Stack);
 
 /**pop
  * deletes the top element in the stack and returns the element
@@ -72,20 +72,7 @@ int push(int elem, stack Stack);
  * 
  * @author: Zhean Ganituen
  */
-int pop(stack Stack);
-
-/**top
- * returns the top element of the stack
- * 
- * @params:
- *  - Stack : stack : the stack
- * 
- * @returns:
- *  - top : the top element in the stack
- * 
- * @author: Zhean Ganituen
- */
-int top(stack Stack);
+int pop(stack *Stack);
 
 /**isEmpty
  * checks if the stack is empty
