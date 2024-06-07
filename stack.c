@@ -9,14 +9,13 @@
 */
 
 #include "stack.h"
-#include "libraries.h"
 
 /**create
  * Implementation of create stack function, see documentation in `stack.h`
  * 
  * @author: Zhean Ganituen
  */
-stack create(int S){
+stack createStack(int S){
     /* what we need to do:
         1. allocate memory for the stack
         2. initialize top as 0
@@ -96,7 +95,7 @@ int pop(stack *Stack){
  * 
  * @author: Zhean Ganituen
  */
-bool isEmpty(stack Stack){
+bool stackEmpty(stack Stack){
     if (Stack.elems == 0) return true;
     else return false;
 }
@@ -106,7 +105,11 @@ bool isEmpty(stack Stack){
  * 
  * @author: Zhean Ganituen
  */
-bool isFull(stack Stack){
+bool stackFull(stack Stack){
     if (Stack.size == Stack.elems) return true;
     else return false;
+}
+
+int top(stack Stack){
+    return Stack.top;
 }

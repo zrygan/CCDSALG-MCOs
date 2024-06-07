@@ -64,7 +64,7 @@ int push(int elem, stack *Stack);
  * deletes the top element in the stack and returns the element
  * 
  * @params:
- *  - Stack : stack : the stack
+ *  - Stack : stack* : the stack
  * 
  * @returns:
  *  - removed : the deleted element
@@ -78,7 +78,7 @@ int pop(stack *Stack);
  * checks if the stack is empty
  * 
  * @params:
- *  - Stack : stack : the stack
+ *  - Stack : stack* : the stack
  * 
  * @returns:
  *  - true : when top is 0; stack is empty
@@ -86,7 +86,7 @@ int pop(stack *Stack);
  * 
  * @author: Zhean Ganituen
 */
-bool isEmpty(stack Stack);
+bool stackEmpty(stack Stack);
 
 
 /**isFull
@@ -101,6 +101,17 @@ bool isEmpty(stack Stack);
  * 
  * @author: Zhean Ganituen
 */
-bool isFull(stack Stack);
+bool stackFull(stack Stack);
+
+/**top 
+ * gets the current value of the top
+ * 
+ * @params
+ *  - Stack : stack : the stack
+ * 
+ * @returns:
+ *  - top : int : the value of the top
+*/
+int top(stack Stack);
 
 #endif
