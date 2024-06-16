@@ -16,8 +16,21 @@
 
 
 int Evaluate(int token1,int operator,int token2){
-switch(operator){
-}
+    int result;
+    switch(operator){
+        case '+': result = token1 + token2; return result; break;
+        case '-': result = token1 - token2; return result; break;
+        case '*': result = token1 * token2; return result; break;
+        case '/': result = token1 / token2; return result; break;
+        case '<': result = token1 < token2; return result; break;
+        case '>': result = token1 > token2; return result; break;
+        case '&': result = token1 && token2; return result; break;
+        case '|': result = token1 || token2; return result; break;
+        case '=': result = token1 == token2; return result; break;
+        case '!': result = token1 != token2; return result; break;
+        default: return result; break;
+    }
+    
 }
 
 int EvaluatePostfix(queue Postfix){
