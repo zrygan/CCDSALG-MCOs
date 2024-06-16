@@ -37,9 +37,9 @@ stack createStack(int S){
  * 
  * @author: Zhean Ganituen
  */
-int push(int elem, stack *Stack){
+int push(char elem, stack *Stack){
     /* what we need to do:
-        1. check wether an element can still be added
+        1. check whether an element can still be added
         2. add elem in the top index
         3. make top gets elem
         4. increment elems (current number of elements)
@@ -110,6 +110,6 @@ bool stackFull(stack Stack){
     else return false;
 }
 
-int top(stack Stack){
+char top(stack Stack){
     return Stack.top;
 }

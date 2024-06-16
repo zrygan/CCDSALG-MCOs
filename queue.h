@@ -26,7 +26,7 @@
  * @author: Zhean Ganituen
  */
 typedef struct{
-    int items[MAX_SIZE];
+    char items[MAX_SIZE];
     int head;
     int tail;
     int size;
@@ -50,7 +50,7 @@ queue createQueue(int S);
  * adds an element in the tail position
  * 
  * @params:
- *  - elem  : int    : element to be insterted
+ *  - elem  : char    : element to be insterted
  *  - Queue : queue* : the queue
  * 
  * @returns:
@@ -58,18 +58,19 @@ queue createQueue(int S);
  * 
  * @author: Zhean Ganituen
  */
-void enqueue(int elem, queue *Queue);
+void enqueue(char elem, queue *Queue);
 
 /**dequeue
  * deletes element in the head position
  * 
  * @params:
  *  - Queue : queue* : the queue
+ *  - buffer : buffer* : the buffer for the char
  * 
  * @returns:
- *  - removed : int : the element removed
+ *  - removed : char : the element removed
  */
-int dequeue(queue *Queue);
+char dequeue(queue *Queue);
 
 /**queueEmpty
  * checks if the queue is empty
