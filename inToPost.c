@@ -8,9 +8,7 @@
  * Source file of infix to postfix algorithm.
 */
 
-#include "queue.c"
 #include "queue.h"
-#include "stack.c"
 #include "stack.h"
 
 //Does not consider tokens with two characters yet
@@ -78,5 +76,3 @@ while(!stackEmpty(Operators)){
 }
 return Postfix;
 }
-
-//

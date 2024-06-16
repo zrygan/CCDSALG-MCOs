@@ -9,10 +9,7 @@
 */
 
 #include "queue.h"
-#include "queue.c"
 #include "stack.h"
-#include "stack.c"
-#include "inToPost.c"
 
 
 int Evaluate(int token1,int operator,int token2){
