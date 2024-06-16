@@ -32,7 +32,7 @@ queue createQueue(int S){
  * 
  * @author: Zhean Ganituen
  */
-void enqueue(int elem, queue *Queue){
+void enqueue(char elem, queue *Queue){
     // put the element in the tail position
     Queue->items[Queue->tail] = elem;
     Queue->elems++;
@@ -48,20 +48,12 @@ void enqueue(int elem, queue *Queue){
  * 
  * @author: Zhean Ganituen
  */
-int dequeue(queue *Queue){
-    // store removed value
-    int removed = Queue->items[Queue->head];
-
-    // remove the element in the head position
-    Queue->items[Queue->head] = 0;
-    Queue->elems--;
-
-    // update head position
-    // same formula as with enqueue (moving tail)
-    Queue->head = (Queue->head + 1) % (Queue->size + 1);
-    // dont update tail
-
-    return removed;
+char dequeue(queue *Queue){
+    char buffer;
+    if (!queueEmpty(*Queue)) {
+        strcpy(&buffer, &Queue->items[(Queue->head)++]);
+    }
+    return buffer;
 }
 
 /**queueEmpty
@@ -89,7 +81,7 @@ bool queueFull(queue Queue){
  * 
  * @author: Zhean Ganituen
  */
-int queueHead(queue Queue){
+char queueHead(queue Queue){
     return Queue.items[Queue.head];
 }
 

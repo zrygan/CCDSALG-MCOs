@@ -26,7 +26,7 @@
  */
 typedef struct
 {
-    int items[MAX_SIZE];
+    char items[MAX_SIZE];
     int top;
     int size;
     int elems;
@@ -49,7 +49,7 @@ stack create(int S);
  * inserts an element `elem` in the stack `Stack`.
  * 
  * @params:
- *  - elem  : int   : the element to insert in the stack
+ *  - elem  : char   : the element to insert in the stack
  *  - Stack : stack : the stack
  * 
  * @returns:
@@ -58,7 +58,7 @@ stack create(int S);
  * 
  * @author: Zhean Ganituen
  */
-int push(int elem, stack *Stack);
+int push(char elem, stack *Stack);
 
 /**pop
  * deletes the top element in the stack and returns the element
@@ -112,6 +112,6 @@ bool stackFull(stack Stack);
  * @returns:
  *  - top : int : the value of the top
 */
-int top(stack Stack);
+char top(stack Stack);
 
 #endif
