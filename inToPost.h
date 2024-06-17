@@ -15,11 +15,9 @@
 #include "stack.h"
 #include "libraries.h"
 
-bool isOperator(char precedence);
+bool isOperator(const char *str);
 
-queue tokenize(const char* infix);
-
-int getPrecedence(char precedence);
+int getPrecedence(const char *precedence);
 
 queue InfixtoPostfix(queue infix);
 

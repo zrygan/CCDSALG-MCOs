@@ -8,89 +8,53 @@
  * Source file of infix to postfix algorithm.
 */
 
-#include "queue.h"
-#include "stack.h"
 #include "inToPost.h"
 
-/**isOperator
- * Checks if the token is an operator or an operand
- * 
- * @params:
- * - precedence : const char* : INSERT
- * 
- * 
- * @author: Vienn Balcita
- * 
- * Revisions by Jaztin Jimenez
- * - changed the paramater from integer to const char*
- * - changed the == operators to strcmp
- */
-bool isOperator(char precedence){
-    return precedence == '+' || precedence == '-' || precedence == '*' || precedence == '/' || precedence == '<' || precedence == '>' || 
-           precedence == '=' || precedence == '!' || precedence == '&' || precedence == '|';
+bool isOperator(const char *str){
+    return strcmp(str, "+") == 0 || strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str, "/") == 0 ||
+           strcmp(str, "<") == 0 || strcmp(str, ">") == 0 || strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 ||
+           strcmp(str, "==") == 0 || strcmp(str, "!=") == 0 || strcmp(str, "&&") == 0 || strcmp(str, "||") == 0;
+
 }
 
-/**getPrecedence
- * Checks the precedence of the operator
- * 
- * @author: Vienn Balcita
- * 
- * Revisions by Jaztin Jimenez
- * - changed the paramter from integer to const char*
- */
-int getPrecedence(char precedence){
-    switch (precedence) {
-        case '|': return 1;
-        case '&': return 2;
-        case '=': case '!': return 3;
-        case '<': case '>': return 4;
-        case '+': case '-': return 5;
-        case '*': case '/': return 6;
-        default: return 0;
-    }
+int getPrecedence(const char *precedence){
+    if (strcmp(precedence, "||") == 0) return 1;
+    if (strcmp(precedence, "&&") == 0) return 2;
+    if (strcmp(precedence, "==") == 0 || strcmp(precedence, "!=") == 0) return 3;
+    if (strcmp(precedence, "<") == 0 || strcmp(precedence, ">") == 0 || strcmp(precedence, "<=") == 0 || strcmp(precedence, ">=") == 0) return 4;
+    if (strcmp(precedence, "+") == 0 || strcmp(precedence, "-") == 0) return 5;
+    if (strcmp(precedence, "*") == 0 || strcmp(precedence, "/") == 0) return 6;
+    return 0;
 }
-
-/**InfixtoPostfix
- * Checks the precedence of the operator
- * 
- * @author: Vienn Balcita
- * 
- * Revisions by Jaztin Jimenez
- * - changed the paramter from integer to const char*
- * - changed the switch cases to if statements for better readability
- */
 
 queue InfixtoPostfix(queue infix) {
-    stack stack = createStack(MAX_SIZE);
+    stack stack = createStack();
     queue Postfix = createQueue(MAX_SIZE);
-    
-    while (!queueEmpty(infix)) {
-        char current = dequeue(&infix); // Dequeue the current character
 
-        if (isalnum(current)) {  // Check if it's an operand
-            enqueue(current, &Postfix); // Enqueue the operand to Postfix
-        } else if (current == '(') {
-            push(current, &stack); // Push '(' to the stack
-        } else if (current == ')') {
-            while (!stackEmpty(stack) && top(stack) != '(') {
-                enqueue(pop(&stack), &Postfix);
-            }
-            pop(&stack); // Remove '('
+    while (!queueEmpty(infix)) {
+        char *current = dequeue(&infix);
+
+        if (isdigit(*current)) {
+            enqueue(current, &Postfix); // Directly enqueue digits to output queue
         } else if (isOperator(current)) {
             while (!stackEmpty(stack) && getPrecedence(top(stack)) >= getPrecedence(current)) {
-                enqueue(pop(&stack), &Postfix);
+                enqueue(pop(&stack), &Postfix); // Pop operators with higher or equal precedence
             }
-            push(current, &stack); // Push the current operator to the stack
+            push(current, &stack); // Push current operator onto the stack
+        } else if (*current == '(') {
+            push(current, &stack); // Push '(' onto the stack
+        } else if (*current == ')') {
+            while (!stackEmpty(stack) && strcmp(top(stack), "(") != 0) {
+                enqueue(pop(&stack), &Postfix); // Pop until '(' is encountered
+            }
+            pop(&stack); // Pop '(' from the stack (discard it)
         }
     }
 
-    // Enqueue any remaining operators in the stack to the postfix queue
+    // Pop all remaining operators from the stack to the output queue
     while (!stackEmpty(stack)) {
         enqueue(pop(&stack), &Postfix);
     }
 
-    printf("im working!\n");
     return Postfix;
 }
-
-//

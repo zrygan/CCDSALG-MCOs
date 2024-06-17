@@ -17,7 +17,7 @@
  */
 queue createQueue(int S){
     queue Queue;
-    // removed size
+    Queue.size = S;
     Queue.head = 0; // start head and tail at 0 position
     Queue.tail = 0;
     // removed elems
@@ -29,19 +29,22 @@ queue createQueue(int S){
  * 
  * @author: Zhean Ganituen
  */
-void enqueue(char elem, queue *Queue){
+void enqueue(char *elem, queue *Queue){
     // checks queue overflow
-    if ((Queue->tail + 1) % MAX_SIZE == Queue->head) {
+    if ((Queue->tail + 1)  % Queue->size == Queue->head) {
     printf("Queue overflow\n");
     return;
     }
-    // put the element in the tail position
-    Queue->items[Queue->tail] = elem;
 
+    // put the element in the tail position
+    strcpy(Queue->items[Queue->tail], elem);
+    
     // update tail position
     // move the position by 1 and make it loop around if it exeeds size
-    Queue->tail = (Queue->tail + 1) % MAX_SIZE;
+    Queue->tail = (Queue->tail + 1) % Queue->size;
     // dont update head
+
+    
 }
 
 /**dequeue
@@ -49,12 +52,13 @@ void enqueue(char elem, queue *Queue){
  * 
  * @author: Zhean Ganituen
  */
-char dequeue(queue *Queue){
+char* dequeue(queue *Queue){
     if (queueEmpty(*Queue)) {
         printf("Queue underflow\n");
+        return NULL;
     }
-    char elem = Queue->items[Queue->head];
-    Queue->head = (Queue->head + 1) % MAX_SIZE;
+    char *elem = Queue->items[Queue->head];
+    Queue->head = (Queue->head + 1) % Queue->size;
     
     return elem;
 }
@@ -68,28 +72,17 @@ bool queueEmpty(queue Queue){
     return Queue.head == Queue.tail;
 }
 
-// removed queueFull
-
 /**queueHead
  * Gets current value in head, see documentation in `queue.h`
  * 
  * @author: Zhean Ganituen
  */
-char queueHead(queue Queue){
+char* queueHead(queue Queue){
+    static char headItem[MAX_SIZE]; // Static array to hold the result
     if (queueEmpty(Queue)) {
         printf("Queue empty\n");
+        return NULL;
     }
-    return Queue.items[Queue.head];
-}
-
-/**queueTail
- * Gets current value in tail, see documentation in `queue.h`
- * 
- * @author: Zhean Ganituen
- */
-int queueTail(queue Queue){
-    if (queueEmpty(Queue)) {
-        printf("Queue empty\n");
-    }
-    return Queue.items[Queue.tail];
+    strncpy(headItem, Queue.items[Queue.head], MAX_SIZE); // Copy the item to static array
+    return headItem;
 }

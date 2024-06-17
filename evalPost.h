@@ -13,11 +13,12 @@
 
 #include "queue.h"
 #include "stack.h"
+#include "intStack.h"
 #include "libraries.h"
 
-bool isOperators(char precedence);
+bool isOperators(const char *str);
 
-int Evaluate(int token1,int operators, int token2);
+int Evaluate(int token1,char *operators,int token2);
 
 int EvaluatePostfix(queue Postfix);
 

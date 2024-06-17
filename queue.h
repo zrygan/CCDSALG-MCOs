@@ -26,10 +26,11 @@
  * @author: Zhean Ganituen
  */
 typedef struct{
-    char items[MAX_SIZE];
+    char items[MAX_SIZE][MAX_SIZE];
     int head;
     int tail;
-    // removed elems and size
+    int size;
+    // removed elems
 } queue;
 
 /**createQueue
@@ -57,7 +58,7 @@ queue createQueue(int S);
  * 
  * @author: Zhean Ganituen
  */
-void enqueue(char elem, queue *Queue);
+void enqueue(char *elem, queue *Queue);
 
 /**dequeue
  * deletes element in the head position
@@ -69,7 +70,7 @@ void enqueue(char elem, queue *Queue);
  * @returns:
  *  - removed : char : the element removed
  */
-char dequeue(queue *Queue);
+char* dequeue(queue *Queue);
 
 /**queueEmpty
  * checks if the queue is empty
@@ -105,17 +106,6 @@ bool queueFull(queue Queue);
  * @returns:
  *  - val : int : the value at the head
  */
-char queueHead(queue Queue);
-
-/**queueTail
- * returns the value at the tail
- * 
- * @params:
- *  - queue : queue : the queue
- * 
- * @returns:
- *  - val : int : the value at the tail
- */
-int queueTail(queue Queue);
+char* queueHead(queue Queue);
 
 #endif
