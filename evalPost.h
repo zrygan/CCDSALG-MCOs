@@ -13,7 +13,6 @@
 
 #include "queue.h"
 #include "stack.h"
-#include "intStack.h"
 #include "libraries.h"
 
 bool isOperators(const char *str);
