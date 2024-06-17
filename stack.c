@@ -22,14 +22,11 @@ stack createStack(int S){
         3. initialize size as S
         4. return the stack created
     */
-    stack *Stack = malloc(sizeof(stack)); // allocate memory for the stack created
+    stack Stack;
+    Stack.top = -1; // init top as 0
+    // REMOVED ELEMS AND SIZE
 
-    Stack->top = 0; // init top as 0
-    Stack->size = S-1; // init size as what ever S-1 is (since max index for size S is S-1)
-
-    Stack->elems = 0; // init number of elements as -1
-
-    return *Stack;
+    return Stack;
 }
 
 /**push
@@ -46,13 +43,9 @@ int push(char elem, stack *Stack){
     */
     
     // check constraint elems (current number of elements) < size (maximum number of elements)
-    if(Stack->elems < Stack->size){
+    if(Stack->top < MAX_SIZE - 1){
         // if an element can be added
-        Stack->items[Stack->elems] = elem;
-        Stack->top = elem;
-        
-        // increment elems
-        Stack->elems++;
+        Stack->items[++(Stack->top)] = elem;
         
         return 1;
     } 
@@ -70,21 +63,8 @@ int pop(stack *Stack){
     /*
         1. check whether an element can still be removed
     */
-
-    if (Stack->elems > 0){
-        // if an element can still be removed
-        Stack->elems--;
-
-        // store element to be removed
-        int removed = Stack->items[Stack->elems];
-        
-        Stack->items[Stack->elems] = 0;
-
-        // update top if stack is not empty
-        if (Stack->elems >= 0) {
-            Stack->top = Stack->items[Stack->elems];
-        }
-        return removed;
+    if (!stackEmpty(*Stack)){
+        return Stack->items[(Stack->top)--];
     }
 
     return -999999;   
@@ -96,20 +76,14 @@ int pop(stack *Stack){
  * @author: Zhean Ganituen
  */
 bool stackEmpty(stack Stack){
-    if (Stack.elems == 0) return true;
-    else return false;
+    return Stack.top == -1;
 }
 
-/**isFull
- * Implementation to check if the stack is full, see documentation is `stack.h`
- * 
- * @author: Zhean Ganituen
- */
-bool stackFull(stack Stack){
-    if (Stack.size == Stack.elems) return true;
-    else return false;
-}
+// Removed stackFull
 
 char top(stack Stack){
-    return Stack.top;
+    if (stackEmpty(Stack)) {
+        printf("Stack is empty\n");
+    }
+    return Stack.items[Stack.top];
 }

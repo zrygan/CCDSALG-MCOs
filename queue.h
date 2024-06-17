@@ -29,8 +29,7 @@ typedef struct{
     char items[MAX_SIZE];
     int head;
     int tail;
-    int size;
-    int elems;
+    // removed elems and size
 } queue;
 
 /**createQueue
@@ -106,7 +105,7 @@ bool queueFull(queue Queue);
  * @returns:
  *  - val : int : the value at the head
  */
-int queueHead(queue Queue);
+char queueHead(queue Queue);
 
 /**queueTail
  * returns the value at the tail

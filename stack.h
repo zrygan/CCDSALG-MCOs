@@ -28,8 +28,7 @@ typedef struct
 {
     char items[MAX_SIZE];
     int top;
-    int size;
-    int elems;
+    // REMOVED SIZE AND ELEMS
 } stack;
 
 /** createStack
@@ -43,7 +42,7 @@ typedef struct
  * 
  * @author: Zhean Ganituen
  */
-stack create(int S);
+stack createStack(int S);
 
 /**push
  * inserts an element `elem` in the stack `Stack`.

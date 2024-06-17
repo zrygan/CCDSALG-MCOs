@@ -8,16 +8,29 @@
  * Source file of postfix evaluation algorithm.
 */
 
-#include "queue.h"
-#include "queue.c"
-#include "stack.h"
-#include "stack.c"
-#include "inToPost.c"
+#include "evalPost.h"
 
+/**isOperator
+ * Checks if the token is an operator or an operand
+ * 
+ * @params:
+ * - precedence : const char* : INSERT
+ * 
+ * 
+ * @author: Vienn Balcita
+ * 
+ * Revisions by Jaztin Jimenez
+ * - changed the paramater from integer to const char*
+ * - changed the == operators to strcmp
+ */
+bool isOperators(char precedence){
+    return precedence == '+' || precedence == '-' || precedence == '*' || precedence == '/' || precedence == '<' || precedence == '>' || 
+           precedence == '=' || precedence == '!' || precedence == '&' || precedence == '|';
+}
 
-int Evaluate(int token1,int operator,int token2){
+int Evaluate(int token1,int operators,int token2){
     int result;
-    switch(operator){
+    switch(operators){
         case '+': result = token1 + token2; return result; break;
         case '-': result = token1 - token2; return result; break;
         case '*': result = token1 * token2; return result; break;
@@ -28,26 +41,26 @@ int Evaluate(int token1,int operator,int token2){
         case '|': result = token1 || token2; return result; break;
         case '=': result = token1 == token2; return result; break;
         case '!': result = token1 != token2; return result; break;
-        default: return result; break;
+        default: return -1;
     }
-    
 }
 
 int EvaluatePostfix(queue Postfix){
-stack Output = createStack(Postfix.elems);
-queue temporary = createQueue(Postfix.elems);
+    stack Output = createStack(MAX_SIZE);
 
-while(!queueEmpty(Postfix)){
+    while (!queueEmpty(Postfix)) {
+        char current = dequeue(&Postfix);
 
-    if(isOperator(queueHead(Postfix))){
-        enqueue(pop(&Output),&temporary);
-        enqueue(dequeue(&Postfix),&Postfix);
-        enqueue(pop(&Output),&temporary);
-        push(Evaluate(dequeue(&temporary),dequeue(&temporary),dequeue(&temporary)),&Output);
+        if (isdigit(current)) {
+            // Convert character to integer before pushing to stack
+            push(current - '0', &Output);
+        } else if (isOperators(current)) {
+            int token2 = pop(&Output);
+            int token1 = pop(&Output);
+            int result = Evaluate(token1, current, token2);
+            push(result, &Output);
+        }
     }
-    else{
-        push(dequeue(&Postfix),&Output);
-    }
-}
-return pop(&Output);
+
+    return pop(&Output);
 }

@@ -11,47 +11,45 @@
 #include "libraries.h"
 #include "stack.h"
 #include "queue.h"
-#include "inToPost.c"
-#include "evalPost.c"
+#include "inToPost.h"
+#include "evalPost.h"
 
-int main(){
-    
+int main() {
     bool loop = true;
-    char infix[MAX_SIZE];
-    queue infixQueue = createQueue(MAX_SIZE); queue postfixQueue = createQueue(MAX_SIZE);
-    
-    while(loop)
-    {
-        scanf("%s", infix);
-            if (strcmp(infix,"QUIT") != 0) {
-                infixQueue = tokenize(infix);
 
-                postfixQueue = InfixtoPostfix(infixQueue);
-                
-                char resetPostfix[MAX_SIZE] = "";
+    while(loop) {
+        char infixExpression[MAX_SIZE];
+        printf("Enter an infix expression (or QUIT to exit): ");
+        scanf("%s", infixExpression);
 
-                // turns the postfix queue into a string
-                while (!queueEmpty(postfixQueue)) { 
-                    char token[MAX_SIZE];
-                    char c = dequeue(&infixQueue);
-                    strcpy(token,&c);
-                    strcat(resetPostfix, token);
-                }
-
-                printf("%s\n", resetPostfix);
-
-                //resets the dequeued postfix queue
-                postfixQueue = tokenize(resetPostfix);
-                
-                //insert evaluate functions here
-                int result = EvaluatePostfix(postfixQueue);
-
-                printf("%d\n", result);
-            }
-            else {
-                loop = false;
+        if (strcmp(infixExpression, "QUIT") == 0) {
+            loop = false;
+        } else {
+            queue infixQueue = createQueue(MAX_SIZE);
+            for (int i = 0; i < strlen(infixExpression); i++) {
+                enqueue(infixExpression[i], &infixQueue);
             }
 
+            queue postfixQueue = InfixtoPostfix(infixQueue);
+
+            char postfixString[MAX_SIZE] = "";
+            while (!queueEmpty(postfixQueue)) {
+                char c = dequeue(&postfixQueue);
+                strncat(postfixString, &c, 1);
+            }
+
+            printf("POSTFIX STRING: %s\n", postfixString);
+
+            // Reset postfix queue for evaluation
+            queue evaluationQueue = createQueue(MAX_SIZE);
+            for (int i = 0; i < strlen(postfixString); i++) {
+                enqueue(postfixString[i], &evaluationQueue);
+            }
+
+            int result = EvaluatePostfix(evaluationQueue);
+
+            printf("Evaluation Result: %d\n", result);
+        }
     }
 
     return 0;

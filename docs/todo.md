@@ -40,7 +40,11 @@
 
 ### Role Assignment
 
-- ...
+- [X] TASK 2: ~~~~
+- [X] TASK 2: ~~~~
+- [X] TASK 2: ~~~~
+- [X] TASK 2: ~~~~
+- [X] TASK 2: ~~~~
 
 ### To do list
 
