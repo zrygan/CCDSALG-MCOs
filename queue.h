@@ -17,7 +17,7 @@
  * struct data type for a queue
  * 
  * @fields:
- *  - items[MAX_SIZE] : int : array of integers, with maximum size of MAX_SIZE = 256
+ *  - items[MAX_SIZE][MAX_SIZE] : int : array of characters, with maximum size of MAX_SIZE = 256
  *  - head            : int : index where the next element to be dequeued
  *  - tail            : int : index where the next element to be inserted
  *  - size            : int : actual max size of the queue
@@ -68,7 +68,7 @@ void enqueue(char *elem, queue *Queue);
  *  - buffer : buffer* : the buffer for the char
  * 
  * @returns:
- *  - removed : char : the element removed
+ *  - removed : char* : the element removed
  */
 char* dequeue(queue *Queue);
 

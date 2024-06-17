@@ -14,24 +14,35 @@
 #include "inToPost.h"
 #include "evalPost.h"
 
+/**printQueue
+ * prints the expression inside the items[] inside of the queue
+ * 
+ * @params:
+ * - q   : queue    : a queue containing the expression to be printed
+ * 
+ * @returns:
+ * none
+ * 
+ * @author: Jaztin Jimenez
+ */
 void printQueue(queue q) {
   printf("Queue: ");
-  if (queueEmpty(q)) {
+  if (queueEmpty(q)) { // checks if the queue is empty
     printf("Empty\n");
     return;
   }
   for (int i = q.head; i <= q.tail; i++) {
-    printf("%s ", q.items[i]);
+    printf("%s ", q.items[i]); // prints out all of the strings inside queue
   }
   printf("\n");
 }
 
 int main() {
-    bool loop = true;
+    bool loop = true; // loop for the program
 
     while (loop) {
         char infixExpression[MAX_SIZE];
-        printf("Enter an infix expression (or QUIT to exit): ");
+        printf("Enter an infix expression (or QUIT to exit): "); // FOR TRACK PURPOSES (soon to be deleted)
         scanf("%s", infixExpression);
 
         if (strcmp(infixExpression, "QUIT") == 0) {
@@ -61,16 +72,16 @@ int main() {
                 enqueue(num, &infixQueue);
             }
 
-            printf("Infix expression: ");
+            printf("Infix expression: "); // FOR TRACK PURPOSES (soon to be deleted)
             printQueue(infixQueue);
             
             queue postfixQueue = InfixtoPostfix(infixQueue);
 
-            printf("Postfix expression: ");
+            printf("Postfix expression: "); // FOR TRACK PURPOSES (soon to be deleted)
             printQueue(postfixQueue);
 
             int result = EvaluatePostfix(postfixQueue);
-            printf("Evaluation Result: %d\n", result);
+            printf("Evaluation Result: %d\n", result); // FOR TRACK PURPOSES (soon to be deleted)
         }
     }
 

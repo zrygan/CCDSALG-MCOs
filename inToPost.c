@@ -10,13 +10,25 @@
 
 #include "inToPost.h"
 
-bool isOperator(const char *str){
+/**isOperator
+ * Implementation of isOperator function, see documentation in `inToPost.h`
+ * 
+ * @author: Vienn Balcita
+ * @contributor: Jaztin Jimenez
+ */
+int isOperator(const char *str){
     return strcmp(str, "+") == 0 || strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str, "/") == 0 ||
            strcmp(str, "<") == 0 || strcmp(str, ">") == 0 || strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 ||
            strcmp(str, "==") == 0 || strcmp(str, "!=") == 0 || strcmp(str, "&&") == 0 || strcmp(str, "||") == 0;
 
 }
 
+/**getPrecedence
+ * Implementation of getPrecedence function, see documentation in `inToPost.h`
+ * 
+ * @author: Vienn Balcita
+ * @contributor: Jaztin Jimenez
+ */
 int getPrecedence(const char *precedence){
     if (strcmp(precedence, "||") == 0) return 1;
     if (strcmp(precedence, "&&") == 0) return 2;
@@ -27,6 +39,12 @@ int getPrecedence(const char *precedence){
     return 0;
 }
 
+/**gInfixtoPostfix
+ * Implementation of InfixtoPostfix function, see documentation in `inToPost.h`
+ * 
+ * @author: Vienn Balcita
+ * @contributor: Jaztin Jimenez
+ */
 queue InfixtoPostfix(queue infix) {
     stack stack = createStack();
     queue Postfix = createQueue(MAX_SIZE);
