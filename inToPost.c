@@ -17,10 +17,11 @@
  * @contributor: Jaztin Jimenez
  */
 int isOperator(const char *str){
-    return strcmp(str, "+") == 0 || strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str, "/") == 0 ||
-           strcmp(str, "<") == 0 || strcmp(str, ">") == 0 || strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 ||
-           strcmp(str, "==") == 0 || strcmp(str, "!=") == 0 || strcmp(str, "&&") == 0 || strcmp(str, "||") == 0;
-
+    return strcmp(str, "!") == 0 || strcmp(str, "^") == 0 || strcmp(str, "+") == 0 || 
+        strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || 
+        strcmp(str, "/") == 0 || strcmp(str, "<") == 0 || strcmp(str, ">") == 0 || 
+        strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 || strcmp(str, "==") == 0 || 
+        strcmp(str, "!=") == 0 || strcmp(str, "&&") == 0 || strcmp(str, "||") == 0;
 }
 
 /**getPrecedence
@@ -30,6 +31,8 @@ int isOperator(const char *str){
  * @contributor: Jaztin Jimenez
  */
 int getPrecedence(const char *precedence){
+    if (strcmp(precedence, "^") == 0) return 7;
+    if (strcmp(precedence, "!") == 0) return 6;
     if (strcmp(precedence, "||") == 0) return 1;
     if (strcmp(precedence, "&&") == 0) return 2;
     if (strcmp(precedence, "==") == 0 || strcmp(precedence, "!=") == 0) return 3;

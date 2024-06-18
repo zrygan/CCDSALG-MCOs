@@ -26,7 +26,6 @@
  * @author: Jaztin Jimenez
  */
 void printQueue(queue q) {
-  printf("Queue: ");
   if (queueEmpty(q)) { // checks if the queue is empty
     printf("Empty\n");
     return;
@@ -42,7 +41,6 @@ int main() {
 
     while (loop) {
         char infixExpression[MAX_SIZE];
-        printf("Enter an infix expression (or QUIT to exit): "); // FOR TRACK PURPOSES (soon to be deleted)
         scanf("%s", infixExpression);
 
         if (strcmp(infixExpression, "QUIT") == 0) {
@@ -81,17 +79,21 @@ int main() {
                 num[numIndex] = '\0';
                 enqueue(num, &infixQueue);
             }
-
-            printf("Infix expression: "); // FOR TRACK PURPOSES (soon to be deleted)
-            printQueue(infixQueue);
             
             queue postfixQueue = InfixtoPostfix(infixQueue);
 
-            printf("Postfix expression: "); // FOR TRACK PURPOSES (soon to be deleted)
             printQueue(postfixQueue);
 
             int result = EvaluatePostfix(postfixQueue);
-            printf("Evaluation Result: %d\n", result); // FOR TRACK PURPOSES (soon to be deleted)
+
+            if (result == -99999999) {
+                printf("Division by zero error!\n");
+            }
+            else {
+                printf("%d\n", result); // FOR TRACK PURPOSES (soon to be deleted)
+            }
+
+            printf("\n");
         }
     }
 

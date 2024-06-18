@@ -18,6 +18,8 @@
         - inToPost.c
         - evalPost.c
 - Jimenez:  Task 3, Integrate the modules
+    See files:
+        - main.c
 - ___:      Task 4, Solution testing
 - ___:      Task 5, Solution documentation
 
