@@ -17,14 +17,11 @@
  */
 stack createStack(){
     /* what we need to do:
-        1. allocate memory for the stack
-        2. initialize top as 0
-        3. initialize size as S
-        4. return the stack created
+        1. initialize top as -1
+        2. return the stack created
     */
     stack Stack;
-    Stack.top = -1; // init top as 0
-    // REMOVED ELEMS AND SIZE
+    Stack.top = -1; // init top as -1
 
     return Stack;
 }
@@ -64,8 +61,11 @@ bool stackEmpty(stack Stack){
     return Stack.top == -1;
 }
 
-// Removed stackFull
-
+/**top
+ * Implementation to check the element at the top of the stack, see documentation in `stack.h`
+ * 
+ * @author: Zhean Ganituen
+ */
 char* top(stack Stack) {
     if (!stackEmpty(Stack)) {
         return Stack.items[Stack.top];
@@ -75,19 +75,31 @@ char* top(stack Stack) {
     }
 }
 
-
-//intStack
-
+/**createIntStack
+ * Implementation of create int stack function, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
 int_stack createIntStack() {
     int_stack Stack;
     Stack.top = -1;
     return Stack;
 }
 
+/**intStackEmpty
+ * Implementation to check if the stack is empty, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
 bool intStackEmpty(int_stack Stack) {
     return Stack.top == -1;
 }
 
+/**intPush
+ * Implementation to check if the stack is empty, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
 void intPush(int elem, int_stack* Stack) {
     if (Stack->top < MAX_SIZE - 1) {
         Stack->items[++(Stack->top)] = elem;
@@ -96,6 +108,11 @@ void intPush(int elem, int_stack* Stack) {
     }
 }
 
+/**intPop
+ * Implementation to remove and return the integer at the top of the stack, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
 int intPop(int_stack* Stack) {
     if (!intStackEmpty(*Stack)) {
         return Stack->items[(Stack->top)--];
@@ -105,6 +122,11 @@ int intPop(int_stack* Stack) {
     }
 }
 
+/**intTop
+ * Implementation to return the integer at the top of the stack, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
 int intTop(int_stack Stack) {
     if (!intStackEmpty(Stack)) {
         return Stack.items[Stack.top];
