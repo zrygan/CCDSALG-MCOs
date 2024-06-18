@@ -1,5 +1,6 @@
 # CCDSALG-MCOs
-Repository for CCDSALG (Data Structures and Algorithms) course projects at De La Salle Univerity. 
+
+Repository for CCDSALG (Data Structures and Algorithms) course projects at De La Salle Univerity.
 
 Balcita, V., [Ganituen, Z.](github.com/zrygan), and Jimenez, J.
 2024
