@@ -63,11 +63,15 @@ int main() {
                     // Check if it's a two-character operator
                     if (i < strlen(infixExpression) - 1 &&
                         ((infixExpression[i] == '>' && infixExpression[i+1] == '=') || (infixExpression[i] == '<' 
-                        && infixExpression[i+1] == '=') || infixExpression[i] == '!' ||
-                        infixExpression[i] == '=' || infixExpression[i] == '|' || infixExpression[i] == '&')) {
+                        && infixExpression[i+1] == '=') || (infixExpression[i] == '!' && infixExpression[i+1] == '=')||
+                        (infixExpression[i] == '=' && infixExpression[i+1] == '=') || infixExpression[i] == '|' || infixExpression[i] == '&')) {
                         char op[3] = {infixExpression[i], infixExpression[i + 1], '\0'};
                         enqueue(op, &infixQueue);
                         i++; // Skip the second character
+                    } else if (infixExpression[i] == '!') {
+                        // Check if it's a unary operator
+                        char op[2] = {infixExpression[i], '\0'};
+                        enqueue(op, &infixQueue);
                     } else {
                         char op[2] = {infixExpression[i], '\0'};
                         enqueue(op, &infixQueue);
@@ -80,6 +84,8 @@ int main() {
                 num[numIndex] = '\0';
                 enqueue(num, &infixQueue);
             }
+
+            printQueue(infixQueue);
             
             queue postfixQueue = InfixtoPostfix(infixQueue);
 
