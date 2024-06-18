@@ -18,7 +18,7 @@
  */
 int isOperator(const char *str){
     return strcmp(str, "!") == 0 || strcmp(str, "^") == 0 || strcmp(str, "+") == 0 || 
-        strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || 
+        strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str,"%%") ||
         strcmp(str, "/") == 0 || strcmp(str, "<") == 0 || strcmp(str, ">") == 0 || 
         strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 || strcmp(str, "==") == 0 || 
         strcmp(str, "!=") == 0 || strcmp(str, "&&") == 0 || strcmp(str, "||") == 0;
@@ -38,7 +38,7 @@ int getPrecedence(const char *precedence){
     if (strcmp(precedence, "==") == 0 || strcmp(precedence, "!=") == 0) return 3;
     if (strcmp(precedence, "<") == 0 || strcmp(precedence, ">") == 0 || strcmp(precedence, "<=") == 0 || strcmp(precedence, ">=") == 0) return 4;
     if (strcmp(precedence, "+") == 0 || strcmp(precedence, "-") == 0) return 5;
-    if (strcmp(precedence, "*") == 0 || strcmp(precedence, "/") == 0) return 6;
+    if (strcmp(precedence, "*") == 0 || strcmp(precedence, "/") == 0 || strcmp(precedence, "%%") == 0) return 6;
     return 0;
 }
 
