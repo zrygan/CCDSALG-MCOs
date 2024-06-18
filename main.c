@@ -62,7 +62,8 @@ int main() {
                     }
                     // Check if it's a two-character operator
                     if (i < strlen(infixExpression) - 1 &&
-                        (infixExpression[i] == '>' || infixExpression[i] == '<' || infixExpression[i] == '!' ||
+                        ((infixExpression[i] == '>' && infixExpression[i+1] == '=') || (infixExpression[i] == '<' 
+                        && infixExpression[i+1] == '=') || infixExpression[i] == '!' ||
                         infixExpression[i] == '=' || infixExpression[i] == '|' || infixExpression[i] == '&')) {
                         char op[3] = {infixExpression[i], infixExpression[i + 1], '\0'};
                         enqueue(op, &infixQueue);
