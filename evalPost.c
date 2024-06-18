@@ -17,11 +17,10 @@
  * @contributor: Jaztin Jimenez
  */
 int isOperators(const char *str){
-    return strcmp(str, "!") == 0 || strcmp(str, "^") == 0 || strcmp(str, "+") == 0 || 
-        strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str,"%%")||
-        strcmp(str, "/") == 0 || strcmp(str, "<") == 0 || strcmp(str, ">") == 0 || 
-        strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 || strcmp(str, "==") == 0 || 
-        strcmp(str, "!=") == 0 || strcmp(str, "&&") == 0 || strcmp(str, "||") == 0;
+    return strcmp(str, "+") == 0 || strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str, "/") == 0 ||
+           strcmp(str, "%") == 0 || strcmp(str, "^") == 0 || strcmp(str, "<") == 0 || strcmp(str, ">") == 0 ||
+           strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 || strcmp(str, "==") == 0 || strcmp(str, "!=") == 0 ||
+           strcmp(str, "&&") == 0 || strcmp(str, "||") == 0 || strcmp(str, "!") == 0;
 }
 
 /**Evaluate
@@ -37,7 +36,7 @@ int Evaluate(int token1,char *operators,int token2){
         return token1 - token2;
     if (strcmp(operators, "*") == 0) 
         return token1 * token2;
-    if (strcmp(operators,"%%") == 0)
+    if (strcmp(operators, "%") == 0) 
         return token1 % token2;
     if (strcmp(operators, "/") == 0){
         if (token2 == 0) {

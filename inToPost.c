@@ -17,11 +17,10 @@
  * @contributor: Jaztin Jimenez
  */
 int isOperator(const char *str){
-    return strcmp(str, "!") == 0 || strcmp(str, "^") == 0 || strcmp(str, "+") == 0 || 
-        strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str,"%%") ||
-        strcmp(str, "/") == 0 || strcmp(str, "<") == 0 || strcmp(str, ">") == 0 || 
-        strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 || strcmp(str, "==") == 0 || 
-        strcmp(str, "!=") == 0 || strcmp(str, "&&") == 0 || strcmp(str, "||") == 0;
+    return strcmp(str, "+") == 0 || strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str, "/") == 0 ||
+           strcmp(str, "%") == 0 || strcmp(str, "^") == 0 || strcmp(str, "<") == 0 || strcmp(str, ">") == 0 ||
+           strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 || strcmp(str, "==") == 0 || strcmp(str, "!=") == 0 ||
+           strcmp(str, "&&") == 0 || strcmp(str, "||") == 0 || strcmp(str, "!") == 0;
 }
 
 /**getPrecedence
@@ -31,14 +30,14 @@ int isOperator(const char *str){
  * @contributor: Jaztin Jimenez
  */
 int getPrecedence(const char *precedence){
-    if (strcmp(precedence, "^") == 0) return 7;
-    if (strcmp(precedence, "!") == 0) return 6;
-    if (strcmp(precedence, "||") == 0) return 1;
-    if (strcmp(precedence, "&&") == 0) return 2;
-    if (strcmp(precedence, "==") == 0 || strcmp(precedence, "!=") == 0) return 3;
-    if (strcmp(precedence, "<") == 0 || strcmp(precedence, ">") == 0 || strcmp(precedence, "<=") == 0 || strcmp(precedence, ">=") == 0) return 4;
+    if (strcmp(precedence, "^") == 0) return 8;
+    if (strcmp(precedence, "!") == 0) return 7;
+    if (strcmp(precedence, "*") == 0 || strcmp(precedence, "/") == 0 || strcmp(precedence, "%") == 0) return 6;
     if (strcmp(precedence, "+") == 0 || strcmp(precedence, "-") == 0) return 5;
-    if (strcmp(precedence, "*") == 0 || strcmp(precedence, "/") == 0 || strcmp(precedence, "%%") == 0) return 6;
+    if (strcmp(precedence, "<") == 0 || strcmp(precedence, ">") == 0 || strcmp(precedence, "<=") == 0 || strcmp(precedence, ">=") == 0) return 4;
+    if (strcmp(precedence, "==") == 0 || strcmp(precedence, "!=") == 0) return 3;
+    if (strcmp(precedence, "&&") == 0) return 2;
+    if (strcmp(precedence, "||") == 0) return 1;
     return 0;
 }
 
