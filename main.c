@@ -53,19 +53,29 @@ int main() {
             // Store infix expression into infixQueue
             char num[MAX_SIZE]; // Temporary array to store numbers
             int numIndex = 0;
-            for (int i = 0; infixExpression[i] != '\0'; i++) {
+            for (int i = 0; infixExpression[i] != '\0'; i++) { // Loop until the end of the string
                 if (isdigit(infixExpression[i])) {
-                num[numIndex++] = infixExpression[i];
+                num[numIndex++] = infixExpression[i]; // Increment and add the integer to the array
                 } else {
-                if (numIndex > 0) {
-                    num[numIndex] = '\0'; // Null terminate the string
-                    enqueue(num, &infixQueue);
-                    numIndex = 0; // Reset index for next number
-                }
-                char op[2] = {infixExpression[i], '\0'};
-                enqueue(op,&infixQueue);
+                    if (numIndex > 0) {
+                        num[numIndex] = '\0'; // Null terminate the string
+                        enqueue(num, &infixQueue);
+                        numIndex = 0; // Reset index for next number
+                    }
+                    // Check if it's a two-character operator
+                    if (i < strlen(infixExpression) - 1 &&
+                        (infixExpression[i] == '>' || infixExpression[i] == '<' || infixExpression[i] == '!' ||
+                        infixExpression[i] == '=' || infixExpression[i] == '|' || infixExpression[i] == '&')) {
+                        char op[3] = {infixExpression[i], infixExpression[i + 1], '\0'};
+                        enqueue(op, &infixQueue);
+                        i++; // Skip the second character
+                    } else {
+                        char op[2] = {infixExpression[i], '\0'};
+                        enqueue(op, &infixQueue);
+                    }
                 }
             }
+
             // Don't forget to enqueue the last number in the expression
             if (numIndex > 0) {
                 num[numIndex] = '\0';
