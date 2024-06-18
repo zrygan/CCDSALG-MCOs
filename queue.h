@@ -17,10 +17,10 @@
  * struct data type for a queue
  * 
  * @fields:
- *  - items[MAX_SIZE][MAX_SIZE] : int : array of characters, with maximum size of MAX_SIZE = 256
- *  - head            : int : index where the next element to be dequeued
- *  - tail            : int : index where the next element to be inserted
- *  - size            : int : actual max size of the queue
+ *  - items[MAX_SIZE][MAX_SIZE] : char : array of Strings, with maximum size of MAX_SIZE = 256
+ *  - head                      : int  : index where the next element to be dequeued
+ *  - tail                      : int  : index where the next element to be inserted
+ *  - size                      : int  : actual max size of the queue
  * 
  * @author: Zhean Ganituen
  */

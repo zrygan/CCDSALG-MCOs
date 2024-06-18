@@ -17,8 +17,8 @@
  * struct data type for a stack
  * 
  * @fields:
- *  - items[MAX_SIZE] : int : array of integers, with maximum size of MAX_SIZE = 256
- *  - top             : int : the most recent addition in the items array 
+ *  - items[MAX_SIZE] : char* : array of characters, with maximum size of MAX_SIZE = 256
+ *  - top             : int   : the index of the most recent addition in the items array 
  * 
  * @author: Zhean Ganituen
  */
