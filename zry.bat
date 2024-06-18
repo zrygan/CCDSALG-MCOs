@@ -17,6 +17,7 @@ REM main
 
 REM With I/O file redirection
 
-main.exe < TESTCASE.txt > RESULT.txt
+main.exe < TESTCASE_1.txt > RESULT_1.txt
+main.exe < TESTCASE_2.txt > RESULT_2.txt
 
 REM END OF FILE
