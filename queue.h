@@ -1,4 +1,4 @@
-/**
+    /**
  * Balcita, V.
  * Ganituen, Z.
  * Jimenez, J.
@@ -21,7 +21,6 @@
  *  - head            : int : index where the next element to be dequeued
  *  - tail            : int : index where the next element to be inserted
  *  - size            : int : actual max size of the queue
- *  - elems           : int : current number of elements in the queue
  * 
  * @author: Zhean Ganituen
  */
@@ -30,7 +29,6 @@ typedef struct{
     int head;
     int tail;
     int size;
-    // removed elems
 } queue;
 
 /**createQueue
@@ -69,6 +67,8 @@ void enqueue(char *elem, queue *Queue);
  * 
  * @returns:
  *  - removed : char* : the element removed
+ * 
+ * @author: Zhean Ganituen, Jaztin Jimenez
  */
 char* dequeue(queue *Queue);
 
@@ -81,6 +81,8 @@ char* dequeue(queue *Queue);
  * @returns:
  *  - true  : when the queue is empty
  *  - false : otherwise
+ * 
+ * @author: Zhean Ganituen
  */
 bool queueEmpty(queue Queue);
 
@@ -92,8 +94,10 @@ bool queueEmpty(queue Queue);
  *  - Queue : queue : the queue
  * 
  * @returns:
- *  - true  : when the queue is full
- *  - false : otherwise
+ *  - true  : bool : when the queue is full
+ *  - false : bool : otherwise
+ * 
+ * @author: Zhean Ganituen
  */
 bool queueFull(queue Queue);
 
@@ -104,7 +108,9 @@ bool queueFull(queue Queue);
  *  - queue : queue : the queue
  * 
  * @returns:
- *  - val : int : the value at the head
+ *  - val : char* : the value at the head
+ * 
+ * @author: Zhean Ganituen, Jaztin Jimenez
  */
 char* queueHead(queue Queue);
 

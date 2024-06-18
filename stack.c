@@ -20,6 +20,7 @@ stack createStack(){
         1. initialize top as -1
         2. return the stack created
     */
+
     stack Stack;
     Stack.top = -1; // init top as -1
 
@@ -101,9 +102,12 @@ bool intStackEmpty(int_stack Stack) {
  * @author: Jaztin Jimenez
  */
 void intPush(int elem, int_stack* Stack) {
+    // do if-else statement to check for overflow
     if (Stack->top < MAX_SIZE - 1) {
+        // push the item in the +1-th position in the stack (top + 1)
         Stack->items[++(Stack->top)] = elem;
     } else {
+        // if overflow, print overflow
         printf("Stack overflow\n");
     }
 }
@@ -114,7 +118,9 @@ void intPush(int elem, int_stack* Stack) {
  * @author: Jaztin Jimenez
  */
 int intPop(int_stack* Stack) {
+    // do if-else statement to check for overflow
     if (!intStackEmpty(*Stack)) {
+        // remove the top item from the stack
         return Stack->items[(Stack->top)--];
     } else {
         printf("Stack underflow\n");
@@ -128,7 +134,9 @@ int intPop(int_stack* Stack) {
  * @author: Jaztin Jimenez
  */
 int intTop(int_stack Stack) {
+    // do if-else statement to check for overflow
     if (!intStackEmpty(Stack)) {
+        // return the top item in the stack
         return Stack.items[Stack.top];
     } else {
         printf("Stack is empty\n");

@@ -53,10 +53,14 @@ void enqueue(char *elem, queue *Queue){
  * @author: Zhean Ganituen
  */
 char* dequeue(queue *Queue){
+    // check if the queue is empty
+
     if (queueEmpty(*Queue)) {
         printf("Queue underflow\n");
         return NULL;
     }
+
+    // if not, then dequeue head
     char *elem = Queue->items[Queue->head];
     Queue->head = (Queue->head + 1) % Queue->size;
     
@@ -69,6 +73,7 @@ char* dequeue(queue *Queue){
  * @author: Zhean Ganituen
  */
 bool queueEmpty(queue Queue){
+    // if queue is empty "reset" the position of head and tail.
     return Queue.head == Queue.tail;
 }
 
@@ -79,10 +84,14 @@ bool queueEmpty(queue Queue){
  */
 char* queueHead(queue Queue){
     static char headItem[MAX_SIZE]; // Static array to hold the result
+
+    // check if queue is empty, then don't run queue algorithm
     if (queueEmpty(Queue)) {
         printf("Queue empty\n");
         return NULL;
     }
+
+    // if not, do the queue algorithm
     strncpy(headItem, Queue.items[Queue.head], MAX_SIZE); // Copy the item to static array
     return headItem;
 }

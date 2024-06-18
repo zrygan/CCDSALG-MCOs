@@ -19,6 +19,8 @@
  * @fields:
  *  - items[MAX_SIZE] : int : array of integers, with maximum size of MAX_SIZE = 256
  *  - top             : int : the most recent addition in the items array 
+ * 
+ * @author: Zhean Ganituen
  */
 typedef struct
 {
