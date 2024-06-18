@@ -17,7 +17,7 @@
  * struct data type for a queue
  * 
  * @fields:
- *  - items[MAX_SIZE] : int : array of integers, with maximum size of MAX_SIZE = 256
+ *  - items[MAX_SIZE][MAX_SIZE] : int : array of characters, with maximum size of MAX_SIZE = 256
  *  - head            : int : index where the next element to be dequeued
  *  - tail            : int : index where the next element to be inserted
  *  - size            : int : actual max size of the queue
@@ -26,11 +26,11 @@
  * @author: Zhean Ganituen
  */
 typedef struct{
-    int items[MAX_SIZE];
+    char items[MAX_SIZE][MAX_SIZE];
     int head;
     int tail;
     int size;
-    int elems;
+    // removed elems
 } queue;
 
 /**createQueue
@@ -50,7 +50,7 @@ queue createQueue(int S);
  * adds an element in the tail position
  * 
  * @params:
- *  - elem  : int    : element to be insterted
+ *  - elem  : char    : element to be insterted
  *  - Queue : queue* : the queue
  * 
  * @returns:
@@ -58,18 +58,19 @@ queue createQueue(int S);
  * 
  * @author: Zhean Ganituen
  */
-void enqueue(int elem, queue *Queue);
+void enqueue(char *elem, queue *Queue);
 
 /**dequeue
  * deletes element in the head position
  * 
  * @params:
  *  - Queue : queue* : the queue
+ *  - buffer : buffer* : the buffer for the char
  * 
  * @returns:
- *  - removed : int : the element removed
+ *  - removed : char* : the element removed
  */
-int dequeue(queue *Queue);
+char* dequeue(queue *Queue);
 
 /**queueEmpty
  * checks if the queue is empty
@@ -105,17 +106,6 @@ bool queueFull(queue Queue);
  * @returns:
  *  - val : int : the value at the head
  */
-int queueHead(queue Queue);
-
-/**queueTail
- * returns the value at the tail
- * 
- * @params:
- *  - queue : queue : the queue
- * 
- * @returns:
- *  - val : int : the value at the tail
- */
-int queueTail(queue Queue);
+char* queueHead(queue Queue);
 
 #endif

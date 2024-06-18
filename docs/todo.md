@@ -18,6 +18,8 @@
         - inToPost.c
         - evalPost.c
 - Jimenez:  Task 3, Integrate the modules
+    See files:
+        - main.c
 - ___:      Task 4, Solution testing
 - ___:      Task 5, Solution documentation
 
@@ -40,7 +42,11 @@
 
 ### Role Assignment
 
-- ...
+- [X] TASK 2: ~~~~
+- [X] TASK 2: ~~~~
+- [X] TASK 2: ~~~~
+- [X] TASK 2: ~~~~
+- [X] TASK 2: ~~~~
 
 ### To do list
 

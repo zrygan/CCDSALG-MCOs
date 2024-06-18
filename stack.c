@@ -15,21 +15,15 @@
  * 
  * @author: Zhean Ganituen
  */
-stack createStack(int S){
+stack createStack(){
     /* what we need to do:
-        1. allocate memory for the stack
-        2. initialize top as 0
-        3. initialize size as S
-        4. return the stack created
+        1. initialize top as -1
+        2. return the stack created
     */
-    stack *Stack = malloc(sizeof(stack)); // allocate memory for the stack created
+    stack Stack;
+    Stack.top = -1; // init top as -1
 
-    Stack->top = 0; // init top as 0
-    Stack->size = S-1; // init size as what ever S-1 is (since max index for size S is S-1)
-
-    Stack->elems = 0; // init number of elements as -1
-
-    return *Stack;
+    return Stack;
 }
 
 /**push
@@ -37,28 +31,12 @@ stack createStack(int S){
  * 
  * @author: Zhean Ganituen
  */
-int push(int elem, stack *Stack){
-    /* what we need to do:
-        1. check wether an element can still be added
-        2. add elem in the top index
-        3. make top gets elem
-        4. increment elems (current number of elements)
-    */
-    
-    // check constraint elems (current number of elements) < size (maximum number of elements)
-    if(Stack->elems < Stack->size){
-        // if an element can be added
-        Stack->items[Stack->elems] = elem;
-        Stack->top = elem;
-        
-        // increment elems
-        Stack->elems++;
-        
-        return 1;
-    } 
-
-    // if an element cannot be added anymore
-    return -1;
+void push(char* elem, stack* Stack) {
+    if (Stack->top < MAX_SIZE - 1) {
+        Stack->items[++(Stack->top)] = elem;
+    } else {
+        printf("Stack overflow\n");
+    }
 }
 
 /**pop
@@ -66,50 +44,94 @@ int push(int elem, stack *Stack){
  * 
  * @author: Zhean Ganituen
  */
-int pop(stack *Stack){
-    /*
-        1. check whether an element can still be removed
-    */
-
-    if (Stack->elems > 0){
-        // if an element can still be removed
-        Stack->elems--;
-
-        // store element to be removed
-        int removed = Stack->items[Stack->elems];
-        
-        Stack->items[Stack->elems] = 0;
-
-        // update top if stack is not empty
-        if (Stack->elems >= 0) {
-            Stack->top = Stack->items[Stack->elems];
-        }
-        return removed;
+char* pop(stack* Stack) {
+    if (!stackEmpty(*Stack)) {
+        return Stack->items[(Stack->top)--];
+    } else {
+        printf("Stack underflow\n");
+        return NULL;
     }
-
-    return -999999;   
 }
-
 /**isEmpty
  * Implementation to check if the stack is empty, see documentation in `stack.h`
  * 
  * @author: Zhean Ganituen
  */
 bool stackEmpty(stack Stack){
-    if (Stack.elems == 0) return true;
-    else return false;
+    return Stack.top == -1;
 }
 
-/**isFull
- * Implementation to check if the stack is full, see documentation is `stack.h`
+/**top
+ * Implementation to check the element at the top of the stack, see documentation in `stack.h`
  * 
  * @author: Zhean Ganituen
  */
-bool stackFull(stack Stack){
-    if (Stack.size == Stack.elems) return true;
-    else return false;
+char* top(stack Stack) {
+    if (!stackEmpty(Stack)) {
+        return Stack.items[Stack.top];
+    } else {
+        printf("Stack is empty\n");
+        return NULL;
+    }
 }
 
-int top(stack Stack){
-    return Stack.top;
+/**createIntStack
+ * Implementation of create int stack function, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
+int_stack createIntStack() {
+    int_stack Stack;
+    Stack.top = -1;
+    return Stack;
+}
+
+/**intStackEmpty
+ * Implementation to check if the stack is empty, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
+bool intStackEmpty(int_stack Stack) {
+    return Stack.top == -1;
+}
+
+/**intPush
+ * Implementation to check if the stack is empty, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
+void intPush(int elem, int_stack* Stack) {
+    if (Stack->top < MAX_SIZE - 1) {
+        Stack->items[++(Stack->top)] = elem;
+    } else {
+        printf("Stack overflow\n");
+    }
+}
+
+/**intPop
+ * Implementation to remove and return the integer at the top of the stack, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
+int intPop(int_stack* Stack) {
+    if (!intStackEmpty(*Stack)) {
+        return Stack->items[(Stack->top)--];
+    } else {
+        printf("Stack underflow\n");
+        return -1;
+    }
+}
+
+/**intTop
+ * Implementation to return the integer at the top of the stack, see documentation in `stack.h`
+ * 
+ * @author: Jaztin Jimenez
+ */
+int intTop(int_stack Stack) {
+    if (!intStackEmpty(Stack)) {
+        return Stack.items[Stack.top];
+    } else {
+        printf("Stack is empty\n");
+        return -1;
+    }
 }

@@ -16,15 +16,12 @@
  * @author: Zhean Ganituen
  */
 queue createQueue(int S){
-    queue *Queue = malloc(sizeof(queue));
-
-    Queue->size = S-1; // init size as S-1 (since max index for size S is S-1)
-
-    Queue->head = 0; // start head and tail at 0 position
-    Queue->tail = 0;
-    Queue->elems = 0;
-
-    return *Queue;
+    queue Queue;
+    Queue.size = S;
+    Queue.head = 0; // start head and tail at 0 position
+    Queue.tail = 0;
+    // removed elems
+    return Queue;
 }
 
 /**enqueue
@@ -32,36 +29,38 @@ queue createQueue(int S){
  * 
  * @author: Zhean Ganituen
  */
-void enqueue(int elem, queue *Queue){
-    // put the element in the tail position
-    Queue->items[Queue->tail] = elem;
-    Queue->elems++;
+void enqueue(char *elem, queue *Queue){
+    // checks queue overflow
+    if ((Queue->tail + 1)  % Queue->size == Queue->head) {
+    printf("Queue overflow\n");
+    return;
+    }
 
+    // put the element in the tail position
+    strcpy(Queue->items[Queue->tail], elem);
+    
     // update tail position
     // move the position by 1 and make it loop around if it exeeds size
-    Queue->tail = (Queue->tail + 1) % (Queue->size + 1);
+    Queue->tail = (Queue->tail + 1) % Queue->size;
     // dont update head
+
+    
 }
 
-/**denqueue
+/**dequeue
  * Implementation of denqueue function, see documentation in `queue.h`
  * 
  * @author: Zhean Ganituen
  */
-int dequeue(queue *Queue){
-    // store removed value
-    int removed = Queue->items[Queue->head];
-
-    // remove the element in the head position
-    Queue->items[Queue->head] = 0;
-    Queue->elems--;
-
-    // update head position
-    // same formula as with enqueue (moving tail)
-    Queue->head = (Queue->head + 1) % (Queue->size + 1);
-    // dont update tail
-
-    return removed;
+char* dequeue(queue *Queue){
+    if (queueEmpty(*Queue)) {
+        printf("Queue underflow\n");
+        return NULL;
+    }
+    char *elem = Queue->items[Queue->head];
+    Queue->head = (Queue->head + 1) % Queue->size;
+    
+    return elem;
 }
 
 /**queueEmpty
@@ -70,18 +69,7 @@ int dequeue(queue *Queue){
  * @author: Zhean Ganituen
  */
 bool queueEmpty(queue Queue){
-    if (Queue.elems == 0) return true;
-    else return false;
-}
-
-/**queueFull
- * Checks if queue is full, see documentation in `queue.h`
- * 
- * @author: Zhean Ganituen
- */
-bool queueFull(queue Queue){
-    if (Queue.elems == Queue.size) return true;
-    else return false;
+    return Queue.head == Queue.tail;
 }
 
 /**queueHead
@@ -89,15 +77,12 @@ bool queueFull(queue Queue){
  * 
  * @author: Zhean Ganituen
  */
-int queueHead(queue Queue){
-    return Queue.items[Queue.head];
-}
-
-/**queueTail
- * Gets current value in tail, see documentation in `queue.h`
- * 
- * @author: Zhean Ganituen
- */
-int queueTail(queue Queue){
-    return Queue.items[Queue.tail];
+char* queueHead(queue Queue){
+    static char headItem[MAX_SIZE]; // Static array to hold the result
+    if (queueEmpty(Queue)) {
+        printf("Queue empty\n");
+        return NULL;
+    }
+    strncpy(headItem, Queue.items[Queue.head], MAX_SIZE); // Copy the item to static array
+    return headItem;
 }

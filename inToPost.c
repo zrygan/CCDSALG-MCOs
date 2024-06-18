@@ -8,75 +8,73 @@
  * Source file of infix to postfix algorithm.
 */
 
-#include "queue.c"
-#include "queue.h"
-#include "stack.c"
-#include "stack.h"
+#include "inToPost.h"
 
-//Does not consider tokens with two characters yet
-bool isOperator(int operator){
-    if (operator == '+' || operator == '-' || operator == '/' || operator == '^' || operator == '%' || 
-    operator == '*' || operator == '<' || operator == '>'){
-        return true;
-    }
-    else{
-        return false;
-    }
+/**isOperator
+ * Implementation of isOperator function, see documentation in `inToPost.h`
+ * 
+ * @author: Vienn Balcita
+ * @contributor: Jaztin Jimenez
+ */
+int isOperator(const char *str){
+    return strcmp(str, "+") == 0 || strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str, "/") == 0 ||
+           strcmp(str, "%") == 0 || strcmp(str, "^") == 0 || strcmp(str, "<") == 0 || strcmp(str, ">") == 0 ||
+           strcmp(str, "<=") == 0 || strcmp(str, ">=") == 0 || strcmp(str, "==") == 0 || strcmp(str, "!=") == 0 ||
+           strcmp(str, "&&") == 0 || strcmp(str, "||") == 0 || strcmp(str, "!") == 0;
 }
 
-int getPrecedence(int precedence){
-    switch(precedence){
-        case '(':
-        case ')': return 8;
-        case '!': return 7;
-        case '^': return 6;
-        case '%':
-        case '*':
-        case '/': return 5;
-        case '+':
-        case '-': return 4;
-        case '<':
-        case '>':
-        case ">=":
-        case "<=":
-        case "!=":
-        case "==": return 3;
-        case "&&": return 2;
-        case "||": return 1;
-        default: return 0;
-    }
+/**getPrecedence
+ * Implementation of getPrecedence function, see documentation in `inToPost.h`
+ * 
+ * @author: Vienn Balcita
+ * @contributor: Jaztin Jimenez
+ */
+int getPrecedence(const char *precedence){
+    if (strcmp(precedence, "^") == 0) return 8;
+    if (strcmp(precedence, "!") == 0) return 7;
+    if (strcmp(precedence, "*") == 0 || strcmp(precedence, "/") == 0 || strcmp(precedence, "%") == 0) return 6;
+    if (strcmp(precedence, "+") == 0 || strcmp(precedence, "-") == 0) return 5;
+    if (strcmp(precedence, "<") == 0 || strcmp(precedence, ">") == 0 || strcmp(precedence, "<=") == 0 || strcmp(precedence, ">=") == 0) return 4;
+    if (strcmp(precedence, "==") == 0 || strcmp(precedence, "!=") == 0) return 3;
+    if (strcmp(precedence, "&&") == 0) return 2;
+    if (strcmp(precedence, "||") == 0) return 1;
+    return 0;
 }
 
-queue InfixtoPostfix(queue infix){
-stack Operators = createStack(infix.elems);
-queue Postfix = createQueue(infix.elems);
+/**gInfixtoPostfix
+ * Implementation of InfixtoPostfix function, see documentation in `inToPost.h`
+ * 
+ * @author: Vienn Balcita
+ * @contributor: Jaztin Jimenez
+ */
+queue InfixtoPostfix(queue infix) {
+    stack stack = createStack();
+    queue Postfix = createQueue(MAX_SIZE);
 
-while(!queueEmpty(infix)){
-    //Opening Parenthesis not needed
-    if(queueHead(infix)=='('){
-        dequeue(&infix);
-    }
-    else if(isOperator(queueHead(infix))){
-        //If top of operator stack precedence is higher than head of infix queue
-        if(getPrecedence(top(Operators))>getPrecedence(queueHead(infix))){
-            //Pop the operator stack, enqueue to post fix queue
-            enqueue(pop(&Operators),&Postfix);
+    while (!queueEmpty(infix)) {
+        char *current = dequeue(&infix);
+
+        if (isdigit(*current)) {
+            enqueue(current, &Postfix); // Directly enqueue digits to output queue
+        } else if (isOperator(current)) {
+            while (!stackEmpty(stack) && getPrecedence(top(stack)) >= getPrecedence(current)) {
+                enqueue(pop(&stack), &Postfix); // Pop operators with higher or equal precedence
+            }
+            push(current, &stack); // Push current operator onto the stack
+        } else if (*current == '(') {
+            push(current, &stack); // Push '(' onto the stack
+        } else if (*current == ')') {
+            while (!stackEmpty(stack) && strcmp(top(stack), "(") != 0) {
+                enqueue(pop(&stack), &Postfix); // Pop until '(' is encountered
+            }
+            pop(&stack); // Pop '(' from the stack (discard it)
         }
-        // if not, push the operator to the operator stack
-        else{
-            push(dequeue(&infix),&Operators);
-        }
     }
-    //If the token is an operand, add it to the the postfix queue
-    else{
-        enqueue(dequeue(&infix),&Postfix);
-    }
-}
-//Any operators left in stack get enqueued to the postfix queue
-while(!stackEmpty(Operators)){
-    enqueue(pop(&Operators),&Postfix);
-}
-return Postfix;
-}
 
-//
+    // Pop all remaining operators from the stack to the output queue
+    while (!stackEmpty(stack)) {
+        enqueue(pop(&stack), &Postfix);
+    }
+
+    return Postfix;
+}
