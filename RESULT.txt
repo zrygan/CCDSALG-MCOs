@@ -22,6 +22,10 @@
 6 3 * 2 /  
 9
 
+60 % 0  
+60 0 %  
+Division by zero error!
+
 12 % 5  
 12 5 %  
 2
