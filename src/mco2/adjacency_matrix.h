@@ -44,6 +44,6 @@ void displayMatrix(adjacency_matrix matrix);
  * 
  * @author Zhean Ganituen
  */
-void getFile(String fileName, adjacency_matrix *matrix);
+void getFile(FILE *f, adjacency_matrix *matrix);
 
 #endif

@@ -13,17 +13,20 @@
 
 int main() {
     String fileName; 
+    FILE *f;
     adjacency_matrix matrix;
-    strcpy(fileName, "graph.txt"); // used for debugging
+    // strcpy(fileName, "graph.txt"); // used for debugging
 
-    // printf("Input filename: ");
-    // scanf("%s", fileName);
+    printf("Input filename: ");
+    scanf("%s", fileName);
     
-    getFile(fileName, &matrix);
-    displayMatrix(matrix);
+    f = fopen(fileName, "r");
 
-    for(int i = 0; i < matrix.vertex; i++){
-        printf("%s, ", matrix.names[i]);
+    if (f != NULL){
+        getFile(f, &matrix);
+        displayMatrix(matrix);
+    } else{
+        printf("\033[31m%s not found\033[37m", fileName);
     }
 
     return 0;
