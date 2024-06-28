@@ -26,7 +26,7 @@ int main() {
         getFile(f, &matrix);
         displayMatrix(matrix);
     } else{
-        printf("\033[31m%s not found\033[37m", fileName);
+        printf("\033[31m%s not found\033[37m.", fileName);
     }
 
     return 0;
