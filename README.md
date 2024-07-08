@@ -27,3 +27,7 @@ Balcita, V., [Ganituen, Z.](github.com/zrygan), and Jimenez, J.
 7. `RESULT.txt`: contains the result of the test case for file I/O redirection.
 8. `zry.bat`: batch file to combine needed command prompt commands in a single command.
 9. `docs/..`: contains the specs, to-do list, and other developer documentation.
+
+## Dependencies
+
+[Graphviz](https://graphviz.org/download/)

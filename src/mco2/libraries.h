@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include <math.h>
 #include "adjacency_matrix.h"
 
 #define MAX_LENGTH 256  // max length of a column of the matrix

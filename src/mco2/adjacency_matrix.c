@@ -13,7 +13,8 @@
 
 /**
  * function definition for displayMatrix, see displayMatrix in `adjacency_matrix.h`
- *
+ ******FOR DEBUGGING ***** not to be placed in the actual output
+ * 
  * @param matrix the adjency matrix
  *
  * @author Zhean Ganituen

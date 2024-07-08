@@ -9,6 +9,7 @@
 */
 
 #include "adjacency_matrix.h"
+#include "make_graph.h"
 #include "libraries.h"
 
 int main() {
@@ -25,6 +26,7 @@ int main() {
     if (f != NULL){
         getFile(f, &matrix);
         displayMatrix(matrix);
+        make_graph(matrix);
     } else{
         printf("\033[31m%s not found\033[37m.", fileName);
     }
