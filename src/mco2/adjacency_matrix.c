@@ -115,6 +115,8 @@ void getFile(FILE *f, adjacency_matrix *matrix)
             // assume not
             int col = -1;
             for(int i = 0; i < vertex; i++){
+                // if it is store the ith value in col
+                // then break
                 if(strcmp(matrix->names[i], text) == 0){
                     col = i;
                     break;
@@ -127,7 +129,8 @@ void getFile(FILE *f, adjacency_matrix *matrix)
                 strcpy(matrix->names[vertex], text);
                 vertex++;
             }
-
+            
+            // indicate that there's a relationship
             matrix->matrix[row][col] = 1;
         }
     }
