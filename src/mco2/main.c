@@ -25,7 +25,7 @@ int main() {
 
     if (f != NULL){
         getFile(f, &matrix);
-        displayMatrix(matrix);
+        displayMatrix(matrix); // FIXME: REMOVE THEN WHEN DONE
         make_graph(matrix);
     } else{
         printf("\033[31m%s not found\033[37m.", fileName);

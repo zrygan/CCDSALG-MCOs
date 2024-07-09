@@ -58,6 +58,7 @@ void make_graph(adjacency_matrix matrix){
     fclose(fp);
 
     // run the CLI command to compile the DOT file as PNG
+    // THIS LINE NEEDS GRAPHVIZ
     system("dot -Tpng graph.dot -o graph.png");
 
     // delete the DOT file
