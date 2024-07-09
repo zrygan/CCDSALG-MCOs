@@ -63,6 +63,6 @@ void make_graph(adjacency_matrix matrix){
 
     // delete the DOT file
     // we can remove this if we want to keep it, but i don't
-    //      think it's necessary
+    // think it's necessary
     system("del graph.dot");
 }

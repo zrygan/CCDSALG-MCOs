@@ -1,0 +1,5 @@
+        Bruce   Clark   Diana   Hal
+Bruce   0       0       1       0
+Clark   0       0       1       1
+Diana   1       1       0       1
+Hal     0       1       1       0

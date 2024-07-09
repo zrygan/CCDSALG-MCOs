@@ -1,5 +1,7 @@
-4
-Bruce Diana -1
-Clark Diana Hal -1
-Diana Bruce Clark Hal -1
-Hal Clark Diana -1
+6
+A B C D -1
+B A C E -1
+C A B D E -1
+D A C F -1
+E B C F -1
+F D E -1
