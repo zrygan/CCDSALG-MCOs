@@ -10,7 +10,6 @@
 
 #include "adjacency_matrix.h"
 #include "make_graph.h"
-#include "libraries.h"
 
 int main() {
     String fileName; 

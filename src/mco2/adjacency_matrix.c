@@ -9,7 +9,6 @@
  */
 
 #include "adjacency_matrix.h"
-#include "libraries.h"
 
 /**
  * function definition for displayMatrix, see displayMatrix in `adjacency_matrix.h`
