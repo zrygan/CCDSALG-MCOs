@@ -11,6 +11,12 @@
 #include "adjacency_matrix.h" // no need to put libraries.h since adjacency_matrix.h
                               // already has that (circular import)
 
+/* verify
+ * verifies if the name of the node is LOGGED already (to remove duplicates of the node name)
+ * 
+ * @param 
+ * 
+*/
 bool verify(String logger[][2], String base, String connection, int total){
     for (int log = 0; log < total; log++){
         if ((strcmp(logger[log][0], base) == 0 && strcmp(logger[log][1], connection) == 0) || 
