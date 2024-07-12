@@ -26,8 +26,9 @@
  * @returns a formatted string that dictates the relationship of the two nodes
  */
 char *node(String home, String dest){
-    String rel = strcat(home, " -> ");
-    String out = strcat(rel, dest); 
+    char* rel;
+    rel = strcat(home, " -> ");
+    char *out = strcat(rel, dest); 
     return out;
 }
 
