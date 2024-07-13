@@ -135,7 +135,7 @@ void getFile(FILE *f, adjacency_matrix *matrix)
     }
 
     // make sure that the diagonals are 0
-    for (int i = 0; i < matrix->vertex; ++i){
+    for (int i = 0; i < matrix->vertex; i++){
         // ???? WHY DO I NEED ++i here... doesn't work when it's i++
         matrix->matrix[i][i] = 0;
     }
