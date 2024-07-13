@@ -19,10 +19,10 @@
  * 
  * @author Jaztin Jimenez
  */
-typedef struct Node
+typedef struct DFSNode
 {
     String val;
-    struct Node** neighbors;
+    struct DFSNode* *neighbors;
     int numNeighbors;
 } DFSNode;
 
