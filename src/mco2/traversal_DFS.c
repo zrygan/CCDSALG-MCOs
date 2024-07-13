@@ -21,12 +21,14 @@ DFSNode createDFSNode(String val) {
 // Function to add an edge between two nodes
 void connectNodes(DFSNode *node1, DFSNode *node2) {
     node1->numNeighbors++; // increments the number of neighboring nodes
-    node1->neighbors[node1->numNeighbors - 1] = node2;
+    node1->neighbors = (DFSNode**)realloc(node1->neighbors, node1->numNeighbors * sizeof(DFSNode*)); // reallocate the size of the node with the number of neighboring nodes 
+                                                                                                    // and reserves a memory for the neighboring node that will be connected
+    node1->neighbors[node1->numNeighbors - 1] = node2; // places the neighboring node to the former node
 }
 
 // DFS function
 void dfs(DFSNode* start_node, bool* visited, String values[], int numNodes) {
-    // Find the index of the current node in the nodes array
+    // Find the index of the current node in the values array
     int nodeIndex = -1;
     for (int i = 0; i < numNodes; i++) {
         if (strcmp(values[i], start_node->val) == 0) {
@@ -35,6 +37,7 @@ void dfs(DFSNode* start_node, bool* visited, String values[], int numNodes) {
         }
     }
 
+    // If the current node does not exist in the values array or is already visited, skip the node
     if (nodeIndex == -1 || visited[nodeIndex]) return;
 
     // Mark the node as visited
