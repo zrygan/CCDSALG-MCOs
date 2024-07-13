@@ -9,24 +9,25 @@
 */
 
 #include "transversal_DFS.h"
+#include "adjacency_matrix.h"
 
-DFSNode* createDFSNode(String val) {
+DFSNode createDFSNode(String val) {
     DFSNode* node = (DFSNode*)malloc(sizeof(DFSNode));
     *node->val = strdup(val);  // Allocate and copy the string value
     node->neighbors = NULL;
     node->numNeighbors = 0;
-    return node;
+    return *node;
 }
 
 // Function to add an edge between two nodes
-void addEdge(DFSNode* node1, DFSNode* node2) {
+void addEdge(DFSNode *node1, DFSNode *node2) {
     node1->numNeighbors++;
     node1->neighbors = (DFSNode**)realloc(node1->neighbors, node1->numNeighbors * sizeof(DFSNode*));
     node1->neighbors[node1->numNeighbors - 1] = node2;
 }
 
 // DFS function
-void dfs(DFSNode* node, bool* visited, char* nodes[], int numNodes) {
+void dfs(DFSNode* node, bool* visited, String nodes[], int numNodes) {
     // Find the index of the current node in the nodes array
     int nodeIndex = -1;
     for (int i = 0; i < numNodes; i++) {
@@ -49,13 +50,29 @@ void dfs(DFSNode* node, bool* visited, char* nodes[], int numNodes) {
 }
 
 void DFSTraversal(adjacency_matrix matrix) {
-    // Create nodes
+    // Create nodes from the adjacency matrix
+    DFSNode nodeName[matrix.vertex];
     for (int i = 0; i < matrix.vertex; i++) {
-        String nodeName;
-        char temp = i;
-        strcat(nodeName, temp); // FIXME: MAKE A BETTER SYSTEM FOR THIS, THIS LOOKS SO DUMB
-        DFSNode* nodeName = createGraphNode(matrix.names[i]);
+        nodeName[i] = createDFSNode(matrix.names[i]);
     }
 
-    
+    // Connect the nodes
+    for (int row = 0; row < matrix.vertex; row++)
+    {
+        for (int col = 0; col < matrix.vertex; col++)
+        {
+            if (matrix.matrix[row][col]) {
+                addEdge(&nodeName[row], &nodeName[col]);
+            }
+        }
+    }
+
+    // Turn all the nodes to false for each vertex
+    bool visited[matrix.vertex]; // FIXME: IF EVER MAYBE I CAN JUST ADD A BOOLEAN IN THE STRUCT ITSELF
+    for (int i = 0; i < matrix.vertex; i++) {
+        visited[i] = false;
+    }
+
+    // Perform the DFS Traversal
+    dfs(&nodeName[0],visited, matrix.names, matrix.vertex); // FIXME: DEBUGGING ONLY!! REMOVE NODENAME
 }
