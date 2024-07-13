@@ -10,9 +10,9 @@
 
 #include "transversal_DFS.h"
 
-DFSNode* createDFSNode(char* val) {
+DFSNode* createDFSNode(String val) {
     DFSNode* node = (DFSNode*)malloc(sizeof(DFSNode));
-    node->val = strdup(val);  // Allocate and copy the string value
+    *node->val = strdup(val);  // Allocate and copy the string value
     node->neighbors = NULL;
     node->numNeighbors = 0;
     return node;
@@ -46,4 +46,16 @@ void dfs(DFSNode* node, bool* visited, char* nodes[], int numNodes) {
     for (int i = 0; i < node->numNeighbors; i++) {
         dfs(node->neighbors[i], visited, nodes, numNodes);
     }
+}
+
+void DFSTraversal(adjacency_matrix matrix) {
+    // Create nodes
+    for (int i = 0; i < matrix.vertex; i++) {
+        String nodeName;
+        char temp = i;
+        strcat(nodeName, temp); // FIXME: MAKE A BETTER SYSTEM FOR THIS, THIS LOOKS SO DUMB
+        DFSNode* nodeName = createGraphNode(matrix.names[i]);
+    }
+
+    
 }

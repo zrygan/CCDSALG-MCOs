@@ -13,25 +13,23 @@
 
 
 #include "libraries.h"
+#include "adjacency_matrix.h"
 
 /**
- * a structure of the adjacency_matrix implementation
- * 
- * @fields: matrix[][] the adjency matrix
- * @fields: vertex the number of vertices in the matrix 
  * 
  * @author Jaztin Jimenez
  */
 typedef struct
 {
-    char* val;
+    String val;
     struct DFSNode** neighbors;
     int numNeighbors;
 } DFSNode;
 
-DFSNode* createDFSNode(char* val);
+DFSNode* createDFSNode(String val);
 
 void addEdge(DFSNode* node1, DFSNode* node2);
 
+void dfs(DFSNode* node, bool* visited, char* nodes[], int numNodes);
 
 #endif
