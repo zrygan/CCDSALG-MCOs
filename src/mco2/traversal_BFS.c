@@ -8,5 +8,5 @@
  * C source code for BFS transveral of graph
 */
 
-#include "transversal_BFS.h"
+#include "traversal_BFS.h"
 

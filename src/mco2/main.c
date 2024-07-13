@@ -10,7 +10,8 @@
 
 #include "adjacency_matrix.h"
 #include "make_graph.h"
-#include "transversal_DFS.h" 
+#include "traversal_DFS.h" // FIXME: If done, try to place both traversal_BFS and traversal_DFS in a single traversal file
+#include "traversal_BFS.h"
 
 int main() {
     String fileName; 

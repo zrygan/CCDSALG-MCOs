@@ -8,7 +8,7 @@
  * C source file for DFS transveral of graph
 */
 
-#include "transversal_DFS.h"
+#include "traversal_DFS.h"
 
 DFSNode createDFSNode(String val) {
     DFSNode* node = (DFSNode*)malloc(sizeof(DFSNode));
@@ -19,18 +19,17 @@ DFSNode createDFSNode(String val) {
 }
 
 // Function to add an edge between two nodes
-void addEdge(DFSNode *node1, DFSNode *node2) {
-    node1->numNeighbors++;
-    node1->neighbors = (DFSNode**)realloc(node1->neighbors, node1->numNeighbors * sizeof(DFSNode*));
+void connectNodes(DFSNode *node1, DFSNode *node2) {
+    node1->numNeighbors++; // increments the number of neighboring nodes
     node1->neighbors[node1->numNeighbors - 1] = node2;
 }
 
 // DFS function
-void dfs(DFSNode* node, bool* visited, String nodes[], int numNodes) {
+void dfs(DFSNode* start_node, bool* visited, String values[], int numNodes) {
     // Find the index of the current node in the nodes array
     int nodeIndex = -1;
     for (int i = 0; i < numNodes; i++) {
-        if (strcmp(nodes[i], node->val) == 0) {
+        if (strcmp(values[i], start_node->val) == 0) {
             nodeIndex = i;
             break;
         }
@@ -40,11 +39,11 @@ void dfs(DFSNode* node, bool* visited, String nodes[], int numNodes) {
 
     // Mark the node as visited
     visited[nodeIndex] = true;
-    printf("%s ", node->val);  // Process the node
+    printf("%s ", start_node->val);  // Process the node
 
     // Recur for all the vertices adjacent to this vertex
-    for (int i = 0; i < node->numNeighbors; i++) {
-        dfs(node->neighbors[i], visited, nodes, numNodes);
+    for (int i = 0; i < start_node->numNeighbors; i++) {
+        dfs(start_node->neighbors[i], visited, values, numNodes);
     }
 }
 
@@ -61,7 +60,7 @@ void DFSTraversal(adjacency_matrix matrix, int start_index) {
         for (int col = 0; col < matrix.vertex; col++)
         {
             if (matrix.matrix[row][col]) {
-                addEdge(&nodeName[row], &nodeName[col]);
+                connectNodes(&nodeName[row], &nodeName[col]);
             }
         }
     }
