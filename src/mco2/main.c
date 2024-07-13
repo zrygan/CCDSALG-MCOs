@@ -16,6 +16,7 @@ int main() {
     String fileName; 
     FILE *f;
     adjacency_matrix matrix;
+    String start; // start vertex
     // strcpy(fileName, "graph.txt"); // used for debugging
 
     printf("Input filename: ");
@@ -27,7 +28,16 @@ int main() {
         getFile(f, &matrix);
         displayMatrix(matrix); // FIXME: REMOVE THEN WHEN DONE
         make_graph(matrix);
-        DFSTraversal(matrix);
+        printf("Input start vertex for the traversal: ");
+        scanf("%s", start);
+        for (int i = 0; i < matrix.vertex; i++) { // checks if vertex exists
+            if (!strcasecmp(matrix.names[i],start)) {
+                // insert BFS Transversal @Viennbalcita
+                DFSTraversal(matrix, i);
+                return 0;
+            }
+        }
+        printf("%s not found", start);
     } else{
         printf("\033[31m%s not found\033[37m.", fileName);
     }

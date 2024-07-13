@@ -48,7 +48,7 @@ void dfs(DFSNode* node, bool* visited, String nodes[], int numNodes) {
     }
 }
 
-void DFSTraversal(adjacency_matrix matrix) {
+void DFSTraversal(adjacency_matrix matrix, int start_index) {
     // Create nodes from the adjacency matrix
     DFSNode nodeName[matrix.vertex];
     for (int i = 0; i < matrix.vertex; i++) {
@@ -73,5 +73,5 @@ void DFSTraversal(adjacency_matrix matrix) {
     }
 
     // Perform the DFS Traversal
-    dfs(&nodeName[2],visited, matrix.names, matrix.vertex); // FIXME: DEBUGGING ONLY!! REMOVE NODENAME. IT STARTS ON CLARK
+    dfs(&nodeName[start_index],visited, matrix.names, matrix.vertex); // FIXME: DEBUGGING ONLY!! REMOVE NODENAME. IT STARTS ON CLARK
 }

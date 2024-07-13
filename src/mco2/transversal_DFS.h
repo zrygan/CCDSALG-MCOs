@@ -32,6 +32,6 @@ void addEdge(DFSNode* node1, DFSNode* node2);
 
 void dfs(DFSNode* node, bool* visited, String nodes[], int numNodes);
 
-void DFSTraversal(adjacency_matrix matrix);
+void DFSTraversal(adjacency_matrix matrix, int start);
 
 #endif
