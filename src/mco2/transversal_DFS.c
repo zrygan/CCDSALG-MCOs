@@ -73,5 +73,5 @@ void DFSTraversal(adjacency_matrix matrix, int start_index) {
     }
 
     // Perform the DFS Traversal
-    dfs(&nodeName[start_index],visited, matrix.names, matrix.vertex); // FIXME: DEBUGGING ONLY!! REMOVE NODENAME. IT STARTS ON CLARK
+    dfs(&nodeName[start_index],visited, matrix.names, matrix.vertex); 
 }

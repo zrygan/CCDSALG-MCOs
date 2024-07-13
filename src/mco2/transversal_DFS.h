@@ -22,7 +22,7 @@
 typedef struct DFSNode
 {
     String val;
-    struct DFSNode* *neighbors;
+    struct DFSNode** neighbors;
     int numNeighbors;
 } DFSNode;
 
@@ -32,6 +32,6 @@ void addEdge(DFSNode* node1, DFSNode* node2);
 
 void dfs(DFSNode* node, bool* visited, String nodes[], int numNodes);
 
-void DFSTraversal(adjacency_matrix matrix, int start);
+void DFSTraversal(adjacency_matrix matrix, int start_index);
 
 #endif
