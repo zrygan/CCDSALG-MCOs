@@ -19,17 +19,19 @@
  * 
  * @author Jaztin Jimenez
  */
-typedef struct
+typedef struct Node
 {
     String val;
-    struct DFSNode** neighbors;
+    struct Node** neighbors;
     int numNeighbors;
 } DFSNode;
 
-DFSNode* createDFSNode(String val);
+DFSNode createDFSNode(String val);
 
 void addEdge(DFSNode* node1, DFSNode* node2);
 
-void dfs(DFSNode* node, bool* visited, char* nodes[], int numNodes);
+void dfs(DFSNode* node, bool* visited, String nodes[], int numNodes);
+
+void DFSTraversal(adjacency_matrix matrix);
 
 #endif

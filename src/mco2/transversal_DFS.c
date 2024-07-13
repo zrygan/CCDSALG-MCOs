@@ -9,11 +9,10 @@
 */
 
 #include "transversal_DFS.h"
-#include "adjacency_matrix.h"
 
 DFSNode createDFSNode(String val) {
     DFSNode* node = (DFSNode*)malloc(sizeof(DFSNode));
-    *node->val = strdup(val);  // Allocate and copy the string value
+    strcpy(node->val,val);
     node->neighbors = NULL;
     node->numNeighbors = 0;
     return *node;
@@ -74,5 +73,5 @@ void DFSTraversal(adjacency_matrix matrix) {
     }
 
     // Perform the DFS Traversal
-    dfs(&nodeName[0],visited, matrix.names, matrix.vertex); // FIXME: DEBUGGING ONLY!! REMOVE NODENAME
+    dfs(&nodeName[2],visited, matrix.names, matrix.vertex); // FIXME: DEBUGGING ONLY!! REMOVE NODENAME. IT STARTS ON CLARK
 }

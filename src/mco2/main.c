@@ -10,6 +10,7 @@
 
 #include "adjacency_matrix.h"
 #include "make_graph.h"
+#include "transversal_DFS.h" 
 
 int main() {
     String fileName; 
@@ -26,6 +27,7 @@ int main() {
         getFile(f, &matrix);
         displayMatrix(matrix); // FIXME: REMOVE THEN WHEN DONE
         make_graph(matrix);
+        DFSTraversal(matrix);
     } else{
         printf("\033[31m%s not found\033[37m.", fileName);
     }
