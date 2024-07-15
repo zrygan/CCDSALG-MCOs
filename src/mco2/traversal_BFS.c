@@ -65,7 +65,7 @@ void bfs(BFSNode* start_node, bool* visited, int visitedCount, String values[], 
 }
 
 
-void bfstraversal(adjacency_matrix matrix, int start_index) {
+void BFStraversal(adjacency_matrix matrix, int start_index) {
     // Create nodes from the adjacency matrix
     BFSNode nodeName[matrix.vertex];
     for (int i = 0; i < matrix.vertex; i++) {
