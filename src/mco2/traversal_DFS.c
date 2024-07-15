@@ -50,7 +50,7 @@ void dfs(DFSNode* start_node, bool* visited, String values[], int numNodes) {
 
     // Recur for all the vertices adjacent to this vertex
     for (int small_index = 0; small_index < start_node->numNeighbors; small_index++) {
-        
+        // Get the unvisited lowest vertex ID
         for (int i = 0; i < start_node->numNeighbors; i++) {
             if (strcmp(temp,start_node->neighbors[i]->val) > 0 && !visited[i]) {
                 strcpy(temp,start_node->neighbors[i]->val);
@@ -59,8 +59,6 @@ void dfs(DFSNode* start_node, bool* visited, String values[], int numNodes) {
         }
         dfs(start_node->neighbors[small_index], visited, values, numNodes); 
     }
-
-    
 }
 
 void DFSTraversal(adjacency_matrix matrix, int start_index) {
