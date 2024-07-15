@@ -44,10 +44,23 @@ void dfs(DFSNode* start_node, bool* visited, String values[], int numNodes) {
     visited[nodeIndex] = true;
     printf("%s ", start_node->val);  // Process the node
 
+    
+    String temp;
+    strcpy(temp,start_node->neighbors[0]->val);
+
     // Recur for all the vertices adjacent to this vertex
-    for (int i = 0; i < start_node->numNeighbors; i++) {
-        dfs(start_node->neighbors[i], visited, values, numNodes);
+    for (int small_index = 0; small_index < start_node->numNeighbors; small_index++) {
+        
+        for (int i = 0; i < start_node->numNeighbors; i++) {
+            if (strcmp(temp,start_node->neighbors[i]->val) > 0 && !visited[i]) {
+                strcpy(temp,start_node->neighbors[i]->val);
+                small_index = i;
+            }
+        }
+        dfs(start_node->neighbors[small_index], visited, values, numNodes); 
     }
+
+    
 }
 
 void DFSTraversal(adjacency_matrix matrix, int start_index) {
