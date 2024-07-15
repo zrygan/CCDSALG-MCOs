@@ -20,7 +20,7 @@ BFSNode createBFSNode(String val) {
 }
 
 // Function to add an edge between two nodes
-void connectNodes(BFSNode *node1, BFSNode *node2) {
+void connectBFSNodes(BFSNode *node1, BFSNode *node2) {
     node1->numNeighbors++; // increments the number of neighboring nodes
     node1->neighbors = (BFSNode**)realloc(node1->neighbors, node1->numNeighbors * sizeof(BFSNode*)); // reallocate the size of the node with the number of neighboring nodes 
                                                                                                     // and reserves a memory for the neighboring node that will be connected
@@ -43,15 +43,13 @@ void bfs(BFSNode* start_node, bool* visited, int visitedCount, String values[], 
     if ((nodeIndex == -1 || visited[nodeIndex]) && (start_node!=parent_node)) return;
 
     // Mark the node as visited
-    if(visited[nodeIndex]==false){
-        visited[nodeIndex] = true;
-        visitedCount++;
-        printf("%s ", start_node->val);  // Process the node and printing out the node
-        //ToDo: Add to the tree/store the sequence in a string array (Ung sinabi ni zhean)
-        if(start_node!=parent_node){
-            strcpy(nodes[treeCount],node(parent_node->val,start_node->val));
-            treeCount++;
-        }
+    visited[nodeIndex] = true;
+    visitedCount++;
+    printf("%s ", start_node->val);  // Process the node and printing out the node
+    //ToDo: Add to the tree/store the sequence in a string array (Ung sinabi ni zhean)
+    if(start_node!=parent_node){
+        strcpy(nodes[treeCount],node(parent_node->val,start_node->val)); // FIXME: @Viennbalcita
+        treeCount++;
     }
 
     //if the visited count is equal to the amount of neighbors of the parent node, move on
@@ -78,7 +76,7 @@ void BFStraversal(adjacency_matrix matrix, int start_index) {
         for (int col = 0; col < matrix.vertex; col++)
         {
             if (matrix.matrix[row][col]) {
-                connectNodes(&nodeName[row], &nodeName[col]);
+                connectBFSNodes(&nodeName[row], &nodeName[col]);
             }
         }
     }

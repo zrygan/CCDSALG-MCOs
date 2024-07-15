@@ -1,6 +1,0 @@
-graph {
- Bruce -- Diana;
- Diana -- Clark;
- Diana -- Hal;
- Clark -- Hal;
-}

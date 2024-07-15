@@ -35,8 +35,10 @@ int main() {
         for (start_index = 0; start_index < matrix.vertex; start_index++) { // checks if vertex exists
             if (!strcasecmp(matrix.names[start_index],start)) {
                 // insert BFS Transversal @Viennbalcita
-                
                 DFSTraversal(matrix, start_index);
+                printf(" DFS TRAVERSAL! FOR DEBUGGING"); // FIXME: FOR DEBUGGING! REMOVE WHEN DONE
+                printf("\n");
+                BFStraversal(matrix, start_index);
                 return 0;
             }
         }
