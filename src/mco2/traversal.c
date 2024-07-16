@@ -26,38 +26,90 @@ void connectNodes(Node *node1, Node *node2) {
     node1->neighbors[node1->numNeighbors - 1] = node2; // places the neighboring node to the former node
 }
 
-//function for bfs itself
-void bfs(Node* start_node, bool* visited, int visitedCount, String values[], int numNodes, Node* parent_node, int index, int treeCount) {
-    // Find the index of the current node in the values array
-    char *nodes[MAX_WIDTH];
+void visit_childnode(Node* current_node, bool* visited, String values[], int numNodes,int treenode_count){
     int nodeIndex = -1;
     for (int i = 0; i < numNodes; i++) { //Go through all the nodes
-        if (strcmp(values[i], start_node->val) == 0) { //If the name[i] is found to be same as the node continue with same index
+        if (strcmp(values[i], current_node->val) == 0) { //If the name[i] is found to be same as the node continue with same index
+            nodeIndex = i;
+            break;
+        }
+    }
+    // If the current node does not exist in the values array or is already visited, and if the current node is not parent node, skip the node
+    if (nodeIndex == -1 || visited[nodeIndex]) return;
+    // && (strcmp(current_node->val,parent_node->val)==0)) return;
+    // Mark the node as visited
+    if(visited[nodeIndex]==false){
+    //printf("%s visited\n", start_node->val);
+    printf("%s ", current_node->val);  // Process the node and printing out the node
+    visited[nodeIndex] = true;
+    }
+}
+
+//function for bfs itself
+void bfs(Node* current_node, bool* visited, String values[], int numNodes, int treenode_count) {
+    // Find the index of the current node in the values array
+    //char *nodes[MAX_WIDTH];
+    int nodeIndex = -1;
+    for (int i = 0; i < numNodes; i++) { //Go through all the nodes
+        if (strcmp(values[i], current_node->val) == 0) { //If the name[i] is found to be same as the node continue with same index
             nodeIndex = i;
             break;
         }
     }
 
     // If the current node does not exist in the values array or is already visited, and if the current node is not parent node, skip the node
-    if ((nodeIndex == -1 || visited[nodeIndex]) && (start_node!=parent_node)) return;
-
+    //if ((nodeIndex == -1 || visited[nodeIndex])) return;
+    //&& (start_node!=parent_node))
+    if (nodeIndex == -1 || visited[nodeIndex])return;
     // Mark the node as visited
+    if(visited[nodeIndex]==false){
+    //printf("%s visited\n", start_node->val);
+    printf("%s ", current_node->val);  // Process the node and printing out the node
     visited[nodeIndex] = true;
-    visitedCount++;
-    printf("%s ", start_node->val);  // Process the node and printing out the node
-    //ToDo: Add to the tree/store the sequence in a string array (Ung sinabi ni zhean)
-    if(start_node!=parent_node){
-        strcpy(nodes[treeCount],node(parent_node->val,start_node->val)); // FIXME: @Viennbalcita
-        treeCount++;
     }
-
+    //ToDo: Add to the tree/store the sequence in a string array (Ung sinabi ni zhean)
+    //if(start_node!=parent_node){
+    //   strcpy(nodes[treeCount],node(parent_node->val,start_node->val)); // FIXME: @Viennbalcita
+    //    treeCount++;
+    //}
+    /*
     //if the visited count is equal to the amount of neighbors of the parent node, move on
     if((visitedCount)==parent_node->numNeighbors){
         bfs(parent_node->neighbors[0], visited,-1, values, numNodes, parent_node, -1,treeCount);
     }
     //if it is not equal then move on to the next neighbor of the parent node
     else{
-        bfs(parent_node->neighbors[index+1],visited,visitedCount, values, numNodes, parent_node, index+1,treeCount);
+        bfs(parent_node->neighbors[index+1],visited,visitedCount, values, numNodes, treenode_count);
+    }
+    */
+
+    String temp;
+    strcpy(temp,current_node->neighbors[0]->val);
+    //visit all the child nodes of the parent
+    for (int small_index = 0; small_index < current_node->numNeighbors; small_index++) {
+        // Get the unvisited lowest vertex ID
+        for (int i = 0; i < current_node->numNeighbors; i++) {
+            if (strcmp(temp,current_node->neighbors[i]->val) > 0 && !visited[i]) {
+                strcpy(temp,current_node->neighbors[i]->val);
+                small_index = i;
+            }
+        }
+    printf("\nits going to: %s\n",current_node->neighbors[small_index]->val);
+    printf("coming from: %s\n", current_node->val);
+    visit_childnode(current_node->neighbors[small_index], visited, values, numNodes,treenode_count);
+    }
+
+    strcpy(temp,current_node->neighbors[0]->neighbors[0]->val);
+    int j = 0;
+    for (int small_index = 0; small_index < current_node->numNeighbors; small_index++,j++) {
+        // Get the unvisited lowest vertex ID
+        for (int i = 0; i < current_node->neighbors[small_index]->numNeighbors; i++) {
+            if ((strcmp(temp,current_node->neighbors[small_index]->neighbors[i]->val) > 0 && !visited[i])) {
+                strcpy(temp,current_node->neighbors[small_index]->neighbors[i]->val);
+                small_index = i;
+            }
+        }
+    bfs(current_node->neighbors[j]->neighbors[small_index], visited, values, numNodes,treenode_count);
     }
 }
 
@@ -84,8 +136,8 @@ void BFStraversal(adjacency_matrix matrix, int start_index) {
     for (int i = 0; i < matrix.vertex; i++) {
         visited[i] = false;
     }
-    // Perform the DFS Traversal
-    bfs(&nodeName[start_index],visited, -1, matrix.names, matrix.vertex, &nodeName[start_index], -1, 0); 
+    // Perform the bfs Traversal
+    bfs(&nodeName[start_index],visited, matrix.names, matrix.vertex,0); 
     
 }
 

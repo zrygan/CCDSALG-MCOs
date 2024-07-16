@@ -75,7 +75,7 @@ void dfs(Node* start_node, bool* visited, String values[], int numNodes);
  */
 void DFSTraversal(adjacency_matrix matrix, int start_index);
 
-void bfs(Node* start_node, bool* visited, int visitedCount, String values[], int numNodes, Node* parent_node, int index, int treeCount);
+//void bfs(Node* start_node, bool* visited, int visitedCount, String values[], int numNodes, Node* parent_node, int index, int treeCount);
 
 void BFStraversal(adjacency_matrix matrix, int start_index);
 
