@@ -5,15 +5,16 @@
  * 
  * CCDSALG, Project 2
  * 
- * Header file for DFS transveral of graph
+ * Header file for transveral of graph
 */
 
-#ifndef TRANSVERSAL_DFS
-#define TRANSVERSAL_DFS
+#ifndef TRAVERSAL
+#define TRAVERSAL
 
 
 #include "libraries.h"
 #include "adjacency_matrix.h"
+#include "make_tree.h"
 
 /**
  * a structure of the DFS Nodes
@@ -24,15 +25,15 @@
  * 
  * @author Jaztin Jimenez
  */
-typedef struct DFSNode
+typedef struct Node
 {
     String val;
-    struct DFSNode** neighbors;
+    struct Node** neighbors;
     int numNeighbors;
-} DFSNode;
+} Node;
 
 /**
- * creates the DFS Nodes
+ * creates the nodes
  * 
  * @param val   :   String  :   the value that the node contains
  * 
@@ -40,7 +41,7 @@ typedef struct DFSNode
  * 
  * @author Jaztin Jimenez
  */
-DFSNode createDFSNode(String val);
+Node createNode(String val);
 
 /**
  * connects the DFS Nodes
@@ -50,7 +51,7 @@ DFSNode createDFSNode(String val);
  * 
  * @author Jaztin Jimenez
  */
-void connectNodes(DFSNode* node1, DFSNode* node2);
+void connectNodes(Node* node1, Node* node2);
 
 /**
  * executes the DFS Traversal
@@ -62,7 +63,7 @@ void connectNodes(DFSNode* node1, DFSNode* node2);
  * 
  * @author Jaztin Jimenez
  */
-void dfs(DFSNode* start_node, bool* visited, String values[], int numNodes);
+void dfs(Node* start_node, bool* visited, String values[], int numNodes);
 
 /**
  * executes the formalities for the DFS Traversal // FIXME: MEDYO DI KO GUSTO HOW I DID THIS WBSJSAHSAH
@@ -73,5 +74,10 @@ void dfs(DFSNode* start_node, bool* visited, String values[], int numNodes);
  * @author Jaztin Jimenez
  */
 void DFSTraversal(adjacency_matrix matrix, int start_index);
+
+void bfs(Node* start_node, bool* visited, int visitedCount, String values[], int numNodes, Node* parent_node, int index, int treeCount);
+
+void BFStraversal(adjacency_matrix matrix, int start_index);
+
 
 #endif
