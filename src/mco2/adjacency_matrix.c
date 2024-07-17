@@ -53,22 +53,28 @@ void displayMatrix(adjacency_matrix matrix)
  */
 void getFile(FILE *f, adjacency_matrix *matrix)
 {
-    String line;
-    char *text;
+    String line, vertexName;
 
-    fgets(line, sizeof(line), f);        // get the first line (contains number of vertices)
-    sscanf(line, "%d", &matrix->vertex); // get the number in the first line and store in vertex
+    fscanf(f, "%d", &matrix->vertex); // get the number in the first line and store in vertex
+    fgetc(f);
 
     // Initialize adjacency matrix
     for (int i = 0; i < matrix->vertex; ++i)
     {
+        // read entire line
+        fgets(line, sizeof(line), f);
+        sscanf(line, "%s", matrix->names[i]);
         for (int j = 0; j < matrix->vertex; ++j)
         {
             matrix->matrix[i][j] = 0;
         }
     }
 
-    int vertex = 0;
+    // Reset file pointer to the beginning
+    rewind(f);
+
+    fscanf(f, "%d", &matrix->vertex); // get the number again to skip the vertex count line
+    fgetc(f); // consume newline after reading vertex count
 
     // iterate through the rows in the text file
     // we can't do a single scanf that reads all text in the row since the number of text in each row is not constant
@@ -79,15 +85,13 @@ void getFile(FILE *f, adjacency_matrix *matrix)
         // remove \n at the end
         line[strcspn(line, "\n")] = '\0';
 
-        text = strtok(line, " "); // get the next text in the line that is separated by " "
+        char *text = strtok(line, " "); // get the next text in the line that is separated by " "
+        strcpy(vertexName, text); // the first text is the vertex name
 
-        // the first text is the vertex name
-        String vertexName;
-        strcpy(vertexName, text);
-
-        // get the vertex names and add in matrix->names
-        int row = -1; // default to not found
-        for (int i = 0; i < vertex; i++)
+        // no need to default to not found or handle if the name is not found
+        // since we initialized the names at the start
+        int row;
+        for (int i = 0; i < matrix->vertex; i++)
         {
             if (strcmp(matrix->names[i], vertexName) == 0)
             {
@@ -96,24 +100,14 @@ void getFile(FILE *f, adjacency_matrix *matrix)
             }
         }
 
-        if (row == -1)
-        {
-            row = vertex;
-            strcpy(matrix->names[vertex], vertexName);
-            vertex++;
-        }
-
         // process the relationships
-        
         while ((text = strtok(NULL, " ")) != NULL)
         {
             if (strcmp(text, "-1") == 0)
                 break; // if the col content is -1, then break loop
 
-            // check if the name exists
-            // assume not
-            int col = -1;
-            for(int i = 0; i < vertex; i++){
+            int col;
+            for(int i = 0; i < matrix->vertex; i++){
                 // if it is store the ith value in col
                 // then break
                 if(strcmp(matrix->names[i], text) == 0){
@@ -122,13 +116,6 @@ void getFile(FILE *f, adjacency_matrix *matrix)
                 }
             }
 
-            // if not add it in names
-            if (col == -1){
-                col = vertex;
-                strcpy(matrix->names[vertex], text);
-                vertex++;
-            }
-            
             // indicate that there's a relationship
             matrix->matrix[row][col] = 1;
         }
@@ -136,7 +123,6 @@ void getFile(FILE *f, adjacency_matrix *matrix)
 
     // make sure that the diagonals are 0
     for (int i = 0; i < matrix->vertex; i++){
-        // ???? WHY DO I NEED ++i here... doesn't work when it's i++ (JAZ: it works wdym?)
         matrix->matrix[i][i] = 0;
     }
 }
