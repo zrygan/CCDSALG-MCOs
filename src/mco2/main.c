@@ -15,12 +15,11 @@
 #include "dfs.h"
 
 int main() {
-    String fileName; 
-    FILE *f;
-    adjacency_matrix matrix;
-    String start; // start vertex
-    // strcpy(fileName, "graph.txt"); // used for debugging
-    int start_index;
+    String fileName;                // the file name
+    FILE *f;                        // the file pointer
+    adjacency_matrix matrix;        // the adjaacency matrix
+    int start_index;                // start index : the index where the traversal starts
+    String start;                   // start vertex
 
     printf("Input filename: ");
     scanf("%s", fileName);
@@ -28,22 +27,35 @@ int main() {
     f = fopen(fileName, "r");
 
     if (f != NULL){
-        getFile(f, &matrix);
-        displayMatrix(matrix); // FIXME: REMOVE THEN WHEN DONE
-        make_graph(matrix);
+        make_adjacency_matrix(f, &matrix);
+        // display_matrix(matrix); // FIXME: _____DEBUGGING_____ REMOVE THEN WHEN DONE
+        
+        make_graph(matrix); // Requires GraphViz to work
+        
         printf("Input start vertex for the traversal: ");
         scanf("%s", start);
+
+
+        // OUTPUT: the degrees
+        int *degrees = malloc(matrix.vertex * sizeof(int));
+        calculate_degrees(matrix, degrees);
+        for (int i = 0; i < matrix.vertex; i++){
+            printf("%s\t%d\n", matrix.names[i], degrees[i]);
+        }
+        printf("\n");
+        
+        // OUTPUT: the BFS and DFS path
         for (start_index = 0; start_index < matrix.vertex; start_index++) { // checks if vertex exists
             if (!strcasecmp(matrix.names[start_index],start)) {
                 BFStraversal(matrix, start_index);
-                printf("\n");
+                printf("\n\n");
                 DFSTraversal(matrix, start_index);
                 return 0;
             }
         }
-        printf("%s not found", start);
+        printf("%s not found.", start); // node name not found
     } else{
-        printf("\033[31m%s not found\033[37m.", fileName);
+        printf("%s not found.", fileName); // file not found
     }
 
     return 0;

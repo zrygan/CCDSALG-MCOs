@@ -11,14 +11,14 @@
 #include "adjacency_matrix.h"
 
 /**
- * function definition for displayMatrix, see displayMatrix in `adjacency_matrix.h`
+ * function definition for display_matrix, see display_matrix in `adjacency_matrix.h`
  ******FOR DEBUGGING ***** not to be placed in the actual output
  *
  * @param matrix the adjency matrix
  *
  * @author Zhean Ganituen
  */
-void displayMatrix(adjacency_matrix matrix)
+void display_matrix(adjacency_matrix matrix)
 {
     printf("Adjacency Matrix:\n");
 
@@ -44,14 +44,14 @@ void displayMatrix(adjacency_matrix matrix)
 }
 
 /**
- * Function definition for getFile, see getFile in `libraries.h`
+ * Function definition for make_adjacency_matrix, see make_adjacency_matrix in `adjacency_matrix.h`
  *
  * @param fileName The name of the file to get.
  * @param matrix The adjacency matrix to populate.
  *
  * @author Zhean Ganituen
  */
-void getFile(FILE *f, adjacency_matrix *matrix)
+void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
 {
     String line, vertexName;
 
@@ -121,8 +121,38 @@ void getFile(FILE *f, adjacency_matrix *matrix)
         }
     }
 
+    diagonals_as_zero(matrix);
+}
+
+/**
+ * Function definition for diagonals_as_zero, see diagonals_as_zero in `adjacency_matrix.h`
+ *
+ * @param fileName The name of the file to get.
+ * @param matrix The adjacency matrix to populate.
+ *
+ * @author Zhean Ganituen
+ */
+void diagonals_as_zero(adjacency_matrix *matrix){
     // make sure that the diagonals are 0
     for (int i = 0; i < matrix->vertex; i++){
         matrix->matrix[i][i] = 0;
+    }
+}
+
+/**
+ * Function definition for calculate_degrees, see calculate_degrees in `adjacency_matrix.h`
+ *
+ * @param fileName The name of the file to get.
+ * @param matrix The adjacency matrix to populate.
+ *
+ * @author Zhean Ganituen
+ */
+void calculate_degrees(adjacency_matrix matrix, int *degrees){
+    for (int i = 0; i < matrix.vertex; i++){
+        int degree = 0;
+        for (int j = 0; j < matrix.vertex; j++){
+            degree += matrix.matrix[i][j];
+        }
+        degrees[i] = degree;
     }
 }

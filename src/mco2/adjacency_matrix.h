@@ -35,7 +35,7 @@ typedef struct
  * 
  * @author Zhean Ganituen
  */
-void displayMatrix(adjacency_matrix matrix);
+void display_matrix(adjacency_matrix matrix);
 
 /**
  * reads the file and makes the adjacency_matrix from the text file content
@@ -44,6 +44,21 @@ void displayMatrix(adjacency_matrix matrix);
  * 
  * @author Zhean Ganituen
  */
-void getFile(FILE *f, adjacency_matrix *matrix);
+void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix);
+
+/**
+ * sets the diagonals of the adjacency_matrix as zero.
+ * 
+ * @param matrix the pointer to the adjacency matrix
+ */
+void diagonals_as_zero(adjacency_matrix *matrix);
+
+/**
+ * calculates the degrees of each parent node in the adjacency matrix
+ * 
+ * @param matrix the adjacency matrix
+ * @param degree an array, the degrees of each parent node in the adjacency matrix
+ */
+void calculate_degrees(adjacency_matrix matrix, int *degrees);
 
 #endif
