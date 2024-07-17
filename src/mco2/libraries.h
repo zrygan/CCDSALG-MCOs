@@ -17,8 +17,8 @@
 #include <stdbool.h>
 #include <math.h>
 
-#define MAX_LENGTH 256  // max length of a column of the matrix
-#define MAX_WIDTH 256   // max width of each row of the matrix 
+#define MAX_VERTICES 21 // max number of vertices
+                        // FIXME: reclarify if the max number of vertices is indeed 21
 
 typedef char String[256]; // type def for String data type
 

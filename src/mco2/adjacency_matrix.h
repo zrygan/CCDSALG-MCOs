@@ -23,9 +23,9 @@
  */
 typedef struct
 {
-    String names[MAX_WIDTH];            // the names in the matrix
-    int matrix[MAX_WIDTH][MAX_LENGTH];  // the adjency matrix
-    int vertex;                         // number of vertices (i.e., the actual width and length of the matrix)
+    String names[MAX_VERTICES];               // the names (or vertices) in the matrix
+    int matrix[MAX_VERTICES][MAX_VERTICES];   // the adjency matrix
+    int vertex;                               // number of vertices (i.e., the actual width and length of the matrix)
 } adjacency_matrix;
 
 /**
