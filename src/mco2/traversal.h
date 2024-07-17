@@ -5,7 +5,7 @@
  * 
  * CCDSALG, Project 2
  * 
- * Header file for transveral of graph
+ * Header file for trasveral helper functions
 */
 
 #ifndef TRAVERSAL
@@ -53,33 +53,6 @@ Node createNode(String val);
  */
 void connectNodes(Node* node1, Node* node2);
 
-/**
- * executes the DFS Traversal
- * 
- * @param start_node    :   DFSNode*    :   contains the starting node for the DFS Traversal
- * @param visited   :   bool*   :   contains an array of booleans that checks if the node has been visited or not
- * @param names :   String[]    :   contains the values of the nodes
- * @param numNodes  :   int     :   the total number of nodes in the matrix
- * 
- * @author Jaztin Jimenez
- */
-void dfs(Node* start_node, bool* visited, String values[], int numNodes);
-
-/**
- * executes the formalities for the DFS Traversal // FIXME: MEDYO DI KO GUSTO HOW I DID THIS WBSJSAHSAH
- * 
- * @param matrix    :   adjacency_matrix    :   contains the adjacency matrix to be traversed
- * @param start_index   :   int             :   contains the node to start the traversing with
- * 
- * @author Jaztin Jimenez
- */
-void DFSTraversal(adjacency_matrix matrix, int start_index);
-
 void visit_node(Node* current_node, bool* visited, String values[], int numNodes);
-
-void bfs(Node* current_node, bool* visited, String values[], int numNodes, int visited_count,String tree_nodes[],int tree_count);
-
-void BFStraversal(adjacency_matrix matrix, int start_index);
-
 
 #endif
