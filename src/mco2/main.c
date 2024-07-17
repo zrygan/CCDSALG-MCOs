@@ -11,6 +11,8 @@
 #include "adjacency_matrix.h"
 #include "make_graph.h"
 #include "traversal.h"
+#include "bfs.h"
+#include "dfs.h"
 
 int main() {
     String fileName; 
