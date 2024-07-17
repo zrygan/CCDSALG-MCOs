@@ -26,6 +26,15 @@ void connectNodes(Node *node1, Node *node2) {
     node1->neighbors[node1->numNeighbors - 1] = node2; // places the neighboring node to the former node
 }
 
+bool checkTreeNode(String tree_nodes[],int tree_count, String node){
+    for (int i = 0; i < tree_count; i++){
+        if(strcmp(tree_nodes[i],node)==0){
+            return false;
+        }
+    }
+    return true;
+}
+
 void visit_node(Node* current_node, bool* visited, String values[], int numNodes){
     int nodeIndex = -1;
     for (int i = 0; i < numNodes; i++) { //Go through all the nodes
@@ -72,13 +81,22 @@ void bfs(Node* current_node, bool* visited, String values[], int numNodes, int v
             }
         }
     visit_node(current_node->neighbors[small_index], visited, values, numNodes);
-    count++;
     //this is not working
     //TODO: tree implementation
+    String home;
+    String dest;
+    String temp;
     if(current_node!=current_node->neighbors[small_index]){
-        strcpy(tree_nodes[tree_count],node(current_node->val,current_node->neighbors[small_index]->val)); // 
-        tree_count++;
+        strcpy(home,current_node->val);
+        strcpy(dest,current_node->neighbors[small_index]->val);
+        strcpy(temp,node(home,dest));
+        if(checkTreeNode(tree_nodes,tree_count,temp)==true || tree_count==0){
+            strcpy(tree_nodes[tree_count],temp);
+            //printf("%s\n", tree_nodes[tree_count]);
+            tree_count++;
+        }
     }
+    count++;
     visited_count++;
     //If there are still neighboring nodes to visit, search thru neighbors again
     if (count<current_node->numNeighbors){
