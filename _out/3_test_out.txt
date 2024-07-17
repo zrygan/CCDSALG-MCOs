@@ -1,0 +1,8 @@
+Input filename: Input start vertex for the traversal: Bruce	1
+Clark	2
+Diana	3
+Hal	2
+
+Hal Clark Diana 
+
+Hal Clark Diana Bruce 

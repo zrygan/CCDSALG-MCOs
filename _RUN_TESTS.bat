@@ -20,4 +20,7 @@ REM Test case 1
 REM Test case 2
 ..\main_mco2.exe < 2_test_in.txt > ..\_out\2_test_out.txt
 
+REM Test case 3
+..\main_mco2.exe < 3_test_in.txt > ..\_out\3_test_out.txt
+
 cd ..
