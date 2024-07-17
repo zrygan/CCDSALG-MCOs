@@ -35,10 +35,9 @@ int main() {
         scanf("%s", start);
         for (start_index = 0; start_index < matrix.vertex; start_index++) { // checks if vertex exists
             if (!strcasecmp(matrix.names[start_index],start)) {
-                // insert BFS traversa; @Viennbalcita
-                DFSTraversal(matrix, start_index);
-                printf("\n");
                 BFStraversal(matrix, start_index);
+                printf("\n");
+                DFSTraversal(matrix, start_index);
                 return 0;
             }
         }
