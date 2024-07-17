@@ -28,18 +28,28 @@ void dfs(Node* start_node, bool* visited, String values[], int numNodes) {
     visited[nodeIndex] = true;
     printf("%s ", start_node->val);  // Process the node
 
-    String temp;
-    strcpy(temp,start_node->neighbors[0]->val);
-    for (int small_index = 0; small_index < start_node->numNeighbors; small_index++) {
-        // Get the unvisited lowest vertex ID
+    // Find the unvisited neighbor with the lowest value
+    while (1) {
+        Node* lowest_neighbor = NULL;
         for (int i = 0; i < start_node->numNeighbors; i++) {
-            if (strcmp(temp,start_node->neighbors[i]->val) > 0 && !visited[i]) {
-                strcpy(temp,start_node->neighbors[i]->val);
-                small_index = i;
+            Node* neighbor = start_node->neighbors[i];
+            int neighborIndex = -1;
+            for (int j = 0; j < numNodes; j++) {
+                if (strcmp(values[j], neighbor->val) == 0) {
+                    neighborIndex = j;
+                    break;
+                }
+            }
+            if (neighborIndex != -1 && !visited[neighborIndex]) {
+                if (lowest_neighbor == NULL || strcmp(neighbor->val, lowest_neighbor->val) < 0) {
+                    lowest_neighbor = neighbor;
+                }
             }
         }
-    //Recur BFS on the neighboring nodes
-    dfs(start_node->neighbors[small_index], visited, values, numNodes);
+        
+        if (lowest_neighbor == NULL) break;
+        
+        dfs(lowest_neighbor, visited, values, numNodes);
     }
 }
 
