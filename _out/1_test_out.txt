@@ -1,0 +1,9 @@
+Input filename: Input start vertex for the traversal: Anthony	3
+Bruce	2
+Clark	2
+Diana	3
+Hal	4
+
+Diana Anthony Bruce Hal 
+
+Diana Anthony Clark Hal Bruce 

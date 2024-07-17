@@ -1,5 +1,5 @@
 REM By: Zhean Ganituen (zrygan)
-REM Batch file to execute C file using I/O redirection 
+REM Batch file to execute C file without I/O redirection 
 
 echo off
 
