@@ -2,23 +2,25 @@
  * Balcita, V.
  * Ganituen, Z.
  * Jimenez, J.
- * 
+ *
  * CCDSALG, Project 2
- * 
+ *
  * C source file for the dfs implementation
-*/
+ */
 
 #include "dfs.h"
 
-int compareValues(const char* a, const char* b) {
+int compareValues(const char *a, const char *b)
+{
     // Check if both strings are integers
-    char* endA;
-    char* endB;
+    char *endA;
+    char *endB;
     long valA = strtol(a, &endA, 10);
     long valB = strtol(b, &endB, 10);
 
     // If both are valid integers, compare numerically
-    if (*endA == '\0' && *endB == '\0') {
+    if (*endA == '\0' && *endB == '\0')
+    {
         return valA - valB;
     }
 
@@ -26,55 +28,66 @@ int compareValues(const char* a, const char* b) {
     return strcmp(a, b);
 }
 
-
 // DFS function
-void dfs(Node* start_node, bool* visited, String values[], int numNodes) {
+void dfs(Node *start_node, bool *visited, String values[], int numNodes)
+{
     // Find the index of the current node in the values array
     int nodeIndex = -1;
-    for (int i = 0; i < numNodes; i++) {
-        if (strcmp(values[i], start_node->val) == 0) {
+    for (int i = 0; i < numNodes; i++)
+    {
+        if (strcmp(values[i], start_node->val) == 0)
+        {
             nodeIndex = i;
             break;
         }
     }
 
     // If the current node does not exist in the values array or is already visited, skip the node
-    if (nodeIndex == -1 || visited[nodeIndex]) return;
+    if (nodeIndex == -1 || visited[nodeIndex])
+        return;
 
     // Mark the node as visited
     visited[nodeIndex] = true;
-    printf("%s ", start_node->val);  // Process the node
+    printf("%s ", start_node->val); // Process the node
 
     // Find the unvisited neighbor with the lowest value
-    while (1) {
-        Node* lowest_neighbor = NULL;
-        for (int i = 0; i < start_node->numNeighbors; i++) {
-            Node* neighbor = start_node->neighbors[i];
+    while (1)
+    {
+        Node *lowest_neighbor = NULL;
+        for (int i = 0; i < start_node->numNeighbors; i++)
+        {
+            Node *neighbor = start_node->neighbors[i];
             int neighborIndex = -1;
-            for (int j = 0; j < numNodes; j++) {
-                if (strcmp(values[j], neighbor->val) == 0) {
+            for (int j = 0; j < numNodes; j++)
+            {
+                if (strcmp(values[j], neighbor->val) == 0)
+                {
                     neighborIndex = j;
                     break;
                 }
             }
-            if (neighborIndex != -1 && !visited[neighborIndex]) {
-                if (lowest_neighbor == NULL || compareValues(neighbor->val, lowest_neighbor->val) < 0) {
+            if (neighborIndex != -1 && !visited[neighborIndex])
+            {
+                if (lowest_neighbor == NULL || compareValues(neighbor->val, lowest_neighbor->val) < 0)
+                {
                     lowest_neighbor = neighbor;
                 }
             }
         }
 
-        if (lowest_neighbor == NULL) break;
+        if (lowest_neighbor == NULL)
+            break;
 
         dfs(lowest_neighbor, visited, values, numNodes);
     }
 }
 
-
-void DFSTraversal(adjacency_matrix matrix, int start_index) {
+void DFSTraversal(adjacency_matrix matrix, int start_index)
+{
     // Create nodes from the adjacency matrix
     Node nodeName[matrix.vertex];
-    for (int i = 0; i < matrix.vertex; i++) {
+    for (int i = 0; i < matrix.vertex; i++)
+    {
         nodeName[i] = createNode(matrix.names[i]);
     }
 
@@ -83,7 +96,8 @@ void DFSTraversal(adjacency_matrix matrix, int start_index) {
     {
         for (int col = 0; col < matrix.vertex; col++)
         {
-            if (matrix.matrix[row][col]) {
+            if (matrix.matrix[row][col])
+            {
                 connectNodes(&nodeName[row], &nodeName[col]);
             }
         }
@@ -91,10 +105,11 @@ void DFSTraversal(adjacency_matrix matrix, int start_index) {
 
     // Turn all the nodes to false for each vertex
     bool visited[matrix.vertex]; // FIXME: IF EVER MAYBE I CAN JUST ADD A BOOLEAN IN THE STRUCT ITSELF
-    for (int i = 0; i < matrix.vertex; i++) {
+    for (int i = 0; i < matrix.vertex; i++)
+    {
         visited[i] = false;
     }
 
     // Perform the DFS Traversal
-    dfs(&nodeName[start_index],visited, matrix.names, matrix.vertex); 
+    dfs(&nodeName[start_index], visited, matrix.names, matrix.vertex);
 }

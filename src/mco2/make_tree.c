@@ -19,31 +19,34 @@
 
 /**
  * constructs a string output that makes the home node the parent of the dest node
- * 
+ *
  * @param home the home node (or parent)
  * @param dest the destination node (or child)
- * 
+ *
  * @returns a formatted string that dictates the relationship of the two nodes
  */
-char *node(String home, String dest){
-    char* rel;
+char *node(String home, String dest)
+{
+    char *rel;
     rel = strcat(home, " -> ");
-    char *out = strcat(rel, dest); 
+    char *out = strcat(rel, dest);
     return out;
 }
 
 /**
  * draws the tree of the BFS using GraphViz by creating a dot file
  * required GraphViz
- * 
+ *
  * @param nodes[] the array of nodes and their corresponding children
  * @param n the number of nodes
  */
-void make_tree(String nodes[], int n){
+void make_tree(String nodes[], int n)
+{
     FILE *fp = fopen("tree.dot", "w");
     fprintf(fp, "graph {n}");
-    
-    for(int i = 0; i < n; i++){
+
+    for (int i = 0; i < n; i++)
+    {
         fprintf(fp, "\t%s\t", nodes[i]);
     }
 

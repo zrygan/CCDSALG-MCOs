@@ -74,7 +74,7 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
     rewind(f);
 
     fscanf(f, "%d", &matrix->vertex); // get the number again to skip the vertex count line
-    fgetc(f); // consume newline after reading vertex count
+    fgetc(f);                         // consume newline after reading vertex count
 
     // iterate through the rows in the text file
     // we can't do a single scanf that reads all text in the row since the number of text in each row is not constant
@@ -86,7 +86,7 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
         line[strcspn(line, "\n")] = '\0';
 
         char *text = strtok(line, " "); // get the next text in the line that is separated by " "
-        strcpy(vertexName, text); // the first text is the vertex name
+        strcpy(vertexName, text);       // the first text is the vertex name
 
         // no need to default to not found or handle if the name is not found
         // since we initialized the names at the start
@@ -107,10 +107,12 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
                 break; // if the col content is -1, then break loop
 
             int col;
-            for(int i = 0; i < matrix->vertex; i++){
+            for (int i = 0; i < matrix->vertex; i++)
+            {
                 // if it is store the ith value in col
                 // then break
-                if(strcmp(matrix->names[i], text) == 0){
+                if (strcmp(matrix->names[i], text) == 0)
+                {
                     col = i;
                     break;
                 }
@@ -132,9 +134,11 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
  *
  * @author Zhean Ganituen
  */
-void diagonals_as_zero(adjacency_matrix *matrix){
+void diagonals_as_zero(adjacency_matrix *matrix)
+{
     // make sure that the diagonals are 0
-    for (int i = 0; i < matrix->vertex; i++){
+    for (int i = 0; i < matrix->vertex; i++)
+    {
         matrix->matrix[i][i] = 0;
     }
 }
@@ -147,10 +151,13 @@ void diagonals_as_zero(adjacency_matrix *matrix){
  *
  * @author Zhean Ganituen
  */
-void calculate_degrees(adjacency_matrix matrix, int *degrees){
-    for (int i = 0; i < matrix.vertex; i++){
+void calculate_degrees(adjacency_matrix matrix, int *degrees)
+{
+    for (int i = 0; i < matrix.vertex; i++)
+    {
         int degree = 0;
-        for (int j = 0; j < matrix.vertex; j++){
+        for (int j = 0; j < matrix.vertex; j++)
+        {
             degree += matrix.matrix[i][j];
         }
         degrees[i] = degree;

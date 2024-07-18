@@ -9,4 +9,4 @@ Input filename: Input start vertex for the traversal: 1	3
 
 10 12 8 13 1 9 
 
-10 12 13 
+10 8 1 2 4 9 12 13 
