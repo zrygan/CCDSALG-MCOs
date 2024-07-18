@@ -25,11 +25,15 @@
  *
  * @returns a formatted string that dictates the relationship of the two nodes
  */
-char *node(String home, String dest)
+char* node(String home, String dest)
 {
     char *rel;
-    rel = strcat(home, " -> ");
-    char *out = strcat(rel, dest);
+    String hometemp;
+    String desttemp;
+    strcpy(hometemp,home);
+    strcpy(desttemp,dest);
+    rel = strcat(hometemp, " -> ");
+    char* out = strcat(rel, desttemp);
     return out;
 }
 
