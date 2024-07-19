@@ -58,38 +58,64 @@ Node* dequeue(queue *Queue){
     
     return elem;
 }
+void sortneighbors(Node* Node){
+    int i, j,min;
+    String temp;
 
+    // One by one move the boundary of the unsorted subarray
+    for (i = 0; i < Node->numNeighbors-1; i++) {
+        // Find the minimum element in the unsorted array
+        min = i;
+        for (j = i+1; j < Node->numNeighbors; j++){
+            if (strcmp(Node->neighbors[j]->val,Node->neighbors[min]->val)<0)
+                min = j;
+        }
+        // Swap the found minimum element with the first element
+        strcpy(temp,Node->neighbors[i]->val);
+        strcpy(Node->neighbors[i]->val,Node->neighbors[min]->val);
+        strcpy(Node->neighbors[min]->val,temp);
+    }
+}
 
-void bfs(Node *current_node, bool *visited, String values[], int numNodes, String tree_nodes[], int tree_count){
+void bfs(Node *start_node, bool *visited, String values[], int numNodes, String tree_nodes[], int* tree_count){
 queue queue = createQueue(numNodes);
-
-enqueue(*current_node, &queue);
+String home;
+String dest;
+enqueue(*start_node, &queue);
 
 while(!queueEmpty(queue)){
-    Node* visit_node = dequeue(&queue);
+    Node* current_node = dequeue(&queue);
+    if(!(strcmp(home,"")==0) && (*tree_count<numNodes-1)) {
+        strcpy(dest, current_node->val);
+        if(!(strcmp(home,dest)==0)){
+            char* temp = node(home, dest);
+            strcpy(tree_nodes[*tree_count],temp);
+            (*tree_count)++;
+        }
+    }
     int nodeindex = -1;
     for(int i = 0;i< numNodes;i++){
-        if (strcmp(values[i],visit_node->val)==0){
+        if (strcmp(values[i],current_node->val)==0){
             nodeindex = i;
             break;
         }
     }
     //if the node exists and it is not visited yet then proceed
     if (nodeindex != -1 && !visited[nodeindex]){
-        printf("%s ", visit_node->val);
+        printf("%s ", current_node->val);
         visited[nodeindex] = true;
-        for(int i = 0;i < visit_node->numNeighbors;i++){
+        strcpy(home,current_node->val);
+        sortneighbors(current_node);
+        //try to implement queues to implement alphabetical ordering
+        for(int i = 0;i < current_node->numNeighbors;i++){
             int neighborindex = -1;
             for (int j = 0; j < numNodes; j++) {  // Find the index of the neighbor in the values array
-                if ((strcmp(values[j], visit_node->neighbors[i]->val)) == 0 && !visited[j]) {
+                if ((strcmp(values[j], current_node->neighbors[i]->val)) == 0 && !visited[j]) {
                     neighborindex = j;
                 }
             }
             if (neighborindex != -1 && !visited[neighborindex]) {  // If the neighbor exists and is not visited
-                enqueue(*visit_node->neighbors[i],&queue);  // Enqueue the neighbor
-                char* temp = node(visit_node->val,visit_node->neighbors[i]->val);
-                strcpy(tree_nodes[tree_count],temp);
-                tree_count++;
+                enqueue(*current_node->neighbors[i],&queue);  // Enqueue the neighbor
             }
         }
     }
@@ -101,6 +127,7 @@ void BFStraversal(adjacency_matrix matrix, int start_index)
     // Create nodes from the adjacency matrix
     String tree_nodes[MAX_VERTICES];
     Node nodeName[matrix.vertex];
+    int tree_count = 0;
     for (int i = 0; i < matrix.vertex; i++)
     {
         nodeName[i] = createNode(matrix.names[i]);
@@ -124,8 +151,14 @@ void BFStraversal(adjacency_matrix matrix, int start_index)
         visited[i] = false;
     }
     // Visit the root node of the traversa;
-    //visit_node(&nodeName[start_index], visited, matrix.names, matrix.vertex);
     // Perform the bfs Traversal
-    bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, tree_nodes, 0);
+    bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, tree_nodes, &tree_count);
 
+    //Checking output for BFS tree
+    /*
+    printf("\n");
+    for(int i = 0; i < matrix.vertex; i++){
+        printf("%s\n",tree_nodes[i]);
+    }
+    */
 }
