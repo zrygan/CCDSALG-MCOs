@@ -10,6 +10,7 @@
 
 #include "bfs.h"
 #include "queue.h"
+#include "make_tree.h"
 
 /*
     Goodness gracious can we use a standard code formatter

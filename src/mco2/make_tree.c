@@ -25,7 +25,7 @@
  *
  * @returns a formatted string that dictates the relationship of the two nodes
  */
-char *node(String home, String dest)
+char *make_tree_relate(String home, String dest)
 {
     char *rel;
     String hometemp;
