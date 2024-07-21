@@ -14,22 +14,6 @@
 #include "libraries.h"
 #include "traversal.h"
 
-
-typedef struct{
-    Node nodes[MAX_VERTICES];
-    int head;
-    int tail;
-    int size;
-} queue;
-
-queue createQueue(int S);
-
-void enqueue(Node elem, queue *Queue);
-
-bool queueEmpty(queue Queue);
-
-Node* dequeue(queue *Queue);
-
 void sortneighbors(Node* Node);
 void bfs(Node* current_node, bool* visited, String values[], int numNodes,String tree_nodes[],int* tree_count);
 

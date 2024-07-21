@@ -9,117 +9,90 @@
  */
 
 #include "bfs.h"
+#include "queue.h"
 
+/*
+    Goodness gracious can we use a standard code formatter
+    to make the code monsters more manageable hahahaha
+    - zry 
+*/
 
-queue createQueue(int S){
-    queue Queue;
-    Queue.size = S;
-    Queue.head = 0; // start head and tail at 0 position
-    Queue.tail = 0;
-    // removed elems
-    return Queue;
-}
-
-void enqueue(Node elem, queue *Queue){
-    // checks queue overflow
-    if ((Queue->tail + 1)  % Queue->size == Queue->head) {
-    printf("Queue overflow\n");
-    return;
-    }
-
-    // put the element in the tail position
-    Queue->nodes[Queue->tail]=elem;
-    
-    // update tail position
-    // move the position by 1 and make it loop around if it exeeds size
-    Queue->tail = (Queue->tail + 1) % Queue->size;
-    // dont update head
-
-
-}
-
-
-bool queueEmpty(queue Queue){
-    // if queue is empty "reset" the position of head and tail.
-    return Queue.head == Queue.tail;
-}
-
-Node* dequeue(queue *Queue){
-    // check if the queue is empty
-
-    if (queueEmpty(*Queue)) {
-        printf("Queue underflow\n");
-        return NULL;
-    }
-
-    // if not, then dequeue head
-    Node* elem = &Queue->nodes[Queue->head];
-    Queue->head = (Queue->head + 1) % Queue->size;
-    
-    return elem;
-}
-void sortneighbors(Node* Node){
-    int i, j,min;
+void sortneighbors(Node *Node)
+{
+    int i, j, min;
     String temp;
 
     // One by one move the boundary of the unsorted subarray
-    for (i = 0; i < Node->numNeighbors-1; i++) {
+    for (i = 0; i < Node->numNeighbors - 1; i++)
+    {
         // Find the minimum element in the unsorted array
         min = i;
-        for (j = i+1; j < Node->numNeighbors; j++){
-            if (strcmp(Node->neighbors[j]->val,Node->neighbors[min]->val)<0)
+        for (j = i + 1; j < Node->numNeighbors; j++)
+        {
+            if (strcmp(Node->neighbors[j]->val, Node->neighbors[min]->val) < 0)
                 min = j;
         }
         // Swap the found minimum element with the first element
-        strcpy(temp,Node->neighbors[i]->val);
-        strcpy(Node->neighbors[i]->val,Node->neighbors[min]->val);
-        strcpy(Node->neighbors[min]->val,temp);
+        strcpy(temp, Node->neighbors[i]->val);
+        strcpy(Node->neighbors[i]->val, Node->neighbors[min]->val);
+        strcpy(Node->neighbors[min]->val, temp);
     }
 }
 
-void bfs(Node *start_node, bool *visited, String values[], int numNodes, String tree_nodes[], int* tree_count){
-queue queue = createQueue(numNodes);
-String home;
-String dest;
-enqueue(*start_node, &queue);
+void bfs(Node *start_node, bool *visited, String values[], int numNodes, String tree_nodes[], int *tree_count)
+{
+    queue queue = createQueue(numNodes);
+    String home;
+    String dest;
+    enqueue(*start_node, &queue);
 
-while(!queueEmpty(queue)){
-    Node* current_node = dequeue(&queue);
-    if(!(strcmp(home,"")==0) && (*tree_count<numNodes-1)) {
-        strcpy(dest, current_node->val);
-        if(!(strcmp(home,dest)==0)){
-            char* temp = node(home, dest);
-            strcpy(tree_nodes[*tree_count],temp);
-            (*tree_count)++;
+    while (!queueEmpty(queue))
+    {
+        Node *current_node = dequeue(&queue);
+        if (!(strcmp(home, "") == 0) && (*tree_count < numNodes - 1))
+        {
+            strcpy(dest, current_node->val);
+            if (!(strcmp(home, dest) == 0))
+            {
+                char *temp = node(home, dest);
+                strcpy(tree_nodes[*tree_count], temp);
+                (*tree_count)++;
+            }
         }
-    }
-    int nodeindex = -1;
-    for(int i = 0;i< numNodes;i++){
-        if (strcmp(values[i],current_node->val)==0){
-            nodeindex = i;
-            break;
+        int nodeindex = -1;
+        for (int i = 0; i < numNodes; i++)
+        {
+            if (strcmp(values[i], current_node->val) == 0)
+            {
+                nodeindex = i;
+                break;
+            }
         }
-    }
-    //if the node exists and it is not visited yet then proceed
-    if (nodeindex != -1 && !visited[nodeindex]){
-        printf("%s ", current_node->val);
-        visited[nodeindex] = true;
-        strcpy(home,current_node->val);
-        sortneighbors(current_node);
-        //try to implement queues to implement alphabetical ordering
-        for(int i = 0;i < current_node->numNeighbors;i++){
-            int neighborindex = -1;
-            for (int j = 0; j < numNodes; j++) {  // Find the index of the neighbor in the values array
-                if ((strcmp(values[j], current_node->neighbors[i]->val)) == 0 && !visited[j]) {
-                    neighborindex = j;
+        // if the node exists and it is not visited yet then proceed
+        if (nodeindex != -1 && !visited[nodeindex])
+        {
+            printf("%s ", current_node->val);
+            visited[nodeindex] = true;
+            strcpy(home, current_node->val);
+            sortneighbors(current_node);
+            // try to implement queues to implement alphabetical ordering
+            for (int i = 0; i < current_node->numNeighbors; i++)
+            {
+                int neighborindex = -1;
+                for (int j = 0; j < numNodes; j++)
+                { // Find the index of the neighbor in the values array
+                    if ((strcmp(values[j], current_node->neighbors[i]->val)) == 0 && !visited[j])
+                    {
+                        neighborindex = j;
+                    }
+                }
+                if (neighborindex != -1 && !visited[neighborindex])
+                {                                                 // If the neighbor exists and is not visited
+                    enqueue(*current_node->neighbors[i], &queue); // Enqueue the neighbor
                 }
             }
-            if (neighborindex != -1 && !visited[neighborindex]) {  // If the neighbor exists and is not visited
-                enqueue(*current_node->neighbors[i],&queue);  // Enqueue the neighbor
-            }
         }
     }
-}
 }
 
 void BFStraversal(adjacency_matrix matrix, int start_index)
@@ -154,7 +127,7 @@ void BFStraversal(adjacency_matrix matrix, int start_index)
     // Perform the bfs Traversal
     bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, tree_nodes, &tree_count);
 
-    //Checking output for BFS tree
+    // Checking output for BFS tree
     /*
     printf("\n");
     for(int i = 0; i < matrix.vertex; i++){
