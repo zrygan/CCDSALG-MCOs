@@ -14,7 +14,7 @@
 /*
     Goodness gracious can we use a standard code formatter
     to make the code monsters more manageable hahahaha
-    - zry 
+    - zry
 */
 
 void sortneighbors(Node *Node)

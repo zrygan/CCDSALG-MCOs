@@ -4,7 +4,8 @@
 #include "libraries.h"
 #include "traversal.h"
 
-typedef struct{
+typedef struct
+{
     Node nodes[MAX_VERTICES];
     int head;
     int tail;
@@ -17,6 +18,6 @@ void enqueue(Node elem, queue *Queue);
 
 bool queueEmpty(queue Queue);
 
-Node* dequeue(queue *Queue);
+Node *dequeue(queue *Queue);
 
 #endif
