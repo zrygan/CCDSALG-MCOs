@@ -52,8 +52,4 @@ Node createNode(String val);
  */
 void connectNodes(Node *node1, Node *node2);
 
-void visit_node(Node *current_node, bool *visited, String values[], int numNodes);
-
-bool checkTreeNode(String tree_nodes[], int tree_count, String node);
-
 #endif
