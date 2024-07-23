@@ -27,14 +27,17 @@
  */
 char *make_tree_relate(String home, String dest)
 {
-    char *rel;
-    String hometemp;
-    String desttemp;
-    strcpy(hometemp, home);
-    strcpy(desttemp, dest);
-    rel = strcat(hometemp, " -> ");
-    char *out = strcat(rel, desttemp);
-    return out;
+    // FIXME: _____OLD IMPLEMENTATION_____
+    // SAVED FOR NOTES
+    // char *rel;
+    // String hometemp;
+    // String desttemp;
+    // strcpy(hometemp, home);
+    // strcpy(desttemp, dest);
+    // rel = strcat(hometemp, " -> ");
+    // char *out = strcat(rel, desttemp);
+    // return out;
+    return NULL; // returned null here to avoid errors
 }
 
 /**
@@ -46,13 +49,15 @@ char *make_tree_relate(String home, String dest)
  */
 void make_tree(String nodes[], int n)
 {
-    FILE *fp = fopen("tree.dot", "w");
-    fprintf(fp, "graph {n}");
+    // FIXME: _____OLD IMPLEMENTATION_____
+    // SAVED FOR NOTES
+    // FILE *fp = fopen("tree.dot", "w");
+    // fprintf(fp, "graph {n}");
 
-    for (int i = 0; i < n; i++)
-    {
-        fprintf(fp, "\t%s\t", nodes[i]);
-    }
+    // for (int i = 0; i < n; i++)
+    // {
+    //     fprintf(fp, "\t%s\t", nodes[i]);
+    // }
 
-    fclose(fp);
+    // fclose(fp);
 }

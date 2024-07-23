@@ -55,14 +55,18 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, String 
         //If the home node is not empty and all the nodes have not yet been visited
         if (!(strcmp(home, "") == 0) && (*tree_count < numNodes - 1))
         {
-            //Create the BFS tree relationship with the home node and the destination node
-            strcpy(dest, current_node->val);
-            if (!(strcmp(home, dest) == 0))
-            {
-                char *temp = make_tree_relate(home, dest);
-                strcpy(tree_nodes[*tree_count], temp);
-                (*tree_count)++;
-            }
+            // Create the BFS tree relationship with the home node and the destination node
+            strcpy(dest, current_node->val);               
+            
+            // FIXME: _____OLD IMPLEMENTATION_____ (for additional feature 2)
+            // [ZRY] FIXME: FIXME: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // I am assuming the codes below are only for the additional feature.
+            // if (!(strcmp(home, dest) == 0))                  
+            // {
+            //     // char *temp = make_tree_relate(home, dest); 
+            //     strcpy(tree_nodes[*tree_count], temp);
+            //     (*tree_count)++;
+            // }
         }
         //Search for the node index in the values array
         int nodeindex = -1;
@@ -135,5 +139,5 @@ void BFStraversal(adjacency_matrix matrix, int start_index)
     // Visit the root node of the traversa;
     // Perform the bfs Traversal
     bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, tree_nodes, &tree_count);
-    make_tree(tree_nodes,tree_count);
+    // make_tree(tree_nodes,tree_count); // FIXME: _____OLD IMPLEMENTATION_____ (for additional feature 2)
 }
