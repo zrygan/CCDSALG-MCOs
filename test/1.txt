@@ -3,4 +3,4 @@ Anthony Clark Diana Hal -1
 Bruce Diana Hal -1
 Clark Anthony Hal -1
 Diana Anthony Bruce Hal -1
-Hal Anthony Bruce Clark Diana 0
+Hal Anthony Bruce Clark Diana -1
