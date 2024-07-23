@@ -31,7 +31,7 @@ int main()
     {
         make_adjacency_matrix(f, &matrix); 
 
-        // display_graph(matrix); // _____FOR ADDITIONAL FEATURE 1 (makes the graph)_____
+        display_graph(matrix); // _____FOR ADDITIONAL FEATURE 1 (makes the graph)_____
                                // REMOVE IF NOT NEEDED
 
         printf("Input start vertex for the traversal: ");
