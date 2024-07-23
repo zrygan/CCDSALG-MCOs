@@ -29,10 +29,10 @@ int main()
 
     if (f != NULL)
     {
-        make_adjacency_matrix(f, &matrix);
-        // display_matrix(matrix); // FIXME: _____DEBUGGING_____ REMOVE THEN WHEN DONE
+        make_adjacency_matrix(f, &matrix); 
 
-        make_graph(matrix); // Requires GraphViz to work
+        display_graph(matrix); // _____FOR ADDITIONAL FEATURE 1 (makes the graph)_____
+                               // REMOVE IF NOT NEEDED
 
         printf("Input start vertex for the traversal: ");
         scanf("%s", start);

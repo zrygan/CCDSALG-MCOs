@@ -13,25 +13,31 @@
 #define MAKE_GRAPH
 
 /**
- * makes a dot file and png of the matrix
- * requires Graphviz
+ * Creates a graphical visualization of the graph using a linked list
  *
  * @param matrix the matrix
  *
  * @author Zhean Ganituen
  */
-void make_graph(adjacency_matrix matrix);
+void display_graph(adjacency_matrix matrix);
 
 /**
- * verifies if the relationship of the two vertices are already drawn
- *
- * @param logger an array of logged relationships
- * @param base the "home" vertex
- * @param connection the "adjacent" vertex
- * @param total the total relationships in the graph
- *
- * @return {true} if there's no relationship drawn yet, {false} otherwise
+ * Creates a border line for the graph visualization
+ * 
+ * @param len the length of the line
+ * 
+ * @returns the border line created
  */
-bool verify(String logger[][2], String base, String connection, int total);
+char *make_border_line(int len);
+
+/**
+ * Creates a name box for the graph visualization
+ * 
+ * @param len the name
+ * 
+ * @returns the name box created
+ */
+char *make_name(String name);
+
 
 #endif

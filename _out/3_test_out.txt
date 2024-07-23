@@ -3,6 +3,6 @@ Clark	2
 Diana	3
 Hal	2
 
-Hal Clark Diana 
+Hal Clark Diana Bruce 
 
 Hal Clark Diana Bruce 

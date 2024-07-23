@@ -4,6 +4,6 @@ Clark	2
 Diana	3
 Hal	4
 
-Diana Anthony Bruce Hal 
+Diana Anthony Bruce Hal Clark 
 
 Diana Anthony Clark Hal Bruce 
