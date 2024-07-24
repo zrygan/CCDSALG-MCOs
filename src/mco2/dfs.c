@@ -10,24 +10,6 @@
 
 #include "dfs.h"
 
-int compareValues(const char *a, const char *b)
-{
-    // Check if both strings are integers
-    char *endA;
-    char *endB;
-    long valA = strtol(a, &endA, 10);
-    long valB = strtol(b, &endB, 10);
-
-    // If both are valid integers, compare numerically
-    if (*endA == '\0' && *endB == '\0')
-    {
-        return valA - valB;
-    }
-
-    // Otherwise, compare as strings
-    return strcmp(a, b);
-}
-
 // DFS function
 void dfs(Node *start_node, bool *visited, String values[], int numNodes)
 {
@@ -68,7 +50,7 @@ void dfs(Node *start_node, bool *visited, String values[], int numNodes)
             }
             if (neighborIndex != -1 && !visited[neighborIndex])
             {
-                if (lowest_neighbor == NULL || compareValues(neighbor->val, lowest_neighbor->val) < 0)
+                if (lowest_neighbor == NULL || strcmp(neighbor->val, lowest_neighbor->val) > 0)
                 {
                     lowest_neighbor = neighbor;
                 }
@@ -104,7 +86,7 @@ void DFSTraversal(adjacency_matrix matrix, int start_index)
     }
 
     // Turn all the nodes to false for each vertex
-    bool visited[matrix.vertex]; // FIXME: IF EVER MAYBE I CAN JUST ADD A BOOLEAN IN THE STRUCT ITSELF
+    bool visited[matrix.vertex];
     for (int i = 0; i < matrix.vertex; i++)
     {
         visited[i] = false;
