@@ -17,47 +17,73 @@
 #define _LAST 192 // └
 #define _SPLT 195 // ├
 
-/**
- * constructs a string output that makes the home node the parent of the dest node
- *
- * @param home the home node (or parent)
- * @param dest the destination node (or child)
- *
- * @returns a formatted string that dictates the relationship of the two nodes
- */
-char *make_tree_relate(String home, String dest)
-{
-    // FIXME: _____OLD IMPLEMENTATION_____
-    // SAVED FOR NOTES
-    // char *rel;
-    // String hometemp;
-    // String desttemp;
-    // strcpy(hometemp, home);
-    // strcpy(desttemp, dest);
-    // rel = strcat(hometemp, " -> ");
-    // char *out = strcat(rel, desttemp);
-    // return out;
-    return NULL; // returned null here to avoid errors
+void bfsTree(Node *startNode, String values[], int numNodes) {
+
+    bool visited[MAX_VERTICES] = {false};
+    queue Queue = createQueue(MAX_VERTICES);
+    enqueue(*startNode, &Queue);
+
+    String tree_nodes[MAX_VERTICES] = {""};
+    int tree_count = 0;
+
+    while (!queueEmpty(Queue)) {
+        Node *current_node = dequeue(&Queue);
+        int nodeIndex = -1;
+        for (int i = 0; i < numNodes; i++) {
+            if (strcmp(values[i], current_node->val) == 0) {
+                nodeIndex = i;
+                break;
+            }
+        }
+
+        if (nodeIndex == -1 || visited[nodeIndex]) continue;
+        visited[nodeIndex] = true;
+        if (checkTreeNode(tree_nodes, tree_count, current_node->val)) {
+            printf("%s\n", current_node->val);
+            strcpy(tree_nodes[tree_count++], current_node->val);
+        }
+
+        for (int i = 0; i < current_node->numNeighbors; i++) {
+            Node *neighbor = current_node->neighbors[i];
+            int neighborIndex = -1;
+            for (int j = 0; j < numNodes; j++) {
+                if (strcmp(values[j], neighbor->val) == 0) {
+                    neighborIndex = j;
+                    break;
+                }
+            }
+            if (neighborIndex != -1 && !visited[neighborIndex]) {
+                printf("|");
+                for (int j = 0; j < tree_count; j++) {
+                    if (strcmp(tree_nodes[j], current_node->val) == 0) {
+                        for (int k = 0; k <= j; k++) {
+                            if (k == j) {
+                                printf("L__ ");
+                            } else {
+                                printf("|    ");
+                            }
+                        }
+                        printf("%s\n", neighbor->val);
+                    }
+                }
+                enqueue(*neighbor, &Queue);
+            }
+        }
+    }
 }
 
-/**
- * draws the tree of the BFS using GraphViz by creating a dot file
- * required GraphViz
- *
- * @param nodes[] the array of nodes and their corresponding children
- * @param n the number of nodes
- */
-void make_tree(String nodes[], int n)
-{
-    // FIXME: _____OLD IMPLEMENTATION_____
-    // SAVED FOR NOTES
-    // FILE *fp = fopen("tree.dot", "w");
-    // fprintf(fp, "graph {n}");
+void makeTree(adjacency_matrix tree, int start_index) {
+    Node nodes[MAX_VERTICES];
+    for (int i = 0; i < tree.vertex; i++) {
+        nodes[i] = createNode(tree.names[i]);
+    }
 
-    // for (int i = 0; i < n; i++)
-    // {
-    //     fprintf(fp, "\t%s\t", nodes[i]);
-    // }
-
-    // fclose(fp);
+    for (int i = 0; i < tree.vertex; i++) {
+        for (int j = 0; j < tree.vertex; j++) {
+            if (tree.matrix[i][j] == 1) {
+                connectNodes(&nodes[i], &nodes[j]);
+            }
+        }
+    }
+    bfsTree(&nodes[start_index], tree.names, tree.vertex);
 }

@@ -12,6 +12,8 @@
 #define MAKE_TREE
 
 #include "libraries.h"
+#include "traversal.h"
+#include "queue.h"
 
 /**
  * constructs a string output that makes the home node the parent of the dest node
@@ -31,5 +33,7 @@ char *make_tree_relate(String home, String dest);
  * @param n the number of nodes
  */
 void make_tree(String nodes[], int n);
+
+void bfsTree(Node *startNode, String values[], int numNodes);
 
 #endif

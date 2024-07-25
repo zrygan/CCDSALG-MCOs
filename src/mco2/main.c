@@ -54,6 +54,12 @@ int main()
                 BFStraversal(matrix, start_index);
                 printf("\n\n");
                 DFSTraversal(matrix, start_index);
+                
+                // PRINTING THE TREE
+                printf("\n\nTree:\n");
+                print_tree(matrix, start_index);
+                break;
+
                 return 0;
             }
         }
