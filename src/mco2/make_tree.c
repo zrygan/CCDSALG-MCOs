@@ -16,7 +16,17 @@
 #define _VERT 124 // │
 #define _LAST 192 // └
 #define _SPLT 195 // ├
-
+bool checkTreeNode(String tree_nodes[], int tree_count, String node)
+{
+    for (int i = 0; i < tree_count; i++)
+    {
+        if (strcmp(tree_nodes[i], node) == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 void bfsTree(Node *startNode, String values[], int numNodes) {
 
     bool visited[MAX_VERTICES] = {false};

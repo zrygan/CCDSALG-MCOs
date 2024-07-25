@@ -57,7 +57,7 @@ int main()
                 
                 // PRINTING THE TREE
                 printf("\n\nTree:\n");
-                print_tree(matrix, start_index);
+                makeTree(matrix, start_index);
                 break;
 
                 return 0;

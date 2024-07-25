@@ -13,7 +13,6 @@
 
 #include "libraries.h"
 #include "adjacency_matrix.h"
-#include "make_tree.h"
 
 /**
  * a structure of the DFS Nodes

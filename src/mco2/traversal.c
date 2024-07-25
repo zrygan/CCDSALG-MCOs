@@ -28,18 +28,6 @@ void connectNodes(Node *node1, Node *node2)
     node1->neighbors[node1->numNeighbors - 1] = node2;                                           // places the neighboring node to the former node
 }
 
-bool checkTreeNode(String tree_nodes[], int tree_count, String node)
-{
-    for (int i = 0; i < tree_count; i++)
-    {
-        if (strcmp(tree_nodes[i], node) == 0)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 void visit_node(Node *current_node, bool *visited, String values[], int numNodes)
 {
     int nodeIndex = -1;
