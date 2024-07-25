@@ -19,6 +19,10 @@
 
 void printBFS(Node *startNode, String names[], int numNodes) {
     bool visited[numNodes];
+    bool islast[numNodes];
+    for(int i = 0; i < numNodes;i++){
+        islast[i] = false;
+    }
     for (int i = 0; i < numNodes; i++) {
         visited[i] = false;
     }
@@ -62,7 +66,27 @@ void printBFS(Node *startNode, String names[], int numNodes) {
             return;
         }
         int currentDepth = depth[currentNodeIndex];
+        
+        //sort neighbors
+        int i, j, min;
+        String temp;
 
+        // One by one move the boundary of the unsorted subarray
+        for (i = 0; i < current_node->numNeighbors - 1; i++)
+        {
+            // Find the minimum element in the unsorted array
+            min = i;
+            for (j = i + 1; j < current_node->numNeighbors; j++)
+            {
+                if (strcmp(current_node->neighbors[j]->val, current_node->neighbors[min]->val) < 0)
+                    min = j;
+            }
+            // Swap the found minimum element with the first element
+            strcpy(temp, current_node->neighbors[i]->val);
+            strcpy(current_node->neighbors[i]->val, current_node->neighbors[min]->val);
+            strcpy(current_node->neighbors[min]->val, temp);
+        }
+        
         for (int i = 0; i < current_node->numNeighbors; i++) {
             Node *neighbor = current_node->neighbors[i];
             int neighborIndex = -1;
@@ -76,9 +100,15 @@ void printBFS(Node *startNode, String names[], int numNodes) {
                 printf("Error: Neighbor node not found in names array.\n");
                 continue;
             }
-
+            if(i==current_node->numNeighbors - 1) {
+                islast[neighborIndex] = true;
+            }     
             if (!visited[neighborIndex]) {
-                for (int k = 0; k < currentDepth; k++) printf("|   ");
+                for (int k = 0; k < currentDepth; k++){
+                    if(islast[k] == false){
+                        printf("|   ");
+                    }
+                }
                 printf("L__ %s\n", neighbor->val);
                 visited[neighborIndex] = true;
                 depth[neighborIndex] = currentDepth + 1;
