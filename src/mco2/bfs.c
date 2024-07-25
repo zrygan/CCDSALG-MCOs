@@ -51,24 +51,6 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, String 
         //Dequeue the next node to be visited
         Node *current_node = dequeue(&queue);
 
-        //testing if this shit works
-        strcat(tree_nodes[*tree_count],current_node->val);
-        for (int i = 0; i <current_node->numNeighbors; i++){
-            count = 0;
-            for(int j = 0; j < numNodes; j++){
-                if(strcmp(values[j],current_node->neighbors[i]->val) == 0 && visited[j]){
-                    count++;
-                }
-            }
-        }
-        if(count == current_node->numNeighbors){
-            strcat(tree_nodes[*tree_count], "|");
-        }
-        else{
-            (*tree_count)++;
-            strcat(tree_nodes[*tree_count], "└");
-        }
-
         //Search for the node index in the values array
         int nodeindex = -1;
         for (int i = 0; i < numNodes; i++)
@@ -135,15 +117,7 @@ void BFStraversal(adjacency_matrix matrix, int start_index)
     {
         visited[i] = false;
     }
-    for(int i = 0; i < matrix.vertex; i++){
-        strcpy(tree_nodes[i], "");
-    }
-    // Visit the root node of the traversa;
+    // Visit the root node of the traversal
     // Perform the bfs Traversal
     bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, tree_nodes, &tree_count);
-    // make_tree(tree_nodes,tree_count); // FIXME: _____OLD IMPLEMENTATION_____ (for additional feature 2)
-    printf("\n");
-    for(int i = 0; i < matrix.vertex;i++){
-        printf("%s\n", tree_nodes[i]);
-    }
 }

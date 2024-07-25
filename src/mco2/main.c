@@ -63,8 +63,10 @@ int main()
 
                 return 0;
             }
+            else {
+                printf("%s not found.", start); // node name not found
+            }
         }
-        printf("%s not found.", start); // node name not found
     }
     else
     {

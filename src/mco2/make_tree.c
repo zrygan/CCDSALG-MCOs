@@ -17,67 +17,71 @@
 #define _LAST 192 // └
 #define _SPLT 195 // ├
 
-bool checkTreeNode(String tree_nodes[], int tree_count, String node)
-{
-    for (int i = 0; i < tree_count; i++)
-    {
-        if (strcmp(tree_nodes[i], node) == 0)
-        {
-            return false;
-        }
+void printBFS(Node *startNode, String names[], int numNodes) {
+    bool visited[numNodes];
+    for (int i = 0; i < numNodes; i++) {
+        visited[i] = false;
     }
-    return true;
-}
 
-void bfsTree(Node *startNode, String values[], int numNodes) {
-
-    bool visited[MAX_VERTICES] = {false};
-    queue Queue = createQueue(MAX_VERTICES);
+    queue Queue = createQueue(numNodes);
     enqueue(*startNode, &Queue);
 
-    String tree_nodes[MAX_VERTICES] = {""};
-    int tree_count = 0;
+    int depth[numNodes];
+    for (int i = 0; i < numNodes; i++) {
+        depth[i] = 0;
+    }
+
+    int startIndex = -1;
+    for (int i = 0; i < numNodes; i++) {
+        if (strcmp(names[i], startNode->val) == 0) {
+            startIndex = i;
+            break;
+        }
+    }
+
+    if (startIndex == -1) {
+        printf("Error: Start node not found in names array.\n");
+        return;
+    }
+
+    visited[startIndex] = true;
+
+    printf("%s\n", startNode->val);
 
     while (!queueEmpty(Queue)) {
         Node *current_node = dequeue(&Queue);
-        int nodeIndex = -1;
+        int currentNodeIndex = -1;
         for (int i = 0; i < numNodes; i++) {
-            if (strcmp(values[i], current_node->val) == 0) {
-                nodeIndex = i;
+            if (strcmp(names[i], current_node->val) == 0) {
+                currentNodeIndex = i;
                 break;
             }
         }
-
-        if (nodeIndex == -1 || visited[nodeIndex]) continue;
-        visited[nodeIndex] = true;
-        if (checkTreeNode(tree_nodes, tree_count, current_node->val)) {
-            printf("%s\n", current_node->val);
-            strcpy(tree_nodes[tree_count++], current_node->val);
+        if (currentNodeIndex == -1) {
+            printf("Error: Current node not found in names array.\n");
+            return;
         }
+        int currentDepth = depth[currentNodeIndex];
 
         for (int i = 0; i < current_node->numNeighbors; i++) {
             Node *neighbor = current_node->neighbors[i];
             int neighborIndex = -1;
             for (int j = 0; j < numNodes; j++) {
-                if (strcmp(values[j], neighbor->val) == 0) {
+                if (strcmp(names[j], neighbor->val) == 0) {
                     neighborIndex = j;
                     break;
                 }
             }
-            if (neighborIndex != -1 && !visited[neighborIndex]) {
-                printf("|");
-                for (int j = 0; j < tree_count; j++) {
-                    if (strcmp(tree_nodes[j], current_node->val) == 0) {
-                        for (int k = 0; k <= j; k++) {
-                            if (k == j) {
-                                printf("L__ ");
-                            } else {
-                                printf("|    ");
-                            }
-                        }
-                        printf("%s\n", neighbor->val);
-                    }
-                }
+            if (neighborIndex == -1) {
+                printf("Error: Neighbor node not found in names array.\n");
+                continue;
+            }
+
+            if (!visited[neighborIndex]) {
+                for (int k = 0; k < currentDepth; k++) printf("|   ");
+                printf("L__ %s\n", neighbor->val);
+                visited[neighborIndex] = true;
+                depth[neighborIndex] = currentDepth + 1;
                 enqueue(*neighbor, &Queue);
             }
         }
@@ -97,5 +101,6 @@ void make_tree(adjacency_matrix tree, int start_index) {
             }
         }
     }
-    bfsTree(&nodes[start_index], tree.names, tree.vertex);
+
+    printBFS(&nodes[start_index], tree.names, tree.vertex);
 }
