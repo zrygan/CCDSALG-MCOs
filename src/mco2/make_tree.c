@@ -16,6 +16,7 @@
 #define _VERT 124 // │
 #define _LAST 192 // └
 #define _SPLT 195 // ├
+
 bool checkTreeNode(String tree_nodes[], int tree_count, String node)
 {
     for (int i = 0; i < tree_count; i++)
@@ -27,6 +28,7 @@ bool checkTreeNode(String tree_nodes[], int tree_count, String node)
     }
     return true;
 }
+
 void bfsTree(Node *startNode, String values[], int numNodes) {
 
     bool visited[MAX_VERTICES] = {false};
@@ -82,7 +84,7 @@ void bfsTree(Node *startNode, String values[], int numNodes) {
     }
 }
 
-void makeTree(adjacency_matrix tree, int start_index) {
+void make_tree(adjacency_matrix tree, int start_index) {
     Node nodes[MAX_VERTICES];
     for (int i = 0; i < tree.vertex; i++) {
         nodes[i] = createNode(tree.names[i]);

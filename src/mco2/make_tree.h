@@ -32,7 +32,7 @@ char *make_tree_relate(String home, String dest);
  * @param nodes[] the array of nodes and their corresponding children
  * @param n the number of nodes
  */
-void make_tree(String nodes[], int n);
+void make_tree(adjacency_matrix tree, int start_index);
 
 void bfsTree(Node *startNode, String values[], int numNodes);
 

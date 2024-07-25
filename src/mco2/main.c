@@ -13,6 +13,7 @@
 #include "traversal.h"
 #include "bfs.h"
 #include "dfs.h"
+#include "make_tree.h"
 
 int main()
 {
@@ -57,7 +58,7 @@ int main()
                 
                 // PRINTING THE TREE
                 printf("\n\nTree:\n");
-                makeTree(matrix, start_index);
+                make_tree(matrix, start_index);
                 break;
 
                 return 0;
