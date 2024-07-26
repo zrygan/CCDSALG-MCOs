@@ -19,6 +19,11 @@
 
 void printBFS(Node *startNode, String names[], int numNodes) {
     bool visited[numNodes];
+    String result[numNodes];
+    int resultIndex = 0;
+    for(int i = 0; i < numNodes;i++){
+        strcpy(result[i], "");
+    }
     for (int i = 0; i < numNodes; i++) {
         visited[i] = false;
     }
@@ -45,10 +50,8 @@ void printBFS(Node *startNode, String names[], int numNodes) {
     }
 
     visited[startIndex] = true;
-    char result[1000] = "";
-    strcat(result, startNode->val);
-    strcat(result, "\n");
-
+    strcpy(result[0], startNode->val);
+    resultIndex = 1;
     while (!queueEmpty(queue)) {
         Node *currentNode = dequeue(&queue);
         int currentNodeIndex = -1;
@@ -59,7 +62,7 @@ void printBFS(Node *startNode, String names[], int numNodes) {
             }
         }
         if (currentNodeIndex == -1) {
-            strcat(result, "Error: Current node not found in names array.\n");
+            strcat(result[resultIndex], "Error: Current node not found in names array.\n");
             continue;
         }
 
@@ -74,7 +77,7 @@ void printBFS(Node *startNode, String names[], int numNodes) {
                 }
             }
             if (neighborIndex == -1) {
-                strcat(result, "Error: Neighbor node not found in names array.\n");
+                strcat(result[resultIndex], "Error: Neighbor node not found in names array.\n");
                 continue;
             }
 
@@ -84,9 +87,8 @@ void printBFS(Node *startNode, String names[], int numNodes) {
                 for (int k = 0; k < depth[currentNodeIndex] + 1; k++) strcat(temp, "|   ");
                 strcat(temp, "L__ ");
                 strcat(temp, neighbor->val);
-                strcat(temp, "\n");
-                strcat(result, temp);
-
+                strcat(result[resultIndex], temp);
+                resultIndex++;
                 visited[neighborIndex] = true;
                 depth[neighborIndex] = depth[currentNodeIndex] + 1;
                 enqueue(*neighbor, &queue);
@@ -94,7 +96,9 @@ void printBFS(Node *startNode, String names[], int numNodes) {
         }
     }
 
-    printf("%s", result);
+    for (int i = 0; i<resultIndex; i++) {
+        printf("%s\n", result[i]);
+    }
 }
 
 void make_tree(adjacency_matrix tree, int start_index) {
