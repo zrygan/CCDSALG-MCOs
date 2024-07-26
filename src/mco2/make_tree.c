@@ -23,8 +23,8 @@ void printBFS(Node *startNode, String names[], int numNodes) {
         visited[i] = false;
     }
 
-    queue Queue = createQueue(numNodes);
-    enqueue(*startNode, &Queue);
+    queue queue = createQueue(numNodes);
+    enqueue(*startNode, &queue);
 
     int depth[numNodes];
     for (int i = 0; i < numNodes; i++) {
@@ -39,16 +39,21 @@ void printBFS(Node *startNode, String names[], int numNodes) {
         }
     }
 
+    if (startIndex == -1) {
+        printf("Error: Start node not found in names array.\n");
+        return;
+    }
+
     visited[startIndex] = true;
     char result[1000] = "";
     strcat(result, startNode->val);
     strcat(result, "\n");
 
-    while (!queueEmpty(Queue)) {
-        Node *current_node = dequeue(&Queue);
+    while (!queueEmpty(queue)) {
+        Node *currentNode = dequeue(&queue);
         int currentNodeIndex = -1;
         for (int j = 0; j < numNodes; j++) {
-            if (strcmp(names[j], current_node->val) == 0) {
+            if (strcmp(names[j], currentNode->val) == 0) {
                 currentNodeIndex = j;
                 break;
             }
@@ -58,8 +63,9 @@ void printBFS(Node *startNode, String names[], int numNodes) {
             continue;
         }
 
-        for (int j = 0; j < current_node->numNeighbors; j++) {
-            Node *neighbor = current_node->neighbors[j];
+        // Print children of the current node
+        for (int j = 0; j < currentNode->numNeighbors; j++) {
+            Node *neighbor = currentNode->neighbors[j];
             int neighborIndex = -1;
             for (int k = 0; k < numNodes; k++) {
                 if (strcmp(names[k], neighbor->val) == 0) {
@@ -72,20 +78,22 @@ void printBFS(Node *startNode, String names[], int numNodes) {
                 continue;
             }
 
-            // Check if the neighbor has been visited
             if (!visited[neighborIndex]) {
+                // Print the node with proper indentation
                 char temp[100] = "";
-                for (int k = 0; k < depth[currentNodeIndex]; k++) strcat(temp, "|   ");
+                for (int k = 0; k < depth[currentNodeIndex] + 1; k++) strcat(temp, "|   ");
                 strcat(temp, "L__ ");
                 strcat(temp, neighbor->val);
                 strcat(temp, "\n");
                 strcat(result, temp);
+
                 visited[neighborIndex] = true;
                 depth[neighborIndex] = depth[currentNodeIndex] + 1;
-                enqueue(*neighbor, &Queue);
+                enqueue(*neighbor, &queue);
             }
         }
     }
+
     printf("%s", result);
 }
 
