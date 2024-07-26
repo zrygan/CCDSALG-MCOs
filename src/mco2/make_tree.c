@@ -39,53 +39,54 @@ void printBFS(Node *startNode, String names[], int numNodes) {
         }
     }
 
-    if (startIndex == -1) {
-        printf("Error: Start node not found in names array.\n");
-        return;
-    }
-
     visited[startIndex] = true;
-
-    printf("%s\n", startNode->val);
+    char result[1000] = "";
+    strcat(result, startNode->val);
+    strcat(result, "\n");
 
     while (!queueEmpty(Queue)) {
         Node *current_node = dequeue(&Queue);
         int currentNodeIndex = -1;
-        for (int i = 0; i < numNodes; i++) {
-            if (strcmp(names[i], current_node->val) == 0) {
-                currentNodeIndex = i;
+        for (int j = 0; j < numNodes; j++) {
+            if (strcmp(names[j], current_node->val) == 0) {
+                currentNodeIndex = j;
                 break;
             }
         }
         if (currentNodeIndex == -1) {
-            printf("Error: Current node not found in names array.\n");
-            return;
+            strcat(result, "Error: Current node not found in names array.\n");
+            continue;
         }
-        int currentDepth = depth[currentNodeIndex];
 
-        for (int i = 0; i < current_node->numNeighbors; i++) {
-            Node *neighbor = current_node->neighbors[i];
+        for (int j = 0; j < current_node->numNeighbors; j++) {
+            Node *neighbor = current_node->neighbors[j];
             int neighborIndex = -1;
-            for (int j = 0; j < numNodes; j++) {
-                if (strcmp(names[j], neighbor->val) == 0) {
-                    neighborIndex = j;
+            for (int k = 0; k < numNodes; k++) {
+                if (strcmp(names[k], neighbor->val) == 0) {
+                    neighborIndex = k;
                     break;
                 }
             }
             if (neighborIndex == -1) {
-                printf("Error: Neighbor node not found in names array.\n");
+                strcat(result, "Error: Neighbor node not found in names array.\n");
                 continue;
             }
 
+            // Check if the neighbor has been visited
             if (!visited[neighborIndex]) {
-                for (int k = 0; k < currentDepth; k++) printf("|   ");
-                printf("L__ %s\n", neighbor->val);
+                char temp[100] = "";
+                for (int k = 0; k < depth[currentNodeIndex]; k++) strcat(temp, "|   ");
+                strcat(temp, "L__ ");
+                strcat(temp, neighbor->val);
+                strcat(temp, "\n");
+                strcat(result, temp);
                 visited[neighborIndex] = true;
-                depth[neighborIndex] = currentDepth + 1;
+                depth[neighborIndex] = depth[currentNodeIndex] + 1;
                 enqueue(*neighbor, &Queue);
             }
         }
     }
+    printf("%s", result);
 }
 
 void make_tree(adjacency_matrix tree, int start_index) {
@@ -102,5 +103,5 @@ void make_tree(adjacency_matrix tree, int start_index) {
         }
     }
 
-    printBFS(&nodes[start_index], tree.names, tree.vertex);
+    printBFS(&nodes[start_index], tree.names, tree.vertex * tree.vertex);
 }
