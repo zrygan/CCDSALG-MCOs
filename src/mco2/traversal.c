@@ -10,6 +10,15 @@
 
 #include "traversal.h"
 
+/**
+ * creates the nodes
+ *
+ * @param val the value that the node contains
+ *
+ * @return DFSNode if the function is executed
+ *
+ * @author Jaztin Jimenez
+ */
 Node createNode(String val)
 {
     Node *node = (Node *)malloc(sizeof(Node));
@@ -19,7 +28,14 @@ Node createNode(String val)
     return *node;
 }
 
-// Function to add an edge between two nodes
+/**
+ * connects the DFS Nodes
+ *
+ * @param node1 contains the former node that will be connected with the latter node
+ * @param node2 contains the latter node that will be connected with the former node
+ *
+ * @author Jaztin Jimenez
+ */
 void connectNodes(Node *node1, Node *node2)
 {
     node1->numNeighbors++;                                                                       // increments the number of neighboring nodes
@@ -28,6 +44,16 @@ void connectNodes(Node *node1, Node *node2)
     node1->neighbors[node1->numNeighbors - 1] = node2;                                           // places the neighboring node to the former node
 }
 
+/**
+ * visits a node
+ *
+ * @param current_node the current node
+ * @param visited checks if the node is visited
+ * @param values the nodes
+ * @param numNodes the number of nodes
+ *
+ * @author Jaztin Jimenez
+ */
 void visit_node(Node *current_node, bool *visited, String values[], int numNodes)
 {
     int nodeIndex = -1;

@@ -11,9 +11,9 @@
 #include "adjacency_matrix.h"
 
 /**
- * Function definition for make_adjacency_matrix, see make_adjacency_matrix in `adjacency_matrix.h`
+ * Populate an adjacency matrix from a file.
  *
- * @param fileName The name of the file to get.
+ * @param f The file pointer.
  * @param matrix The adjacency matrix to populate.
  *
  * @author Zhean Ganituen
@@ -94,10 +94,9 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
 }
 
 /**
- * Function definition for diagonals_as_zero, see diagonals_as_zero in `adjacency_matrix.h`
+ * sets the diagonals of the adjacency_matrix as zero.
  *
- * @param fileName The name of the file to get.
- * @param matrix The adjacency matrix to populate.
+ * @param matrix the pointer to the adjacency matrix
  *
  * @author Zhean Ganituen
  */
@@ -111,10 +110,10 @@ void diagonals_as_zero(adjacency_matrix *matrix)
 }
 
 /**
- * Function definition for calculate_degrees, see calculate_degrees in `adjacency_matrix.h`
+ * calculates the degrees of each parent node in the adjacency matrix
  *
- * @param fileName The name of the file to get.
- * @param matrix The adjacency matrix to populate.
+ * @param matrix the adjacency matrix
+ * @param degree an array, the degrees of each parent node in the adjacency matrix
  *
  * @author Zhean Ganituen
  */
