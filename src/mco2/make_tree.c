@@ -6,18 +6,16 @@ char *padding(int d){
     out[0] = '\0';
     
     for (int i = 0; i < 4 * d; i++){
-        strcat(out, " ");
+        strncat(out, " ", 2);
     }
     
-    strcat(out, "\\__ "); // add the arrow
-    strcat(out, "\0");
+    strncat(out, "\\__ ", 5); // add the arrow
     return out;
 }
 
 void display_tree(tree_node *tree, int vertices, const char *curr, int distance){
     char *pad = padding(distance);
     printf("%s%s\n", pad, curr);
-    free(pad); // free the allocated memory
 
     for (int i = 0; i < vertices; i++){
         if (strcmp(tree[i].root, curr) == 0){
