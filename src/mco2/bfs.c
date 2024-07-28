@@ -64,12 +64,12 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
 {
     queue queue = createQueue(numNodes);
     enqueue(*start_node, &queue);
+
     // Do until all the nodes have been visited
     while (!queueEmpty(queue))
     {
         // Dequeue the next node to be visited
         Node *current_node = dequeue(&queue);
-
         // Search for the node index in the values array
         int nodeindex = -1;
         for (int i = 0; i < numNodes; i++)
@@ -86,23 +86,35 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
             // Print the node to be visited and set it to visited in the visited array
             fprintf(m, "%s ", current_node->val);
             visited[nodeindex] = true;
-            // Sort the neighbors of the current node aphabetically
-            sortneighbors(current_node);
-            // try to implement queues to implement alphabetical ordering
+
+            // Sort the neighbors of the current node alphabetically
+            for (int i = 0; i < current_node->numNeighbors; i++)
+            {
+                for (int j = i + 1; j < current_node->numNeighbors; j++)
+                {
+                    if (strcmp(current_node->neighbors[i]->val, current_node->neighbors[j]->val) > 0)
+                    {
+                        Node *temp = current_node->neighbors[i];
+                        current_node->neighbors[i] = current_node->neighbors[j];
+                        current_node->neighbors[j] = temp;
+                    }
+                }
+            }
+
             for (int i = 0; i < current_node->numNeighbors; i++)
             {
                 int neighborindex = -1;
                 for (int j = 0; j < numNodes; j++)
-                { // Find the index of the neighbor in the values array and it is not visited yet
-                    if ((strcmp(values[j], current_node->neighbors[i]->val)) == 0 && !visited[j])
+                {
+                    if (strcmp(values[j], current_node->neighbors[i]->val) == 0)
                     {
                         neighborindex = j;
                     }
                 }
                 if (neighborindex != -1 && !visited[neighborindex])
-                {                                                 // If the neighbor exists and is not visited
-                    enqueue(*current_node->neighbors[i], &queue); // Enqueue the neighbor
-
+                {
+                    enqueue(*current_node->neighbors[i], &queue); // If the neighbor exists and is not visited
+                                                                  // Enqueue the neighbor
                     // [zry : deep dive into madness part 1] WHY ARE YOU ERROR-ing!!!!
                     // [zry : the solution to the maddnes???]
                     /*
@@ -123,10 +135,9 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
 
                     if (!exists)
                     {
-                        // Add the neighbor to the tree
                         strcpy(tree[*tree_count].name, current_node->neighbors[i]->val);
                         strcpy(tree[*tree_count].root, current_node->val);
-                        tree[*tree_count].distance = 1; // Distance from the parent node
+                        tree[*tree_count].distance = 1;
                         (*tree_count)++;
                     }
                 }

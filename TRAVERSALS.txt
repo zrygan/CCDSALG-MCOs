@@ -9,6 +9,6 @@ Max	2
 Hana	4
 Iono	2
 
-Iono Hana Olga Kale Ana Go Ben Cana Leo Max 
+Ana Ben Cana Hana Go Iono Kale Olga Leo Max 
 
-Iono Hana Ana Ben Cana Go Kale Leo Max Olga 
+Ana Ben Cana Go Hana Iono Olga Kale Leo Max 
