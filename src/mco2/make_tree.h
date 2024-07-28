@@ -8,15 +8,20 @@
  * Header file for tree illustration of the BFS
  */
 
+
 #ifndef MAKE_TREE
 #define MAKE_TREE
 
 #include "libraries.h"
-#include "traversal.h"
-#include "queue.h"
+typedef struct tree_node
+{
+    String name;
+    int distance;
+    String root;
+} tree_node;
 
-void printBFS(Node *startNode, String names[], int numNodes);
+void display_tree(tree_node *tree, int vertices, const char *curr, int distance);
 
-void make_tree(adjacency_matrix tree, int start_index);
+char *padding(int d);
 
 #endif

@@ -40,11 +40,10 @@ void sortneighbors(Node *Node)
     }
 }
 
-void bfs(Node *start_node, bool *visited, String values[], int numNodes, String tree_nodes[], int *tree_count)
+void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tree_count, tree_node *tree)
 {
     queue queue = createQueue(numNodes);
     enqueue(*start_node, &queue);
-    int count;
     //Do until all the nodes have been visited
     while (!queueEmpty(queue))
     {
@@ -64,10 +63,10 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, String 
         // if the node exists and it is not visited yet then proceed
         if (nodeindex != -1 && !visited[nodeindex])
         {
-            //Print the node to be visited and set it to visited in the visited array
+            // Print the node to be visited and set it to visited in the visited array
             printf("%s ", current_node->val);
             visited[nodeindex] = true;
-            //Sort the neighbors of the current node aphabetically
+            // Sort the neighbors of the current node aphabetically
             sortneighbors(current_node);
             // try to implement queues to implement alphabetical ordering
             for (int i = 0; i < current_node->numNeighbors; i++)
@@ -83,16 +82,20 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, String 
                 if (neighborindex != -1 && !visited[neighborindex])
                 {                                                 // If the neighbor exists and is not visited
                     enqueue(*current_node->neighbors[i], &queue); // Enqueue the neighbor
+                    // Add the neighbor to the tree
+                    strcpy(tree[*tree_count].name, current_node->neighbors[i]->val);
+                    strcpy(tree[*tree_count].root, current_node->val);
+                    tree[*tree_count].distance = 1; // Distance from the parent node
+                    (*tree_count)++;
                 }
             }
         }
     }
 }
 
-void BFStraversal(adjacency_matrix matrix, int start_index)
+void BFStraversal(adjacency_matrix matrix, int start_index, tree_node *tree)
 {
     // Create nodes from the adjacency matrix
-    String tree_nodes[MAX_VERTICES];
     Node nodeName[matrix.vertex];
     int tree_count = 0;
     for (int i = 0; i < matrix.vertex; i++)
@@ -118,6 +121,12 @@ void BFStraversal(adjacency_matrix matrix, int start_index)
         visited[i] = false;
     }
     // Visit the root node of the traversal
+    // Add the root node to the tree
+    strcpy(tree[tree_count].name, matrix.names[start_index]);
+    strcpy(tree[tree_count].root, ""); // Set the root of the tree
+    tree[tree_count].distance = 0; // Distance from the root node
+    tree_count++;
+
     // Perform the bfs Traversal
-    bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, tree_nodes, &tree_count);
+    bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, &tree_count, tree);
 }

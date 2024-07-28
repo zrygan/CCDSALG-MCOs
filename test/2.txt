@@ -1,6 +1,6 @@
 5
 Ana Bap Mercy -1
-Bap Brig Zen -1
-Brig Zen -1
+Bap Ana Brig Zen -1
+Brig Bap Zen -1
 Mercy Ana -1
-Zen Brig -1
+Zen Bap Brig -1

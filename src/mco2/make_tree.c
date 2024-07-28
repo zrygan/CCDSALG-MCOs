@@ -1,119 +1,44 @@
-/**
- * Balcita, V.
- * Ganituen, Z.
- * Jimenez, J.
- *
- * CCDSALG, Project 2
- *
- * C file of the tree illustration of the BFS.
- */
-
 #include "make_tree.h"
 
-// for ascii art (remove if not needed)
-#define _DASH 196 // ┐
-#define _ROOT 191 // ─
-#define _VERT 124 // │
-#define _LAST 192 // └
-#define _SPLT 195 // ├
-
-void printBFS(Node *startNode, String names[], int numNodes) {
-    bool visited[numNodes];
-    String result[numNodes];
-    int resultIndex = 0;
-    for(int i = 0; i < numNodes;i++){
-        strcpy(result[i], "");
+char *padding(int d){
+    if (!d) return "";
+    char *out = malloc(4*d+5);
+    out[0] = '\0';
+    
+    for (int i = 0; i < 4 * d; i++){
+        strcat(out, " ");
     }
-    for (int i = 0; i < numNodes; i++) {
-        visited[i] = false;
-    }
+    
+    strcat(out, "\\__ "); // add the arrow
+    strcat(out, "\0");
+    return out;
+}
 
-    queue queue = createQueue(numNodes);
-    enqueue(*startNode, &queue);
+void display_tree(tree_node *tree, int vertices, const char *curr, int distance){
+    char *pad = padding(distance);
+    printf("%s%s\n", pad, curr);
+    free(pad); // free the allocated memory
 
-    int depth[numNodes];
-    for (int i = 0; i < numNodes; i++) {
-        depth[i] = 0;
-    }
-
-    int startIndex = -1;
-    for (int i = 0; i < numNodes; i++) {
-        if (strcmp(names[i], startNode->val) == 0) {
-            startIndex = i;
-            break;
+    for (int i = 0; i < vertices; i++){
+        if (strcmp(tree[i].root, curr) == 0){
+            display_tree(tree, vertices, tree[i].name, distance + 1);
         }
-    }
-
-    if (startIndex == -1) {
-        printf("Error: Start node not found in names array.\n");
-        return;
-    }
-
-    visited[startIndex] = true;
-    strcpy(result[0], startNode->val);
-    resultIndex = 1;
-    while (!queueEmpty(queue)) {
-        Node *currentNode = dequeue(&queue);
-        int currentNodeIndex = -1;
-        for (int j = 0; j < numNodes; j++) {
-            if (strcmp(names[j], currentNode->val) == 0) {
-                currentNodeIndex = j;
-                break;
-            }
-        }
-        if (currentNodeIndex == -1) {
-            strcat(result[resultIndex], "Error: Current node not found in names array.\n");
-            continue;
-        }
-
-        // Print children of the current node
-        for (int j = 0; j < currentNode->numNeighbors; j++) {
-            Node *neighbor = currentNode->neighbors[j];
-            int neighborIndex = -1;
-            for (int k = 0; k < numNodes; k++) {
-                if (strcmp(names[k], neighbor->val) == 0) {
-                    neighborIndex = k;
-                    break;
-                }
-            }
-            if (neighborIndex == -1) {
-                strcat(result[resultIndex], "Error: Neighbor node not found in names array.\n");
-                continue;
-            }
-
-            if (!visited[neighborIndex]) {
-                // Print the node with proper indentation
-                char temp[100] = "";
-                for (int k = 0; k < depth[currentNodeIndex] + 1; k++) strcat(temp, "|   ");
-                strcat(temp, "L__ ");
-                strcat(temp, neighbor->val);
-                strcat(result[resultIndex], temp);
-                resultIndex++;
-                visited[neighborIndex] = true;
-                depth[neighborIndex] = depth[currentNodeIndex] + 1;
-                enqueue(*neighbor, &queue);
-            }
-        }
-    }
-
-    for (int i = 0; i<resultIndex; i++) {
-        printf("%s\n", result[i]);
     }
 }
 
-void make_tree(adjacency_matrix tree, int start_index) {
-    Node nodes[MAX_VERTICES];
-    for (int i = 0; i < tree.vertex; i++) {
-        nodes[i] = createNode(tree.names[i]);
-    }
-
-    for (int i = 0; i < tree.vertex; i++) {
-        for (int j = 0; j < tree.vertex; j++) {
-            if (tree.matrix[i][j] == 1) {
-                connectNodes(&nodes[i], &nodes[j]);
-            }
+// REMEMBER TO PUT THIS IN main.c [zry]
+/*
+    // Find the root node and start printing
+    for (int i = 0; i < n; i++) {
+        if (tree[i].distance == 0) {
+            display_tree(tree, n, tree[i].name, 0);
         }
     }
+*/
 
-    printBFS(&nodes[start_index], tree.names, tree.vertex * tree.vertex);
-}
+// REMEMBER TO PUT THIS IN bfs.c [zry]
+/*
+    strcpy(tree[1].name, "NODE_NAME_");
+    strcpy(tree[1].root, "ROOT_NAME_");
+    tree[1].distance = INT_;
+*/
