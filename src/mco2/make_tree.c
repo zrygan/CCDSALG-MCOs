@@ -40,12 +40,37 @@ void display_tree(tree_node *tree, int vertices, const char *curr, int distance)
     char *pad = padding(distance);
     printf("%s%s\n", pad, curr);
 
+    // Create an array to store indices of child nodes
+    int child_indices[vertices];
+    int child_count = 0;
+
+    // Find all child nodes
     for (int i = 0; i < vertices; i++)
     {
         if (strcmp(tree[i].root, curr) == 0)
         {
-            display_tree(tree, vertices, tree[i].name, distance + 1);
+            child_indices[child_count++] = i;
         }
+    }
+
+    // Sort child nodes based on their names using bubble sort
+    for (int i = 0; i < child_count - 1; i++)
+    {
+        for (int j = 0; j < child_count - i - 1; j++)
+        {
+            if (strcmp(tree[child_indices[j]].name, tree[child_indices[j + 1]].name) > 0)
+            {
+                int temp = child_indices[j];
+                child_indices[j] = child_indices[j + 1];
+                child_indices[j + 1] = temp;
+            }
+        }
+    }
+
+    // Display sorted child nodes
+    for (int i = 0; i < child_count; i++)
+    {
+        display_tree(tree, vertices, tree[child_indices[i]].name, distance + 1);
     }
 }
 
