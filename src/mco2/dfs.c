@@ -11,7 +11,7 @@
 #include "dfs.h"
 
 // DFS function
-void dfs(Node *start_node, bool *visited, String values[], int numNodes)
+void dfs(Node *start_node, bool *visited, String values[], int numNodes, FILE *m)
 {
     // Find the index of the current node in the values array
     int nodeIndex = -1;
@@ -30,7 +30,7 @@ void dfs(Node *start_node, bool *visited, String values[], int numNodes)
 
     // Mark the node as visited
     visited[nodeIndex] = true;
-    printf("%s ", start_node->val); // Process the node
+    fprintf(m, "%s ", start_node->val); // Process the node
 
     // Find the unvisited neighbor with the lowest value
     while (1)
@@ -60,11 +60,11 @@ void dfs(Node *start_node, bool *visited, String values[], int numNodes)
         if (lowest_neighbor == NULL)
             break;
 
-        dfs(lowest_neighbor, visited, values, numNodes);
+        dfs(lowest_neighbor, visited, values, numNodes, m);
     }
 }
 
-void DFSTraversal(adjacency_matrix matrix, int start_index)
+void DFSTraversal(adjacency_matrix matrix, int start_index, FILE *m)
 {
     // Create nodes from the adjacency matrix
     Node nodeName[matrix.vertex];
@@ -93,5 +93,5 @@ void DFSTraversal(adjacency_matrix matrix, int start_index)
     }
 
     // Perform the DFS Traversal
-    dfs(&nodeName[start_index], visited, matrix.names, matrix.vertex);
+    dfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, m);
 }

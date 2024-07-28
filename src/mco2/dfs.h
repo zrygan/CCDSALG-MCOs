@@ -24,7 +24,7 @@
  *
  * @author Jaztin Jimenez
  */
-void dfs(Node *start_node, bool *visited, String values[], int numNodes);
+void dfs(Node *start_node, bool *visited, String values[], int numNodes, FILE *m);
 
 /**
  * executes the formalities for the DFS Traversal // FIXME: MEDYO DI KO GUSTO HOW I DID THIS WBSJSAHSAH
@@ -34,6 +34,6 @@ void dfs(Node *start_node, bool *visited, String values[], int numNodes);
  *
  * @author Jaztin Jimenez
  */
-void DFSTraversal(adjacency_matrix matrix, int start_index);
+void DFSTraversal(adjacency_matrix matrix, int start_index, FILE *m);
 
 #endif

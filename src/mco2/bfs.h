@@ -30,7 +30,7 @@ void sortneighbors(Node *Node);
  * @param numNodes  :   int     :   the total number of nodes in the matrix
  * @param tree_count : int* : the number of BFS traversal relatioins
  */
-void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tree_count, tree_node *tree);
+void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tree_count, tree_node *tree, FILE *m);
 
 /**
  * executes the formalities for the BFS Traversal
@@ -39,6 +39,6 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
  * @param start_index   :   int             :   contains the node to start the traversing with
  *
  */
-void BFStraversal(adjacency_matrix matrix, int start_index, tree_node *tree);
+void BFStraversal(adjacency_matrix matrix, int start_index, tree_node *tree, FILE *m);
 
 #endif

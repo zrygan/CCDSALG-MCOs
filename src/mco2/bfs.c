@@ -40,17 +40,17 @@ void sortneighbors(Node *Node)
     }
 }
 
-void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tree_count, tree_node *tree)
+void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tree_count, tree_node *tree, FILE *m)
 {
     queue queue = createQueue(numNodes);
     enqueue(*start_node, &queue);
-    //Do until all the nodes have been visited
+    // Do until all the nodes have been visited
     while (!queueEmpty(queue))
     {
-        //Dequeue the next node to be visited
+        // Dequeue the next node to be visited
         Node *current_node = dequeue(&queue);
 
-        //Search for the node index in the values array
+        // Search for the node index in the values array
         int nodeindex = -1;
         for (int i = 0; i < numNodes; i++)
         {
@@ -64,7 +64,7 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
         if (nodeindex != -1 && !visited[nodeindex])
         {
             // Print the node to be visited and set it to visited in the visited array
-            printf("%s ", current_node->val);
+            fprintf(m, "%s ", current_node->val);
             visited[nodeindex] = true;
             // Sort the neighbors of the current node aphabetically
             sortneighbors(current_node);
@@ -93,7 +93,7 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
     }
 }
 
-void BFStraversal(adjacency_matrix matrix, int start_index, tree_node *tree)
+void BFStraversal(adjacency_matrix matrix, int start_index, tree_node *tree, FILE *m)
 {
     // Create nodes from the adjacency matrix
     Node nodeName[matrix.vertex];
@@ -124,9 +124,9 @@ void BFStraversal(adjacency_matrix matrix, int start_index, tree_node *tree)
     // Add the root node to the tree
     strcpy(tree[tree_count].name, matrix.names[start_index]);
     strcpy(tree[tree_count].root, ""); // Set the root of the tree
-    tree[tree_count].distance = 0; // Distance from the root node
+    tree[tree_count].distance = 0;     // Distance from the root node
     tree_count++;
 
     // Perform the bfs Traversal
-    bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, &tree_count, tree);
+    bfs(&nodeName[start_index], visited, matrix.names, matrix.vertex, &tree_count, tree, m);
 }
