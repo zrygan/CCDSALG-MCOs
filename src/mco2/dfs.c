@@ -50,7 +50,7 @@ void dfs(Node *start_node, bool *visited, String values[], int numNodes, FILE *m
             }
             if (neighborIndex != -1 && !visited[neighborIndex])
             {
-                if (lowest_neighbor == NULL || strcmp(neighbor->val, lowest_neighbor->val) > 0)
+                if (lowest_neighbor == NULL || strcmp(neighbor->val, lowest_neighbor->val) < 0)
                 {
                     lowest_neighbor = neighbor;
                 }
