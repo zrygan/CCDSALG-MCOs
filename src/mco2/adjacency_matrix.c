@@ -18,14 +18,6 @@
  *
  * @author Zhean Ganituen
  */
-/**
- * Populate an adjacency matrix from a file.
- *
- * @param f The file pointer.
- * @param matrix The adjacency matrix to populate.
- *
- * @author Zhean Ganituen
- */
 void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
 {
     String line, vertexName;
@@ -56,7 +48,7 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
     {
         // remove \n at the end
         line[strcspn(line, "\n")] = '\0';
-s
+
         char *text = strtok(line, " "); // get the next text in the line that is separated by " "
         strcpy(vertexName, text);       // the first text is the vertex name
 
