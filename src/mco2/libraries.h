@@ -19,6 +19,7 @@
 
 #define MAX_VERTICES 21 // max number of vertices
                         // FIXME: reclarify if the max number of vertices is indeed 21
+                        // [zry] you mean 20... but i think it is O_O
 
 typedef char String[256]; // type def for String data type
 

@@ -40,15 +40,6 @@ int main()
             tree[i].checker = false;
         }
 
-        // OUTPUT: the degrees
-        int *degrees = malloc(matrix.vertex * sizeof(int));
-        calculate_degrees(matrix, degrees);
-        for (int i = 0; i < matrix.vertex; i++)
-        {
-            printf("%s\t%d\n", matrix.names[i], degrees[i]);
-        }
-        printf("\n");
-
         printf("Input start vertex for the traversal: ");
         scanf("%s", start);
 
@@ -57,6 +48,15 @@ int main()
         { // checks if vertex exists
             if (!strcasecmp(matrix.names[start_index], start))
             {
+                // OUTPUT: the degrees
+                int *degrees = malloc(matrix.vertex * sizeof(int));
+                calculate_degrees(matrix, degrees);
+                for (int i = 0; i < matrix.vertex; i++)
+                {
+                    printf("%s\t%d\n", matrix.names[i], degrees[i]);
+                }
+                printf("\n");
+
                 BFStraversal(matrix, start_index, tree); // OUTPUT: BFS
                 printf("\n\n");                          // SPACER
                 DFSTraversal(matrix, start_index);       // OUTPUT: DFS
