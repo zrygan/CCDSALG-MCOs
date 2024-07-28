@@ -82,16 +82,39 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
                 if (neighborindex != -1 && !visited[neighborindex])
                 {                                                 // If the neighbor exists and is not visited
                     enqueue(*current_node->neighbors[i], &queue); // Enqueue the neighbor
-                    // Add the neighbor to the tree
-                    strcpy(tree[*tree_count].name, current_node->neighbors[i]->val);
-                    strcpy(tree[*tree_count].root, current_node->val);
-                    tree[*tree_count].distance = 1; // Distance from the parent node
-                    (*tree_count)++;
+                    
+                    // [zry : deep dive into madness part 1] WHY ARE YOU ERROR-ing!!!!
+                    // [zry : the solution to the maddnes???] 
+                    /* 
+                        PROBLEM :           there's a stupid duplicate of Missy
+                        PROBABLE SOLUTION : we have a checker if the thingy is in the tree already
+
+                        RESULT ._. :        OMG OMG OMG IT WORK
+                    */ 
+                    int exists = 0;
+                    for (int k = 0; k < *tree_count; k++)
+                    {
+                        if (strcmp(tree[k].name, current_node->neighbors[i]->val) == 0)
+                        {
+                            exists = 1;
+                            break;
+                        }
+                    }
+
+                    if (!exists)
+                    {
+                        // Add the neighbor to the tree
+                        strcpy(tree[*tree_count].name, current_node->neighbors[i]->val);
+                        strcpy(tree[*tree_count].root, current_node->val);
+                        tree[*tree_count].distance = 1; // Distance from the parent node
+                        (*tree_count)++;
+                    }
                 }
             }
         }
     }
 }
+
 
 void BFStraversal(adjacency_matrix matrix, int start_index, tree_node *tree, FILE *m)
 {

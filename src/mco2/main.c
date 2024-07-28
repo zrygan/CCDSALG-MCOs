@@ -37,10 +37,6 @@ int main()
 
         // initialize the tree
         tree = malloc(matrix.vertex * sizeof(tree_node));
-        for (int i = 0; i < matrix.vertex; i++)
-        {
-            tree[i].checker = false;
-        }
 
         printf("Input start vertex for the traversal: ");
         scanf("%s", start);
