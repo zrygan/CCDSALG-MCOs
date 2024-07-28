@@ -1,9 +1,9 @@
-Angela	3
 Cruise	1
+Kent	3
+Angela	3
 Isabella	2
 Missy	3
-Kent	3
 
-Missy Angela Isabella Kent Cruise 
+Cruise Kent Angela Missy Isabella 
 
-Missy Kent Cruise Angela Isabella 
+Cruise Kent Angela Isabella Missy 

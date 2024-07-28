@@ -40,7 +40,6 @@ int main()
 
         printf("Input start vertex for the traversal: ");
         scanf("%s", start);
-        printf("\n"); // spacer
 
         // OUTPUT: the BFS and DFS path
         for (start_index = 0; start_index < matrix.vertex; start_index++)
