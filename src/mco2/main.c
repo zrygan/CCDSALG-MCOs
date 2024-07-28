@@ -71,8 +71,6 @@ int main()
                 }
                 // _____ADDITIONAL FEATURE_____ <end>
 
-
-                break;
                 return 0;
             }
         }
