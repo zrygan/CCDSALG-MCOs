@@ -1,5 +1,14 @@
-
 #include "queue.h"
+
+/**
+ * creates an empty queue with head and tail at 0
+ *
+ * @param S size of queue
+ *
+ * @returns the queue created
+ *
+ * @author: Zhean Ganituen
+ */
 queue createQueue(int S)
 {
     queue Queue;
@@ -10,6 +19,17 @@ queue createQueue(int S)
     return Queue;
 }
 
+/**
+ * adds an element in the tail position
+ *
+ * @param elem element to be insterted
+ * @param queue* the queue
+ *
+ * @returns:
+ *  - none
+ *
+ * @author: Zhean Ganituen
+ */
 void enqueue(Node elem, queue *Queue)
 {
     // checks queue overflow
@@ -28,12 +48,35 @@ void enqueue(Node elem, queue *Queue)
     // dont update head
 }
 
+/**
+ * checks if the queue is empty
+ *
+ * @param queue the queue
+ *
+ * @returns:
+ *  - true  : when the queue is empty
+ *  - false : otherwise
+ *
+ * @author: Zhean Ganituen
+ */
 bool queueEmpty(queue Queue)
 {
     // if queue is empty "reset" the position of head and tail.
     return Queue.head == Queue.tail;
 }
 
+/**
+ * deletes element in the head position
+ *
+ *
+ *  @param queue* the queue
+ *  @param buffer* the buffer for the char
+ *
+ * @returns:
+ *  - removed : char* : the element removed
+ *
+ * @author: Zhean Ganituen, Jaztin Jimenez
+ */
 Node *dequeue(queue *Queue)
 {
     // check if the queue is empty

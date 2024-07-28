@@ -46,7 +46,7 @@ int main()
         for (start_index = 0; start_index < matrix.vertex; start_index++)
         { // checks if vertex exists
             if (!strcasecmp(matrix.names[start_index], start))
-            {  
+            {
                 // OUTPUT: the degrees
                 m = fopen("TRAVERSALS.txt", "w");
 
@@ -56,12 +56,12 @@ int main()
                 {
                     fprintf(m, "%s\t%d\n", matrix.names[i], degrees[i]);
                 }
-                fprintf(m,"\n");
+                fprintf(m, "\n");
 
                 BFStraversal(matrix, start_index, tree, m); // OUTPUT: BFS
-                fprintf(m,"\n\n");                          // SPACER
+                fprintf(m, "\n\n");                         // SPACER
                 DFSTraversal(matrix, start_index, m);       // OUTPUT: DFS
-                
+
                 // _____ADDITIONAL FEATURE_____
                 // (makes the graph)
                 // COMMENT OUT, IF NOT NEEDED

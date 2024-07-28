@@ -18,6 +18,13 @@
     - zry
 */
 
+/**
+ * Alphabetically sorts the neighbors of the given node
+ *
+ * @param Node : Node* : The node whose neighobors are to be sorted
+ *
+ * @authors Vienn Balcita, Jaztin Jimenez
+ */
 void sortneighbors(Node *Node)
 {
     int i, j, min;
@@ -40,6 +47,19 @@ void sortneighbors(Node *Node)
     }
 }
 
+/**
+ * Executes the BFS traversal algorithm
+ *
+ * @param start_node The starting node for the BFS traversal
+ * @param visited contains an array of booleans that checks if the node has been visited or not
+ * @param values contains the values of the nodes
+ * @param numNodes the total number of nodes in the matrix
+ * @param tree_count the number of BFS traversal relatioins
+ * @param tree the BFS tree structure array
+ * @param m the output file
+ *
+ * @authors Vienn Balcita, Jaztin Jimenez, Zhean Ganituen (BFS Tree)
+ */
 void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tree_count, tree_node *tree, FILE *m)
 {
     queue queue = createQueue(numNodes);
@@ -82,15 +102,15 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
                 if (neighborindex != -1 && !visited[neighborindex])
                 {                                                 // If the neighbor exists and is not visited
                     enqueue(*current_node->neighbors[i], &queue); // Enqueue the neighbor
-                    
+
                     // [zry : deep dive into madness part 1] WHY ARE YOU ERROR-ing!!!!
-                    // [zry : the solution to the maddnes???] 
-                    /* 
+                    // [zry : the solution to the maddnes???]
+                    /*
                         PROBLEM :           there's a stupid duplicate of Missy
                         PROBABLE SOLUTION : we have a checker if the thingy is in the tree already
 
                         RESULT ._. :        OMG OMG OMG IT WORK
-                    */ 
+                    */
                     int exists = 0;
                     for (int k = 0; k < *tree_count; k++)
                     {
@@ -115,7 +135,16 @@ void bfs(Node *start_node, bool *visited, String values[], int numNodes, int *tr
     }
 }
 
-
+/**
+ * executes the formalities for the BFS Traversal
+ *
+ * @param matrix contains the adjacency matrix to be traversed
+ * @param start_index contains the node to start the traversing with
+ * @param tree the BFS tree structure array
+ * @param m the output file
+ *
+ * @authors Vienn Balcita, Jaztin Jimenez, Zhean Ganituen (BFS Tree, File I/O)
+ */
 void BFStraversal(adjacency_matrix matrix, int start_index, tree_node *tree, FILE *m)
 {
     // Create nodes from the adjacency matrix

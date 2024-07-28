@@ -30,7 +30,7 @@ typedef struct
 
 /**
  * displays the adjency matrix
- *
+ * ___FOR DEBUGGING___
  * @param matrix the adjency matrix
  *
  * @author Zhean Ganituen
@@ -38,9 +38,10 @@ typedef struct
 void display_matrix(adjacency_matrix matrix);
 
 /**
- * reads the file and makes the adjacency_matrix from the text file content
+ * Populate an adjacency matrix from a file.
  *
- * @param fileName the name of the file
+ * @param f The file pointer.
+ * @param matrix The adjacency matrix to populate.
  *
  * @author Zhean Ganituen
  */
