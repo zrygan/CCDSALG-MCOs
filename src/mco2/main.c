@@ -54,7 +54,7 @@ int main()
         // OUTPUT: the BFS and DFS path
         for (start_index = 0; start_index < matrix.vertex; start_index++)
         { // checks if vertex exists
-            if (!strcasecmp(matrix.names[start_index], start))
+            if (!strcmp(matrix.names[start_index], start))
             {
                 BFStraversal(matrix, start_index, tree);
                 printf("\n\n");
@@ -75,10 +75,8 @@ int main()
                 break;
                 return 0;
             }
-            else {
-                printf("%s not found.", start); // node name not found
-            }
         }
+        printf("%s not found.", start); // node name not found
     }
     else
     {
