@@ -41,6 +41,14 @@ void display_matrix(adjacency_matrix matrix) {
  *
  * @author Zhean Ganituen
  */
+/**
+ * Populate an adjacency matrix from a file.
+ *
+ * @param f The file pointer.
+ * @param matrix The adjacency matrix to populate.
+ *
+ * @author Zhean Ganituen
+ */
 void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
 {
     String line, vertexName;
@@ -51,22 +59,25 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
     // Initialize adjacency matrix
     for (int i = 0; i < matrix->vertex; ++i)
     {
+        // read entire line
+        fgets(line, sizeof(line), f);
+        sscanf(line, "%s", matrix->names[i]);
         for (int j = 0; j < matrix->vertex; ++j)
         {
             matrix->matrix[i][j] = 0;
         }
     }
 
-    // Create a mapping of node names to indices
-    char **node_names = (char **)malloc(matrix->vertex * sizeof(char *));
-    for (int i = 0; i < matrix->vertex; i++)
-    {
-        node_names[i] = (char *)malloc(256 * sizeof(char));
-    }
+    // Reset file pointer to the beginning
+    rewind(f);
 
-    int node_index = 0;
+    fscanf(f, "%d", &matrix->vertex); // get the number again to skip the vertex count line
+    fgetc(f);                         // consume newline after reading vertex count
 
     // iterate through the rows in the text file
+    // we can't do a single scanf that reads all text in the row since the number of text in each row is not constant
+    // so what we can do is like make separate Strings from the line (separated by " ")
+    // get the entire line
     while (fgets(line, sizeof(line), f))
     {
         // remove \n at the end
@@ -75,21 +86,16 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
         char *text = strtok(line, " "); // get the next text in the line that is separated by " "
         strcpy(vertexName, text);       // the first text is the vertex name
 
-        int row = -1;
-        for (int i = 0; i < node_index; i++)
+        // no need to default to not found or handle if the name is not found
+        // since we initialized the names at the start
+        int row;
+        for (int i = 0; i < matrix->vertex; i++)
         {
-            if (strcmp(node_names[i], vertexName) == 0)
+            if (strcmp(matrix->names[i], vertexName) == 0)
             {
                 row = i; // if found set it as i
                 break;
             }
-        }
-
-        if (row == -1)
-        {
-            strcpy(node_names[node_index], vertexName);
-            row = node_index;
-            node_index++;
         }
 
         // process the relationships
@@ -98,37 +104,22 @@ void make_adjacency_matrix(FILE *f, adjacency_matrix *matrix)
             if (strcmp(text, "-1") == 0)
                 break; // if the col content is -1, then break loop
 
-            int col = -1;
-            for (int i = 0; i < node_index; i++)
+            int col;
+            for (int i = 0; i < matrix->vertex; i++)
             {
                 // if it is store the ith value in col
                 // then break
-                if (strcmp(node_names[i], text) == 0)
+                if (strcmp(matrix->names[i], text) == 0)
                 {
                     col = i;
                     break;
                 }
             }
 
-            if (col == -1)
-            {
-                strcpy(node_names[node_index], text);
-                col = node_index;
-                node_index++;
-            }
-
             // indicate that there's a relationship
             matrix->matrix[row][col] = 1;
         }
     }
-
-    // Copy node names to matrix->names
-    for (int i = 0; i < matrix->vertex; i++)
-    {
-        strcpy(matrix->names[i], node_names[i]);
-        free(node_names[i]);
-    }
-    free(node_names);
 
     diagonals_as_zero(matrix);
 }

@@ -1,9 +1,8 @@
-Cruise	1
-Kent	3
-Angela	3
-Isabella	2
-Missy	3
+Clark	2
+Hal	2
+Diana	3
+Bruce	1
 
-Cruise Kent Angela Missy Isabella 
+Diana Bruce Clark Hal 
 
-Cruise Kent Angela Isabella Missy 
+Diana Bruce Clark Hal 
