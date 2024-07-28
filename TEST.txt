@@ -1,6 +1,11 @@
-5
-Cruise Kent -1
-Angela Isabella Kent Missy -1
-Missy Angela Isabella Kent -1
-Isabella Angela Missy -1
-Kent Angela Cruise Missy -1 
+10
+Ben Ana -1
+Ana Ben Cana Hana -1
+Kale Hana Leo Max Olga -1
+Leo Kale Max -1
+Go Cana Hana -1
+Cana Ana Go Hana -1
+Olga Iono Kale -1
+Max Kale Leo -1
+Hana Ana Go Iono Kale -1
+Iono Hana Olga -1

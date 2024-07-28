@@ -1,8 +1,14 @@
-Clark	2
-Hal	2
-Diana	3
-Bruce	1
+Ben	1
+Ana	3
+Kale	4
+Leo	2
+Go	2
+Cana	3
+Olga	2
+Max	2
+Hana	4
+Iono	2
 
-Diana Bruce Clark Hal 
+Iono Hana Olga Kale Ana Go Ben Cana Leo Max 
 
-Diana Bruce Clark Hal 
+Iono Hana Ana Ben Cana Go Kale Leo Max Olga 
