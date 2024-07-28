@@ -35,6 +35,8 @@ int main()
         make_adjacency_matrix(f, &matrix);
         fclose(f);
 
+        display_matrix(matrix); // _____DEBUGGING_____ ::: COMMENT OUT IF NEEDED
+
         // initialize the tree
         tree = malloc(matrix.vertex * sizeof(tree_node));
 

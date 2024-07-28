@@ -11,6 +11,29 @@
 #include "adjacency_matrix.h"
 
 /**
+ * displays the adjency matrix
+ * ___FOR DEBUGGING___
+ * @param matrix the adjency matrix
+ *
+ * @author Zhean Ganituen
+ */
+void display_matrix(adjacency_matrix matrix) {
+    printf("Adjacency Matrix:\n");
+    printf("\t");
+    for (int i = 0; i < matrix.vertex; i++) {
+        printf("%s\t", matrix.names[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < matrix.vertex; i++) {
+        printf("%s\t", matrix.names[i]);
+        for (int j = 0; j < matrix.vertex; j++) {
+            printf("%d\t", matrix.matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+/**
  * Populate an adjacency matrix from a file.
  *
  * @param f The file pointer.
