@@ -44,9 +44,9 @@ void display_graph(adjacency_matrix matrix)
                 strcat(content, _ARROW);
             }
         }
-
-        strcat(border, make_border_line(strlen("NULL")));
-        strcat(content, make_name("NULL"));
+        String null = "NULL";
+        strcat(border, make_border_line(strlen(null)));
+        strcat(content, make_name(null));
 
         printf("%s\n%s\n%s\n\n", border, content, border);
 
@@ -66,7 +66,7 @@ char *make_border_line(int len){
     return out;
 }
 
-char *make_name(char *name){
+char *make_name(String name){
     char *out = (char*)malloc((strlen(name) + 5) * sizeof(char));
     out[0] = '\0';
 
