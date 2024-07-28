@@ -82,7 +82,7 @@ int main()
                 return 0;
             }
         }
-        printf("%s not found.", start); // node name not found
+        printf("Vertex %s not found.", start); // node name not found
     }
     else
     {
